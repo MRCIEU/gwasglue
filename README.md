@@ -6,12 +6,14 @@
 <!-- badges: end -->
 
 
+This R package serves as a conduit between packages that can read or query GWAS summary data, and packages that can analyse GWAS summary data. It currently glues data from the following data sources:
+
 ## Data sources
 
 - [ieugwasr](https://github.com/mrcieu/ieugwasr)
 - [gwasvcf](https://github.com/mrcieu/gwasvcf)
 
-## Connections to other packages
+## Analytical outputs
 
 ### Finemapping
 - [finemapr](https://github.com/variani/finemapr) 
@@ -40,9 +42,13 @@
 
 ## Installation
 
-You can install the released version of gwasglue from [CRAN](https://CRAN.R-project.org) with:
+You can install the development version of gwasglue with:
 
 ``` r
 devtools::install_github("mrcieu/gwasglue")
 ```
 
+
+## Usage
+
+See vignettes etc here: [https://mrcieu.github.io/gwasglue](https://mrcieu.github.io/gwasglue).

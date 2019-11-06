@@ -1,13 +1,36 @@
 Package: gwasglue
-Title: What the Package Does (One Line, Title Case)
+Title: GWAS summary data sources connected to analytical tools
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Gibran",
+           family = "Hemani",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+           email = "g.hemani@bristol.ac.uk",
+           comment = c(ORCID = "0000-0003-0920-1055"))
+Description: Many tools exist that use GWAS summary data for colocalisation, fine mapping, Mendelian randomization, visualisation, etc. This package is a conduit that connects R packages that can retrieve GWAS summary data to various tools for analysing those data.
+Depends: 
+    R (>= 3.6.0),
+    gwasvcf,
+    ieugwasr
+Imports:
+    dplyr,
+    testthat,
+    mr.raps,
+    MendelianRandomization,
+    ieugwasr,
+    MRPRESSO,
+    RadialMR,
+    MRMix,
+    TwoSampleMR,
+    finemapr
+Remotes:
+    rondolab/MR-PRESSO,
+    mrcieu/ieugwasr,
+    mrcieu/TwoSampleMR,
+    mrcieu/MRInstruments,
+    WSpiller/RadialMR,
+    gqi/MRMix,
+    variani/finemapr
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
