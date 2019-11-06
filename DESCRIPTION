@@ -21,8 +21,10 @@ Imports:
     RadialMR,
     MRMix,
     TwoSampleMR,
-    magrittr
+    magrittr,
+    S4Vectors
 Remotes:
+    bioc::release/S4Vectors,
     rondolab/MR-PRESSO,
     mrcieu/ieugwasr,
     mrcieu/gwasvcf,
