@@ -15,10 +15,11 @@ This R package serves as a conduit between packages that can read or query GWAS 
 
 #### Finemapping
 - [finemapr](https://github.com/variani/finemapr) 
-    - [FINEMAP](http://www.christianbenner.com/)
-    - [PAINTOR](https://github.com/gkichaev/PAINTOR_V3.0)
-    - [CAVIAR](https://github.com/fhormoz/caviar)
+- [FINEMAP](http://www.christianbenner.com/) - TODO
+- [PAINTOR](https://github.com/gkichaev/PAINTOR_V3.0) - TODO
+- [CAVIAR](https://github.com/fhormoz/caviar) - TODO
 - [SuSIE](https://stephenslab.github.io/susie-paper/index.html) - TODO
+- [JAM](https://github.com/pjnewcombe/R2BGLiMS) - TODO
 
 #### Colocalisation
 - [coloc](https://cloud.r-project.org/web/packages/coloc/index.html) - TODO
