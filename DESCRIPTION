@@ -25,6 +25,7 @@ Imports:
 Remotes:
     rondolab/MR-PRESSO,
     mrcieu/ieugwasr,
+    mrcieu/gwasvcf,
     mrcieu/TwoSampleMR,
     mrcieu/MRInstruments,
     WSpiller/RadialMR,
