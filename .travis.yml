@@ -4,6 +4,8 @@ r:
   - devel
 cache: packages
 
+warnings_are_errors: false
+
 r_packages:
   - covr
 
