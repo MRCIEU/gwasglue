@@ -1,8 +1,11 @@
 language: r
 r:
-  - bioc-release
-  - bioc-devel
+  - release
+  - devel
 cache: packages
+
+r_github_packages:
+  - mrcieu/gwasvcf
 
 warnings_are_errors: false
 
