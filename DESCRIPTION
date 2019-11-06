@@ -11,6 +11,8 @@ Description: Many tools exist that use GWAS summary data for colocalisation, fin
 Depends: 
     R (>= 3.6.0)
 Imports:
+    BiocGenerics,
+    S4Vectors,
     gwasvcf,
     ieugwasr,
     dplyr,
@@ -21,9 +23,9 @@ Imports:
     RadialMR,
     MRMix,
     TwoSampleMR,
-    magrittr,
-    S4Vectors
+    magrittr
 Remotes:
+    bioc::release/BiocGenerics,
     bioc::release/S4Vectors,
     rondolab/MR-PRESSO,
     mrcieu/ieugwasr,
