@@ -7,6 +7,9 @@ cache: packages
 r_github_packages:
   - mrcieu/gwasvcf
 
+bioc_packages:
+  - GenomicAlignments
+
 warnings_are_errors: false
 
 r_packages:
