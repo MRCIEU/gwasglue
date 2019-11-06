@@ -21,7 +21,6 @@ Imports:
     RadialMR,
     MRMix,
     TwoSampleMR,
-    finemapr,
     magrittr
 Remotes:
     rondolab/MR-PRESSO,
@@ -29,8 +28,7 @@ Remotes:
     mrcieu/TwoSampleMR,
     mrcieu/MRInstruments,
     WSpiller/RadialMR,
-    gqi/MRMix,
-    variani/finemapr
+    gqi/MRMix
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
