@@ -1,2 +1,4 @@
 ^LICENSE\.md$
 ^\.travis\.yml$
+^doc$
+^Meta$

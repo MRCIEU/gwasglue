@@ -1,0 +1,16 @@
+---
+title: "Mendelian randomization"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Mendelian randomization}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+

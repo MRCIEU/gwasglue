@@ -1,0 +1,25 @@
+---
+title: "Genetic colocalisation"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Genetic colocalisation}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+Instructions on how to use gwasvcf and ieugwasr to perform colocalisation
+
+
+## ieugwasr
+
+
+
+
+## gwasvcf
