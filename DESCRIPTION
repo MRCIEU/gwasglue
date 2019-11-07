@@ -22,11 +22,13 @@ Imports:
     MRPRESSO,
     RadialMR,
     MRMix,
+    TwoSampleMR,
     magrittr
 Remotes:
     mrcieu/gwasvcf,
     rondolab/MR-PRESSO,
     mrcieu/ieugwasr,
+    mrcieu/TwoSampleMR,
     mrcieu/MRInstruments,
     WSpiller/RadialMR,
     gqi/MRMix
