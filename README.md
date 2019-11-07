@@ -6,8 +6,13 @@
 [![Codecov test coverage](https://codecov.io/gh/MRCIEU/gwasglue/branch/master/graph/badge.svg)](https://codecov.io/gh/MRCIEU/gwasglue?branch=master)
 <!-- badges: end -->
 
+This R package serves as a conduit between packages that can read or query GWAS summary data, and packages that can analyse GWAS summary data. Here is where it lies in the general ecosystem of GWAS data and analysis:
 
-This R package serves as a conduit between packages that can read or query GWAS summary data, and packages that can analyse GWAS summary data. It currently glues data from the following data sources:
+
+![schematic](https://drive.google.com/uc?id=1KgjRmqrKA2McoXZrll7GEquenqRMUB5_)
+
+
+It currently glues data from the following data sources
 
 #### Data sources
 - [ieugwasr](https://github.com/mrcieu/ieugwasr)
