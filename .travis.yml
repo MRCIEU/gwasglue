@@ -10,6 +10,8 @@ r_github_packages:
 bioc_packages:
   - GenomicAlignments
 
+script: true
+
 warnings_are_errors: false
 
 r_packages:
