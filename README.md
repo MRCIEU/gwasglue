@@ -19,7 +19,7 @@ It currently glues data from the following data sources
 - [gwasvcf](https://github.com/mrcieu/gwasvcf)
 
 #### Finemapping
-- [finemapr](https://github.com/variani/finemapr) 
+- [finemapr](https://github.com/variani/finemapr) - done
 - [FINEMAP](http://www.christianbenner.com/) - TODO
 - [PAINTOR](https://github.com/gkichaev/PAINTOR_V3.0) - TODO
 - [CAVIAR](https://github.com/fhormoz/caviar) - TODO
@@ -27,13 +27,13 @@ It currently glues data from the following data sources
 - [JAM](https://github.com/pjnewcombe/R2BGLiMS) - TODO
 
 #### Colocalisation
-- [coloc](https://cloud.r-project.org/web/packages/coloc/index.html) - TODO
+- [coloc](https://cloud.r-project.org/web/packages/coloc/index.html) - done for ieugwasr
 - [HEIDI](http://cnsgenomics.com/software/gsmr/) - TODO
 - [eCAVIAR](https://github.com/fhormoz/caviar) - TODO
 - [S-Predixcan](https://github.com/hakyimlab/MetaXcan) - TODO
 
 #### Mendelian randomization
-- [TwoSampleMR](https://github.com/mrcieu/TwoSampleMR)
+- [TwoSampleMR](https://github.com/mrcieu/TwoSampleMR) - done
 - [MendelianRandomization](https://cran.r-project.org/web/packages/MendelianRandomization/index.html) - port from TwoSampleMR
 - [RadialMR](https://github.com/WSpiller/RadialMR) - port from TwoSampleMR
 - [MRPRESSO](https://github.com/rondolab/MR-PRESSO) - port from TwoSampleMR
@@ -41,6 +41,7 @@ It currently glues data from the following data sources
 - [MRMix](https://github.com/gqi/MRMix) - TODO
 
 #### Visualisation
+- [gassocplot](https://github.com/jrs95/gassocplot) - done for ieugwasr
 - Locus zoom plots e.g. [https://github.com/jrs95/gassocplot] - TODO
 
 
