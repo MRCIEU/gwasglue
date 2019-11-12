@@ -12,10 +12,16 @@
 ieugwasr_to_finemapr <- function(region, id, bfile=NULL, plink_bin=NULL)
 {
 	id <- unique(id)
+	message("Getting rsids in region")
 	rsid <- ieugwasr::variants_to_rsid(region)
-	ld <- ieugwasr::ld_matrix(rsid, bfile, plink_bin, with_alleles=FALSE) %>% greedy_remove()
+	message("Extracting rsids from data")
+	as <- ieugwasr::associations(rsid, id, proxies=0)
+	rsid_avail <- unique(as$name)
+	message("Calculating LD for ", length(rsid_avail), " variants")
+	ld <- suppressWarnings(ieugwasr::ld_matrix(rsid_avail, bfile, plink_bin, with_alleles=FALSE)) %>% greedy_remove()
 	rsid_avail <- rownames(ld)
-	as <- ieugwasr::associations(rsid_avail, id, proxies=0)
+	message("Data available for ", length(rsid_avail), " variants")
+	as <- subset(as, name %in% rsid_avail)
 	out <- list()
 	for(i in 1:length(unique(id)))
 	{
@@ -45,6 +51,12 @@ print.FinemaprList <- function(x)
 }
 
 
+gwasvcf_to_finemapr <- function(region, vcf)
+{
+	NULL
+}
+
+
 
 greedy_remove <- function(ld)
 {
@@ -66,4 +78,3 @@ greedy_remove <- function(ld)
 	stopifnot(all(is.finite(ld)))
 	return(ld)
 }
-
