@@ -108,12 +108,9 @@
 <a href="#finemapping" class="anchor"></a>Finemapping</h4>
 <ul>
 <li><a href="https://github.com/variani/finemapr">finemapr</a></li>
-<li>
-<a href="http://www.christianbenner.com/">FINEMAP</a> - TODO</li>
-<li>
-<a href="https://github.com/gkichaev/PAINTOR_V3.0">PAINTOR</a> - TODO</li>
-<li>
-<a href="https://github.com/fhormoz/caviar">CAVIAR</a> - TODO</li>
+<li><a href="http://www.christianbenner.com/">FINEMAP</a></li>
+<li><a href="https://github.com/gkichaev/PAINTOR_V3.0">PAINTOR</a></li>
+<li><a href="https://github.com/fhormoz/caviar">CAVIAR</a></li>
 <li>
 <a href="https://stephenslab.github.io/susie-paper/index.html">SuSIE</a> - TODO</li>
 <li>
@@ -124,8 +121,7 @@
 <h4 class="hasAnchor">
 <a href="#colocalisation" class="anchor"></a>Colocalisation</h4>
 <ul>
-<li>
-<a href="https://cloud.r-project.org/web/packages/coloc/index.html">coloc</a> - TODO</li>
+<li><a href="https://cloud.r-project.org/web/packages/coloc/index.html">coloc</a></li>
 <li>
 <a href="http://cnsgenomics.com/software/gsmr/">HEIDI</a> - TODO</li>
 <li>
@@ -155,6 +151,7 @@
 <h4 class="hasAnchor">
 <a href="#visualisation" class="anchor"></a>Visualisation</h4>
 <ul>
+<li><a href="https://github.com/jrs95/gassocplot">gassocplot</a></li>
 <li>Locus zoom plots e.g. [<a href="https://github.com/jrs95/gassocplot" class="uri">https://github.com/jrs95/gassocplot</a>] - TODO</li>
 </ul>
 </div>
@@ -168,6 +165,34 @@
 <h2 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h2>
 <p>See vignettes etc here: <a href="https://mrcieu.github.io/gwasglue">https://mrcieu.github.io/gwasglue</a>.</p>
+</div>
+<div id="reference-datasets" class="section level2">
+<h2 class="hasAnchor">
+<a href="#reference-datasets" class="anchor"></a>Reference datasets</h2>
+<p>Example GWAS VCF (GIANT 2010 BMI):</p>
+<ul>
+<li><a href="http://fileserve.mrcieu.ac.uk/vcf/IEU-a-2.vcf.gz" class="uri">http://fileserve.mrcieu.ac.uk/vcf/IEU-a-2.vcf.gz</a></li>
+<li><a href="http://fileserve.mrcieu.ac.uk/vcf/IEU-a-2.vcf.gz.tbi" class="uri">http://fileserve.mrcieu.ac.uk/vcf/IEU-a-2.vcf.gz.tbi</a></li>
+</ul>
+<p>1kg European reference panel for LD:</p>
+<ul>
+<li><a href="http://fileserve.mrcieu.ac.uk/ld/data_maf0.01_rs_ref.tgz" class="uri">http://fileserve.mrcieu.ac.uk/ld/data_maf0.01_rs_ref.tgz</a></li>
+</ul>
+<p>1kg vcf harmonised against human genome reference:</p>
+<ul>
+<li><a href="http://fileserve.mrcieu.ac.uk/vcf/1kg_v3_nomult.vcf.gz" class="uri">http://fileserve.mrcieu.ac.uk/vcf/1kg_v3_nomult.vcf.gz</a></li>
+<li><a href="http://fileserve.mrcieu.ac.uk/vcf/1kg_v3_nomult.vcf.gz.tbi" class="uri">http://fileserve.mrcieu.ac.uk/vcf/1kg_v3_nomult.vcf.gz.tbi</a></li>
+</ul>
+</div>
+<div id="contributing-to-the-resource" class="section level2">
+<h2 class="hasAnchor">
+<a href="#contributing-to-the-resource" class="anchor"></a>Contributing to the resource</h2>
+<p>For any <code>&lt;analysis&gt;</code> package we create a new file called <code>R/&lt;analysis&gt;.r</code> which contains two functions:</p>
+<ul>
+<li><code>gwasvcf_to_&lt;analysis&gt;</code></li>
+<li><code>ieugwasr_to_&lt;analysis&gt;</code></li>
+</ul>
+<p>For an example, see the <code>R/TwoSampleMR.r</code> file, which contains the functions <code>gwasvcf_to_TwoSampleMR</code> and <code>ieugwasr_to_TwoSampleMR</code>.</p>
 </div>
 </div>
   </div>

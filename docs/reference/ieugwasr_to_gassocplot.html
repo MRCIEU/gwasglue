@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • gwasglue</title>
+<title>Generate regional plot for ieugwasr — ieugwasr_to_gassocplot • gwasglue</title>
 
 
 <!-- jquery -->
@@ -35,7 +35,9 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Generate regional plot for ieugwasr — ieugwasr_to_gassocplot" />
+<meta property="og:description" content="Uses James Staley's gassocplot package https://github.com/jrs95/gassocplot" />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -54,7 +56,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -122,102 +124,44 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Generate regional plot for ieugwasr</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mrcieu/gwasglue/blob/master/R/gassocplot.r'><code>R/gassocplot.r</code></a></small>
+    <div class="hidden name"><code>ieugwasr_to_gassocplot.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>Uses James Staley's gassocplot package https://github.com/jrs95/gassocplot</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>ieugwasr_to_gassocplot</span>(<span class='no'>chrpos</span>, <span class='no'>id</span>)</pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="gwasvcf_to_TwoSampleMR.html">gwasvcf_to_TwoSampleMR()</a></code> </p>
-        </td>
-        <td><p>Create exposure or outcome data format for TwoSampleMR from vcf</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="gwasvcf_to_coloc.html">gwasvcf_to_coloc()</a></code> </p>
-        </td>
-        <td><p>Perform coloc</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="harmonise.html">harmonise()</a></code> </p>
-        </td>
-        <td><p>Generic harmonisation function</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="harmonise_against_ref.html">harmonise_against_ref()</a></code> </p>
-        </td>
-        <td><p>Harmonise gwas alleles to be same as reference</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ieugwasr_to_TwoSampleMR.html">ieugwasr_to_TwoSampleMR()</a></code> </p>
-        </td>
-        <td><p>Convert output from query to TwoSampleMR format</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ieugwasr_to_finemapr.html">ieugwasr_to_finemapr()</a></code> </p>
-        </td>
-        <td><p>Generate data for analysis in various finemapping methods</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ieugwasr_to_gassocplot.html">ieugwasr_to_gassocplot()</a></code> </p>
-        </td>
-        <td><p>Generate regional plot for ieugwasr</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="is_forward_strand.html">is_forward_strand()</a></code> </p>
-        </td>
-        <td><p>Check a GWAS dataset against a reference known to be on the forward strand</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="read_gwas.html">read_gwas()</a></code> </p>
-        </td>
-        <td><p>Read in GWAS dataset</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="read_reference.html">read_reference()</a></code> </p>
-        </td>
-        <td><p>Read in reference dataset</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="write_out.html">write_out()</a></code> </p>
-        </td>
-        <td><p>Create format for HPC pipeline</p></td>
-      </tr>
-    </tbody>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>chrpos</th>
+      <td><p>A window range to plot e.g. 16:3349655-3849655</p></td>
+    </tr>
+    <tr>
+      <th>id</th>
+      <td><p>Vector of one or more IEU GWAS db study IDs</p></td>
+    </tr>
     </table>
-  </div>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>assoc_plot or stack_assoc_plot if multiple markers given</p>
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
     </ul>
+
   </div>
 </div>
 
