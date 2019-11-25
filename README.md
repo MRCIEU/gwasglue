@@ -11,6 +11,9 @@ This R package serves as a conduit between packages that can read or query GWAS 
 
 ![schematic](https://drive.google.com/uc?id=1KgjRmqrKA2McoXZrll7GEquenqRMUB5_)
 
+![schematic](https://drive.google.com/uc?id=15CuzYDlNJeRREQ1ZTF7jLsVGc86OnF7Z)
+
+
 
 It currently glues data from the following data sources
 
