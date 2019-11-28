@@ -9,8 +9,7 @@
 This R package serves as a conduit between packages that can read or query GWAS summary data, and packages that can analyse GWAS summary data. Here is where it lies in the general ecosystem of GWAS data and analysis:
 
 
-![schematic](https://drive.google.com/uc?id=1LVYkaLImvVfocwisBnpmM7oqESCojc3m)
-
+![schematic](https://drive.google.com/uc?id=15w33jAaI6lAKINfLlNw343njUuPd4M6i)
 
 It currently glues data from the following data sources
 
