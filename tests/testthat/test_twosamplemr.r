@@ -11,7 +11,7 @@ test_that("gwasvcf_to_TwoSampleMR", {
 
 
 test_that("ieugwasr_to_TwoSampleMR", {
-	a <- ieugwasr::tophits("IEU-a-2")
+	a <- ieugwasr::tophits("ieu-a-2")
 	exposure_dat <- ieugwasr_to_TwoSampleMR(a)
 	expect_true(nrow(exposure_dat) == nrow(a))
 })

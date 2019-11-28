@@ -374,7 +374,7 @@ harmonise <- function(chr1, pos1, ref1, alt1, chr2, pos2, ref2, alt2, rsid2 = NU
 		dat$decision[a6] <- 6
 	}
 
-	dat <- dat %>% arrange(i, decision) %>%
+	dat <- dat %>% dplyr::arrange(i, decision) %>%
 		subset(!duplicated(i))
 
 	message("0: stick = ", sum(dat$decision == 0))

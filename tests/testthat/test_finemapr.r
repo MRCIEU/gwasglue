@@ -5,7 +5,7 @@ library(ieugwasr)
 test_that("ieugwasr_to_finemapr", {
 		v <- ieugwasr::variants_rsid("rs7528419")
 	r <- paste0(v[["chr"]], ":", v[["pos"]]-100000, "-", v[["pos"]]+100000)
-	a <- ieugwasr_to_finemapr(r, c("IEU-a-7", "IEU-a-2"))
+	a <- ieugwasr_to_finemapr(r, c("ieu-a-7", "ieu-a-2"))
 	expect_true(length(a) == 2)
 	expect_true(class(a) == "FinemaprList")
 
