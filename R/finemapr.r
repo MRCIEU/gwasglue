@@ -16,21 +16,21 @@ ieugwasr_to_finemapr <- function(region, id, bfile=NULL, plink_bin=NULL)
 	rsid <- ieugwasr::variants_to_rsid(region)
 	message("Extracting rsids from data")
 	as <- ieugwasr::associations(rsid, id, proxies=0)
-	rsid_avail <- unique(as$name)
+	rsid_avail <- unique(as$rsid)
 	message("Calculating LD for ", length(rsid_avail), " variants")
 	ld <- suppressWarnings(ieugwasr::ld_matrix(rsid_avail, bfile, plink_bin, with_alleles=FALSE)) %>% greedy_remove()
 	rsid_avail <- rownames(ld)
 	message("Data available for ", length(rsid_avail), " variants")
-	as <- subset(as, name %in% rsid_avail)
+	as <- subset(as, rsid %in% rsid_avail)
 	out <- list()
 	for(i in 1:length(unique(id)))
 	{
 		dat <- list()
-		x <- as[as[["name"]] %in% rsid_avail & as[["id"]] == id[i],]
-		dat[["z"]] <- dplyr::tibble(snp = x[["name"]], zscore = x[["beta"]] / x[["se"]])
-		index <- match(x[["name"]], rsid_avail)
+		x <- as[as[["rsid"]] %in% rsid_avail & as[["id"]] == id[i],]
+		dat[["z"]] <- dplyr::tibble(snp = x[["rsid"]], zscore = x[["beta"]] / x[["se"]])
+		index <- match(x[["rsid"]], rsid_avail)
 		dat[["ld"]] <- ld[index, index]
-		stopifnot(all(x[["name"]] == rownames(dat[["ld"]])))
+		stopifnot(all(x[["rsid"]] == rownames(dat[["ld"]])))
 
 		n <- x[["n"]]
 		if(all(is.na(n)))

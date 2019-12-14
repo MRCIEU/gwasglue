@@ -11,7 +11,7 @@ ieugwasr_to_TwoSampleMR <- function(x, type="exposure")
 	stopifnot(is.data.frame(x))
 	names(x) <- paste0(names(x), ".", type)
 	nom <- names(x)
-	names(x)[nom == paste0("name.", type)] <- "SNP"
+	names(x)[nom == paste0("rsid.", type)] <- "SNP"
 	names(x)[nom == paste0("ea.", type)] <- paste0("effect_allele.", type)
 	names(x)[nom == paste0("nea.", type)] <- paste0("other_allele.", type)
 	names(x)[nom == paste0("eaf.", type)] <- paste0("eaf.", type)

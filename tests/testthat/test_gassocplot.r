@@ -1,9 +1,9 @@
 context("gassocplot")
 library(gwasglue)
 
-radius <- 250000
-a <- tophits("ieu-a-2")
-b <- variants_rsid(a$name)
+radius <- 70000
+a <- ieugwasr::tophits("ieu-a-2")
+b <- ieugwasr::variants_rsid(a$rsid)
 chrpos <- paste0(b$chr[1], ":", b$pos[1]-radius, "-", b$pos[1]+radius)
 
 test_that("ieugwasr1", {
