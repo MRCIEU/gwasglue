@@ -111,10 +111,16 @@
 <p>We have made a new system for naming datasets, and all datasets are organised into data batches. Either new datasets are uploaded one at a time in which case they are added to the <code>ieu-a</code> data batch, or there is a bulk upload in which case a new batch is created. For example, <code>ukb-a</code> is a bulk upload of the first round of the Neale lab UKBiobank GWAS, and <code>ukb-b</code> is the IEU GWAS analysis of the UKBiobank data. In most cases, a dataset is then numbered arbitrarily within the batch. For example, the 2010 GIANT BMI analysis was previously known as <code>2</code>, and it is now known as <code>ieu-a-2</code>.</p>
 <p>There is backward compatibility built into the R packages that access the data, so if you use an ‘old’ ID, it will automatically translate that to the new one. But it will give you a warning, and we urge you to update your scripts to reflect this change.</p>
 </div>
-<div id="ukbiobank-data-is-now-substantially-reduced" class="section level3">
+<div id="authentication" class="section level3">
 <h3 class="hasAnchor">
-<a href="#ukbiobank-data-is-now-substantially-reduced" class="anchor"></a>UKBiobank data is now substantially reduced</h3>
-<p>There were previously ~20k traits with complete GWAS data, but a majority of these were binary traits based on very few numbers of cases. We have now filtered out unreliable datasets, there are 2514 traits remaining, with any binary traits removed that had fewer than 1000 cases. Another issue is the combination of small numbers of cases and allele frequency - here minor allele count (MAC) for a particular association could be very small which would lead to high false positives when using Bolt-LMM. The remaining traits have been filtered to only retain associations where the MAC &gt; 90.</p>
+<a href="#authentication" class="anchor"></a>Authentication</h3>
+<p>Previously you would automatically be asked to authenticate any query to the database, through google. Now, we are making authentication voluntary - something that you do at the start of a session only if you need access to specific private datasets on the database. For the vast majority of use cases this is not required.</p>
+<p>Another change is that the R package that managed the authentication has updated, and the file tokens generated are slightly different. For full information on how to deal with this, see here: <a href="https://mrcieu.github.io/ieugwasr/articles/guide.html#authentication" class="uri">https://mrcieu.github.io/ieugwasr/articles/guide.html#authentication</a></p>
+</div>
+<div id="ukbiobank-data-has-been-curated" class="section level3">
+<h3 class="hasAnchor">
+<a href="#ukbiobank-data-has-been-curated" class="anchor"></a>UKBiobank data has been curated</h3>
+<p>We conducted a large GWAS analysis using a pipeline that systematically analysed every <a href="https://www.ncbi.nlm.nih.gov/pubmed/29040602">PHESANT</a> phenotype in UK Biobank. There were previously ~20k traits with complete GWAS data, but a majority of these were binary traits based on very few numbers of cases. We have now filtered out unreliable datasets, there are 2514 traits remaining, with any binary traits removed that had fewer than 1000 cases. Another issue is the combination of small numbers of cases and allele frequency - here minor allele count (MAC) for a particular association could be very small which would lead to high false positives when using Bolt-LMM. The remaining traits have been filtered to only retain associations where the MAC &gt; 90.</p>
 <p>Document detailing this investigation here: <a href="https://htmlpreview.github.io/?https://raw.githubusercontent.com/MRCIEU/ukbb-gwas-analysis/master/docs/ldsc_clumped_analysis.html?token=AAOV6TBQXEXEPT7SUXXLWMC6DWP3O" class="uri">https://htmlpreview.github.io/?https://raw.githubusercontent.com/MRCIEU/ukbb-gwas-analysis/master/docs/ldsc_clumped_analysis.html?token=AAOV6TBQXEXEPT7SUXXLWMC6DWP3O</a></p>
 </div>
 <div id="all-data-is-now-harmonised" class="section level3">
@@ -140,7 +146,7 @@
 <div id="everything-is-faster" class="section level3">
 <h3 class="hasAnchor">
 <a href="#everything-is-faster" class="anchor"></a>Everything is faster</h3>
-<p>We are using Elasticsearch and Neo4j on an Oracle Cloud Infrastructure to serve the data. It’s much faster.</p>
+<p>We are using Elasticsearch and Neo4j on an Oracle Cloud Infrastructure to serve the data. It’s much faster. Interestingly, it actually gets faster when more people are using it because the cache gets ‘warmed up’ by more requests.</p>
 </div>
 </div>
 <div id="what-is-new" class="section level2">
@@ -225,6 +231,12 @@
 <li>gwas2vcf online tool, allowing users to create GWAS VCF files from summary data: <a href="http://ieu-db-interface.epi.bris.ac.uk:8400/" class="uri">http://ieu-db-interface.epi.bris.ac.uk:8400/</a> (Functional, under construction?)</li>
 </ul>
 </div>
+<div id="how-to-request-new-data" class="section level2">
+<h2 class="hasAnchor">
+<a href="#how-to-request-new-data" class="anchor"></a>How to request new data</h2>
+<p>We have setup a github issues page here: <a href="https://github.com/MRCIEU/igd-data-requests/issues" class="uri">https://github.com/MRCIEU/igd-data-requests/issues</a></p>
+<p>Please visit here to make a log of new data requests, or to contribute new data.</p>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -236,6 +248,7 @@
 <li><a href="#what-has-changed">What has changed</a></li>
       <li><a href="#what-is-new">What is new</a></li>
       <li><a href="#key-links">Key links</a></li>
+      <li><a href="#how-to-request-new-data">How to request new data</a></li>
       </ul>
 </div>
       </div>

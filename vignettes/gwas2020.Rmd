@@ -24,9 +24,15 @@ We have made a new system for naming datasets, and all datasets are organised in
 
 There is backward compatibility built into the R packages that access the data, so if you use an 'old' ID, it will automatically translate that to the new one. But it will give you a warning, and we urge you to update your scripts to reflect this change.
 
-### UKBiobank data is now substantially reduced
+### Authentication
 
-There were previously ~20k traits with complete GWAS data, but a majority of these were binary traits based on very few numbers of cases. We have now filtered out unreliable datasets, there are 2514 traits remaining, with any binary traits removed that had fewer than 1000 cases. Another issue is the combination of small numbers of cases and allele frequency - here minor allele count (MAC) for a particular association could be very small which would lead to high false positives when using Bolt-LMM. The remaining traits have been filtered to only retain associations where the MAC > 90.
+Previously you would automatically be asked to authenticate any query to the database, through google. Now, we are making authentication voluntary - something that you do at the start of a session only if you need access to specific private datasets on the database. For the vast majority of use cases this is not required. 
+
+Another change is that the R package that managed the authentication has updated, and the file tokens generated are slightly different. For full information on how to deal with this, see here: https://mrcieu.github.io/ieugwasr/articles/guide.html#authentication
+
+### UKBiobank data has been curated
+
+We conducted a large GWAS analysis using a pipeline that systematically analysed every [PHESANT](https://www.ncbi.nlm.nih.gov/pubmed/29040602) phenotype in UK Biobank. There were previously ~20k traits with complete GWAS data, but a majority of these were binary traits based on very few numbers of cases. We have now filtered out unreliable datasets, there are 2514 traits remaining, with any binary traits removed that had fewer than 1000 cases. Another issue is the combination of small numbers of cases and allele frequency - here minor allele count (MAC) for a particular association could be very small which would lead to high false positives when using Bolt-LMM. The remaining traits have been filtered to only retain associations where the MAC > 90.
 
 Document detailing this investigation here: https://htmlpreview.github.io/?https://raw.githubusercontent.com/MRCIEU/ukbb-gwas-analysis/master/docs/ldsc_clumped_analysis.html?token=AAOV6TBQXEXEPT7SUXXLWMC6DWP3O
 
@@ -48,7 +54,7 @@ All rs IDs have been mapped to dbSNP build 144. Therefore, some rs IDs may have 
 
 ### Everything is faster
 
-We are using Elasticsearch and Neo4j on an Oracle Cloud Infrastructure to serve the data. It's much faster.
+We are using Elasticsearch and Neo4j on an Oracle Cloud Infrastructure to serve the data. It's much faster. Interestingly, it actually gets faster when more people are using it because the cache gets 'warmed up' by more requests.
 
 
 ## What is new
@@ -109,3 +115,9 @@ Either the data in the database, or the GWAS VCF files, can be queried and the r
 - pygwasvcf package, python interface to GWAS VCF files: https://github.com/mrcieu/pygwasvcf (Under construction)
 - gwasglue package, linking GWAS data to various analytical methods: https://mrcieu.github.io/gwasglue/ (Functional, under construction)
 - gwas2vcf online tool, allowing users to create GWAS VCF files from summary data: http://ieu-db-interface.epi.bris.ac.uk:8400/ (Functional, under construction?)
+
+## How to request new data
+
+We have setup a github issues page here: https://github.com/MRCIEU/igd-data-requests/issues
+
+Please visit here to make a log of new data requests, or to contribute new data.
