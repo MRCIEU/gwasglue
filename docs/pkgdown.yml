@@ -4,5 +4,6 @@ pkgdown_sha: ~
 articles:
   colocalisation: colocalisation.html
   finemapping: finemapping.html
+  gwas2020: gwas2020.html
   mr: mr.html
 
