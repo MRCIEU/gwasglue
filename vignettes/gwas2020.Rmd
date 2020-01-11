@@ -20,7 +20,7 @@ This document details changes and new features specifically relating to the TwoS
 
 ### Dataset IDs
 
-We have made a new system for naming datasets, and all datasets are organised into data batches. Either new datasets are uploaded one at a time in which case they are added to the `ieu-a` data batch, or there is a bulk upload in which case a new batch is created. For example, `ukb-a` is a bulk upload of the first round of the Neale lab UKBiobank GWAS, and `ukb-b` is the IEU GWAS analysis of the UKBiobank data. In most cases, a dataset is then numbered arbitrarily within the batch. For example, the 2010 GIANT BMI analysis was previously known as `2`, and it is now known as `ieu-a-2`.
+We have made a new system for naming datasets, and all datasets are organised into data batches. Either new datasets are uploaded one at a time in which case they are added to the `ieu-a` data batch, or there is a bulk upload in which case a new batch is created. For example, `ukb-a` is a bulk upload of the first round of the Neale lab UKBiobank GWAS, and `ukb-b` is the IEU GWAS analysis of the UKBiobank data. In most cases, a dataset is then numbered arbitrarily within the batch. For example, the Locke et al 2014 BMI analysis was previously known as `2`, and it is now known as `ieu-a-2`.
 
 There is backward compatibility built into the R packages that access the data, so if you use an 'old' ID, it will automatically translate that to the new one. But it will give you a warning, and we urge you to update your scripts to reflect this change.
 
