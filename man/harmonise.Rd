@@ -4,8 +4,19 @@
 \alias{harmonise}
 \title{Generic harmonisation function}
 \usage{
-harmonise(chr1, pos1, ref1, alt1, chr2, pos2, ref2, alt2, rsid2 = NULL,
-  indel_recode = FALSE, strand_flip = FALSE)
+harmonise(
+  chr1,
+  pos1,
+  ref1,
+  alt1,
+  chr2,
+  pos2,
+  ref2,
+  alt2,
+  rsid2 = NULL,
+  indel_recode = FALSE,
+  strand_flip = FALSE
+)
 }
 \arguments{
 \item{chr1}{Vector}

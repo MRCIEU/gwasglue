@@ -4,8 +4,12 @@
 \alias{read_reference}
 \title{Read in reference dataset}
 \usage{
-read_reference(reference_file, rsid = NULL, chrompos = NULL,
-  remove_dup_rsids = TRUE)
+read_reference(
+  reference_file,
+  rsid = NULL,
+  chrompos = NULL,
+  remove_dup_rsids = TRUE
+)
 }
 \arguments{
 \item{reference_file}{Reference vcf}

@@ -16,10 +16,46 @@ knitr::opts_chunk$set(
 
 Instructions on how to use gwasvcf and ieugwasr to perform colocalisation
 
+We'll use the example of LDL cholesterol (`ieu-a-300`) and coronary heart disease (`ieu-a-7`). 
+
 
 ## ieugwasr
 
+First find a region that we know to be associated with LDL cholesterol.
 
+```{r}
+library(gwasglue)
+library(dplyr)
+top <- ieugwasr::tophits('ieu-a-300') %>% arrange(p)
+top
+```
+
+Choose the best signal and create a range
+
+```{r}
+chrpos <- paste0(top$chr[1], ":", top$position[1] - 90000, "-", top$position[1] + 90000)
+chrpos
+```
+
+Extract, harmonise and format the data
+
+```{r}
+out <- ieugwasr_to_coloc(id1='ieu-a-300', id2='ieu-a-7', chrompos=chrpos)
+```
+
+Run colocalisation analysis
+
+```{r}
+res <- coloc::coloc.abf(out[[1]], out[[2]])
+```
+
+Plot
+
+```{r}
+temp <- coloc_to_gassocplot(out)
+library(gassocplot)
+gassocplot::stack_assoc_plot(temp$markers, temp$z, temp$corr, traits=temp$traits)
+```
 
 
 ## gwasvcf

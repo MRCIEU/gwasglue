@@ -2,20 +2,20 @@
 % Please edit documentation in R/coloc.r
 \name{gwasvcf_to_coloc}
 \alias{gwasvcf_to_coloc}
-\title{Perform coloc}
+\title{Generate coloc dataset from vcf files}
 \usage{
-gwasvcf_to_coloc(vcf1, vcf2, chrompos)
+gwasvcf_to_coloc(vcf1, vcf2, chrompos, type1 = "quant", type2 = "quant")
 }
 \arguments{
-\item{vcf1}{VCF object}
+\item{vcf1}{VCF object or path to vcf file}
 
-\item{vcf2}{VCF object}
+\item{vcf2}{VCF object or path to vcf file}
 
-\item{chrompos}{chrompos object (see input to parse_chrompos)}
+\item{chrompos}{Character of chr:pos1-pos2}
 }
 \value{
-Result from coloc
+List of datasets to feed into coloc
 }
 \description{
-Perform coloc between two vcfs given a particular locus
+Generate coloc dataset from vcf files
 }

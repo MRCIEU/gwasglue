@@ -1,14 +1,12 @@
-#' Perform coloc
+#' Generate coloc dataset from vcf files
 #'
-#' Perform coloc between two vcfs given a particular locus
-#'
-#' @param vcf1 VCF object
-#' @param vcf2 VCF object
-#' @param chrompos chrompos object (see input to parse_chrompos)
+#' @param vcf1 VCF object or path to vcf file
+#' @param vcf2 VCF object or path to vcf file
+#' @param chrompos Character of chr:pos1-pos2
 #'
 #' @export
-#' @return Result from coloc
-gwasvcf_to_coloc <- function(vcf1, vcf2, chrompos)
+#' @return List of datasets to feed into coloc
+gwasvcf_to_coloc <- function(vcf1, vcf2, chrompos, type1="quant", type2="quant")
 {
 	## TODO: binary or quantitative traits
 	## TODO: multiallelic variants
@@ -26,12 +24,61 @@ gwasvcf_to_coloc <- function(vcf1, vcf2, chrompos)
 			tab1$start == tab2$start
 	stopifnot(sum(index) > 0)
 
-	tab1 <- tab1[index,] %>% {list(pvalues = 10^-.$LP, N = .$SS, MAF = .$AF, beta = .$ES, varbeta = .$SE^2, type = "quant", snp = names(vcf2)[index])}
-	tab2 <- tab2[index,] %>% {list(pvalues = 10^-.$LP, N = .$SS, MAF = .$AF, beta = .$ES, varbeta = .$SE^2, type = "quant", snp = names(vcf2)[index])}
+	tab1 <- tab1[index,] %>% {list(pvalues = 10^-.$LP, N = .$SS, MAF = .$AF, beta = .$ES, varbeta = .$SE^2, type = type1, snp = names(vcf2)[index])}
+	tab2 <- tab2[index,] %>% {list(pvalues = 10^-.$LP, N = .$SS, MAF = .$AF, beta = .$ES, varbeta = .$SE^2, type = type2, snp = names(vcf2)[index])}
 
 	return(list(dataset1=tab1, dataset2=tab2))
 }
 
 
+#' Perform 
+#'
+#' <full description>
+#'
+#' @param id1 ID for trait 1
+#' @param id2 ID for trait 2
+#' @param chrompos Character of chr:pos1-pos2
+#'
+#' @export
+#' @return List of datasets to feed into coloc
+ieugwasr_to_coloc <- function(id1, id2, chrompos)
+{
+	tab1 <- ieugwasr::associations(id=id1, variants=chrompos) %>% subset(., !duplicated(rsid))
+	tab2 <- ieugwasr::associations(id=id2, variants=chrompos) %>% subset(., !duplicated(rsid))
+	commonsnps <- tab1$rsid[tab1$rsid %in% tab2$rsid]
+	tab1 <- tab1[tab1$rsid %in% commonsnps, ] %>% arrange(rsid)
+	tab2 <- tab2[tab2$rsid %in% commonsnps, ] %>% arrange(rsid)
+	stopifnot(all(tab1$rsid == tab2$rsid))
 
-## TODO: add ieugwasr version
+	index <- as.character(tab1$ea) == as.character(tab2$ea) &
+			as.character(tab1$nea) == as.character(tab2$nea) &
+			as.character(tab1$rsid) == as.character(tab2$rsid) &
+			tab1$position == tab2$position
+	stopifnot(sum(index) > 0)
+	tab1$eaf <- as.numeric(tab1$eaf)
+	tab2$eaf <- as.numeric(tab2$eaf)
+	tab1$eaf[which(tab1$eaf > 0.5)] <- 1 - tab1$eaf[which(tab1$eaf > 0.5)]
+	tab2$eaf[which(tab2$eaf > 0.5)] <- 1 - tab2$eaf[which(tab2$eaf > 0.5)]
+
+	info1 <- ieugwasr::gwasinfo(id1)
+	type1 <- info1 %>% {ifelse(.$unit == "logOR", "cc", "quant")}
+	info2 <- ieugwasr::gwasinfo(id2)
+	type2 <- info2 %>% {ifelse(.$unit == "logOR", "cc", "quant")}
+
+	tab1 <- tab1[index,] %>% {list(pvalues = .$p, N = .$n, MAF = .$eaf, beta = .$beta, varbeta = .$se^2, type = type1, snp = .$rsid, z = .$beta / .$se, chr = .$chr, pos = .$position, id = id1)}
+	tab2 <- tab2[index,] %>% {list(pvalues = .$p, N = .$n, MAF = .$eaf, beta = .$beta, varbeta = .$se^2, type = type2, snp = .$rsid, z = .$beta / .$se, chr = .$chr, pos = .$position, id = id2)}
+
+	if(type1 == "cc")
+	{
+		tab1$s <- info1$ncase / info1$sample_size
+	} else 
+
+	if(type2 == "cc")
+	{
+		tab2$s <- info2$ncase / info2$sample_size
+	}
+
+	return(list(dataset1=tab1, dataset2=tab2))
+}
+
+

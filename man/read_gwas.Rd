@@ -4,8 +4,22 @@
 \alias{read_gwas}
 \title{Read in GWAS dataset}
 \usage{
-read_gwas(filename, skip, delimiter, gzipped, snp, nea, ea, ea_af, effect,
-  se, pval, n, info, z)
+read_gwas(
+  filename,
+  skip,
+  delimiter,
+  gzipped,
+  snp,
+  nea,
+  ea,
+  ea_af,
+  effect,
+  se,
+  pval,
+  n,
+  info,
+  z
+)
 }
 \arguments{
 \item{filename}{<what param does>}

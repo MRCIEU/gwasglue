@@ -38,3 +38,36 @@ ieugwasr_to_gassocplot <- function(chrpos, id)
 	}
 }
 
+
+#' Convert coloc dataset to gassocplot dataset
+#'
+#' @param coloclist Output from *_to_coloc
+#' @param bfile If number of SNPs > 500 then need to provide your own LD reference panel. Provide plink dataset here. 
+#' @param plink_bin If number of SNPs > 500 then need to provide your own LD reference panel. Provide plink executable here
+#'
+#' @export
+#' @return List to feed into gassocplot
+coloc_to_gassocplot <- function(coloclist, bfile=NULL, plink_bin=NULL)
+{
+	markers <- dplyr::tibble(
+		marker = coloclist$dataset1$snp,
+		chr = coloclist$dataset1$chr,
+		pos = coloclist$dataset1$pos,
+	)
+	z <- dplyr::tibble(
+		id1 = coloclist$dataset1$z,
+		id2 = coloclist$dataset2$z
+	)
+	message("Extracting LD matrix for ", nrow(markers), " variants")
+	ld <- ieugwasr::ld_matrix(markers[["marker"]], with_alleles=FALSE, bfile=bfile, plink_bin=plink_bin)
+	message("Found ", nrow(ld), " variants in LD reference panel")
+	index <- match(rownames(ld), markers[["marker"]])
+	markers <- markers[index, ]
+	z <- z[index, ]
+	stopifnot(all(markers$marker == rownames(ld)))
+	traits <- c(coloclist[["dataset1"]][["id"]], coloclist[["dataset2"]][["id"]])
+	names(z) <- traits
+
+	list(markers = markers, z = z, corr = ld, traits = traits) %>% return()
+}
+
