@@ -64,7 +64,7 @@ wget https://gwas.mrcieu.ac.uk/files/ieu-a-7/ieu-a-7.vcf.gz.tbi
 First get the tophits for LDL cholesterol
 
 ```{r}
-set_bcftools()
+gwasvcf::set_bcftools()
 expd2 <- gwasvcf::query_gwas("ieu-a-300.vcf.gz", chrompos=paste0(expd1$chr.exposure, ":", expd1$pos.exposure))
 ```
 
@@ -104,7 +104,7 @@ tar xzvf data_maf0.01_rs_ref.tgz
 Now extract the top hits based on a p-value threshold
 
 ```{r}
-set_bcftools()
+gwasvcf::set_bcftools()
 expd3 <- gwasvcf::query_gwas("ieu-a-300.vcf.gz", pval=5e-8)
 expd3
 ```
@@ -129,6 +129,23 @@ expd3 <- subset(expd3, SNP %in% retain_snps)
 This only works if you extract on rsids at the moment, and is quite slow. But here it is:
 
 ```{r}
+gwasvcf::set_plink()
 outd2 <- gwasvcf::query_gwas("ieu-a-7.vcf.gz", rsid = expd3$SNP, proxies="yes", bfile="data_maf0.01_rs_ref")
 outd2 <- gwasglue::gwasvcf_to_TwoSampleMR(outd2, "outcome")
 ```
+
+
+## Further MR methods
+
+A number of other MR methods are available. The current framework for using them is to:
+
+1. Convert your data to TwoSampleMR format
+2. Use the TwoSampleMR package to convert to other formats
+
+Examples of formats that you can convert to within TwoSampleMR:
+
+- [MR-PRESSO](https://github.com/rondolab/MR-PRESSO)
+- [RadialMR](https://github.com/WSpiller/RadialMR)
+- [MRMix](https://github.com/gqi/MRMix/)
+- [MendelianRandomization](https://cran.r-project.org/web/packages/MendelianRandomization/index.html)
+- [MR-RAPS](https://cran.r-project.org/web/packages/mr.raps/)
