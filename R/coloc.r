@@ -6,7 +6,7 @@
 #'
 #' @export
 #' @return List of datasets to feed into coloc
-gwasvcf_to_coloc <- function(vcf1, vcf2, chrompos, type1="quant", type2="quant")
+gwasvcf_to_coloc <- function(vcf1, vcf2, chrompos)
 {
 	## TODO: binary or quantitative traits
 	## TODO: multiallelic variants
@@ -24,16 +24,32 @@ gwasvcf_to_coloc <- function(vcf1, vcf2, chrompos, type1="quant", type2="quant")
 			tab1$start == tab2$start
 	stopifnot(sum(index) > 0)
 
-	tab1 <- tab1[index,] %>% {list(pvalues = 10^-.$LP, N = .$SS, MAF = .$AF, beta = .$ES, varbeta = .$SE^2, type = type1, snp = names(vcf2)[index])}
-	tab2 <- tab2[index,] %>% {list(pvalues = 10^-.$LP, N = .$SS, MAF = .$AF, beta = .$ES, varbeta = .$SE^2, type = type2, snp = names(vcf2)[index])}
+	type1 <- ifelse(VariantAnnotation::header(vcf1) %>%
+		VariantAnnotation::meta() %>%
+		{.[["SAMPLE"]][["StudyType"]]} == "Continuous", "quant", "cc")
 
-	return(list(dataset1=tab1, dataset2=tab2))
+	type2 <- ifelse(VariantAnnotation::header(vcf2) %>%
+		VariantAnnotation::meta() %>%
+		{.[["SAMPLE"]][["StudyType"]]} == "Continuous", "quant", "cc")
+
+	out1 <- tab1[index,] %>% {list(pvalues = 10^-.$LP, N = .$SS, MAF = .$AF, beta = .$ES, varbeta = .$SE^2, type = type1, snp = names(vcf2)[index], z = .$ES / .$SE, chr = .$seqnames, pos = .$start, id = VariantAnnotation::samples(VariantAnnotation::header(vcf1))[1])}
+	out2 <- tab2[index,] %>% {list(pvalues = 10^-.$LP, N = .$SS, MAF = .$AF, beta = .$ES, varbeta = .$SE^2, type = type2, snp = names(vcf2)[index], z = .$ES / .$SE, chr = .$seqnames, pos = .$start, id = VariantAnnotation::samples(VariantAnnotation::header(vcf2))[1])}
+
+	if(type1 == "cc")
+	{
+		out1$s <- mean(tab1$NC / tab1$SS, na.rm=TRUE)
+	} else 
+
+	if(type2 == "cc")
+	{
+		out2$s <- mean(tab1$NC / tab1$SS, na.rm=TRUE)
+	}
+
+	return(list(dataset1=out1, dataset2=out2))
 }
 
 
-#' Perform 
-#'
-#' <full description>
+#' Generate coloc dataset from the IEU GWAS database
 #'
 #' @param id1 ID for trait 1
 #' @param id2 ID for trait 2

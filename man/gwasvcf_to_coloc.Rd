@@ -4,7 +4,7 @@
 \alias{gwasvcf_to_coloc}
 \title{Generate coloc dataset from vcf files}
 \usage{
-gwasvcf_to_coloc(vcf1, vcf2, chrompos, type1 = "quant", type2 = "quant")
+gwasvcf_to_coloc(vcf1, vcf2, chrompos)
 }
 \arguments{
 \item{vcf1}{VCF object or path to vcf file}

@@ -101,14 +101,113 @@
 
     
     
-<p>Instructions on how to use gwasvcf and ieugwasr to perform colocalisation</p>
+<p>Here we’ll perform colocalisation analysis for a particular region, and plot the regions as well. We’ll do the same analysis two ways:</p>
+<ul>
+<li>querying the association data from the <a href="https://gwas.mrcieu.ac.uk/">IEU GWAS database</a>, and</li>
+<li>downloading the <a href="https://github.com/MRCIEU/gwas_vcf_spec">GWAS VCF</a> files and querying those.</li>
+</ul>
+<p>We’ll use the example of LDL cholesterol <a href="https://gwas.mrcieu.ac.uk/datasets/ieu-a-300/">ieu-a-300</a> and coronary heart disease <a href="https://gwas.mrcieu.ac.uk/datasets/ieu-a-7/">ieu-a-7</a>.</p>
+<p>Load libraries:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw"><a href="https://rdrr.io/r/base/message.html">suppressPackageStartupMessages</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/warning.html">suppressWarnings</a></span>({</span>
+<span id="cb1-2"><a href="#cb1-2"></a>    <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(gwasglue)</span>
+<span id="cb1-3"><a href="#cb1-3"></a>    <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(dplyr)</span>
+<span id="cb1-4"><a href="#cb1-4"></a>    <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(gassocplot)</span>
+<span id="cb1-5"><a href="#cb1-5"></a>}))</span></code></pre></div>
 <div id="ieugwasr" class="section level2">
 <h2 class="hasAnchor">
 <a href="#ieugwasr" class="anchor"></a>ieugwasr</h2>
+<p>First find a region that we know to be associated with LDL cholesterol.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>top &lt;-<span class="st"> </span>ieugwasr<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/ieugwasr/man/tophits.html">tophits</a></span>(<span class="st">'ieu-a-300'</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span>(p)</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="co">#&gt; API: public: https://gwas-api.mrcieu.ac.uk/</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>top</span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="co">#&gt; # A tibble: 81 x 12</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="co">#&gt;    position         p chr      beta      n     se id    rsid  ea    nea  </span></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="co">#&gt;       &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;  &lt;int&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="co">#&gt;  1   1.10e8 1.00e-200 1     -0.150  172825 0.0047 ieu-… rs49… T     C    </span></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="co">#&gt;  2   4.54e7 1.00e-200 19    -0.485  139198 0.0119 ieu-… rs72… A     G    </span></span>
+<span id="cb2-9"><a href="#cb2-9"></a><span class="co">#&gt;  3   1.12e7 1.00e-200 19    -0.221  170608 0.0061 ieu-… rs65… T     G    </span></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="co">#&gt;  4   2.13e7 9.48e-183 2      0.119  173007 0.004  ieu-… rs13… A     G    </span></span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="co">#&gt;  5   5.55e7 8.57e-143 1      0.497   77417 0.018  ieu-… rs11… A     G    </span></span>
+<span id="cb2-12"><a href="#cb2-12"></a><span class="co">#&gt;  6   4.54e7 2.99e-122 19    -0.446   99409 0.0183 ieu-… rs12… A     G    </span></span>
+<span id="cb2-13"><a href="#cb2-13"></a><span class="co">#&gt;  7   4.41e7 4.84e- 83 2     -0.0806 172940 0.0041 ieu-… rs65… C     T    </span></span>
+<span id="cb2-14"><a href="#cb2-14"></a><span class="co">#&gt;  8   7.47e7 7.79e- 78 5      0.0733 168357 0.0038 ieu-… rs12… C     T    </span></span>
+<span id="cb2-15"><a href="#cb2-15"></a><span class="co">#&gt;  9   4.52e7 7.29e- 62 19    -0.189  170260 0.0112 ieu-… rs29… C     T    </span></span>
+<span id="cb2-16"><a href="#cb2-16"></a><span class="co">#&gt; 10   1.26e8 2.10e- 50 8     -0.0564 172963 0.0036 ieu-… rs29… T     A    </span></span>
+<span id="cb2-17"><a href="#cb2-17"></a><span class="co">#&gt; # … with 71 more rows, and 2 more variables: eaf &lt;chr&gt;, trait &lt;chr&gt;</span></span></code></pre></div>
+<p>Choose the best signal and create a range</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>chrpos &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(top<span class="op">$</span>chr[<span class="dv">1</span>], <span class="st">":"</span>, top<span class="op">$</span>position[<span class="dv">1</span>] <span class="op">-</span><span class="st"> </span><span class="dv">90000</span>, <span class="st">"-"</span>, top<span class="op">$</span>position[<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span><span class="dv">90000</span>)</span>
+<span id="cb3-2"><a href="#cb3-2"></a>chrpos</span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="co">#&gt; [1] "1:109724880-109904880"</span></span></code></pre></div>
+<p>Extract, harmonise and format the data</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ieugwasr_to_coloc.html">ieugwasr_to_coloc</a></span>(<span class="dt">id1=</span><span class="st">'ieu-a-300'</span>, <span class="dt">id2=</span><span class="st">'ieu-a-7'</span>, <span class="dt">chrompos=</span>chrpos)</span></code></pre></div>
+<p>Run colocalisation analysis</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>res &lt;-<span class="st"> </span>coloc<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/coloc/man/coloc.abf.html">coloc.abf</a></span>(out[[<span class="dv">1</span>]], out[[<span class="dv">2</span>]])</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="co">#&gt; Warning in sdY.est(d$varbeta, d$MAF, d$N): estimating sdY from maf and</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="co">#&gt; varbeta, please directly supply sdY if known</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="co">#&gt; PP.H0.abf PP.H1.abf PP.H2.abf PP.H3.abf PP.H4.abf </span></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="co">#&gt; 1.31e-304  1.29e-19 3.67e-288  2.61e-03  9.97e-01 </span></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="co">#&gt; [1] "PP abf for shared variant: 99.7%"</span></span></code></pre></div>
+<p>Plot</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>temp &lt;-<span class="st"> </span><span class="kw"><a href="../reference/coloc_to_gassocplot.html">coloc_to_gassocplot</a></span>(out)</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="co">#&gt; Extracting LD matrix for 253 variants</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="co">#&gt; Warning in ieugwasr::ld_matrix(markers[["marker"]], with_alleles = FALSE, : The following variants are not present in the LD reference panel</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="co">#&gt; rs114570757</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="co">#&gt; rs115867281</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="co">#&gt; rs116711509</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="co">#&gt; rs41279710</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="co">#&gt; rs41279722</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="co">#&gt; rs6683212</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="co">#&gt; Found 247 variants in LD reference panel</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a>gassocplot<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/gassocplot/man/stack_assoc_plot.html">stack_assoc_plot</a></span>(temp<span class="op">$</span>markers, temp<span class="op">$</span>z, temp<span class="op">$</span>corr, <span class="dt">traits=</span>temp<span class="op">$</span>traits)</span></code></pre></div>
+<p><img src="colocalisation_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
+<pre><code>#&gt; TableGrob (2 x 1) "arrange": 2 grobs
+#&gt;   z     cells    name              grob
+#&gt; 1 1 (1-1,1-1) arrange    gtable[layout]
+#&gt; 2 2 (2-2,1-1) arrange gtable[guide-box]</code></pre>
 </div>
 <div id="gwasvcf" class="section level2">
 <h2 class="hasAnchor">
 <a href="#gwasvcf" class="anchor"></a>gwasvcf</h2>
+<p>Let’s do the same with the vcf files (and the indexes). Download from here:</p>
+<ul>
+<li><a href="https://gwas.mrcieu.ac.uk/files/ieu-a-300/ieu-a-300.vcf.gz">https://gwas.mrcieu.ac.uk/files/ieu-a-300/ieu-a-300.vcf.gz</a></li>
+<li><a href="https://gwas.mrcieu.ac.uk/files/ieu-a-300/ieu-a-300.vcf.gz.tbi">https://gwas.mrcieu.ac.uk/files/ieu-a-300/ieu-a-300.vcf.gz.tbi</a></li>
+<li><a href="https://gwas.mrcieu.ac.uk/files/ieu-a-7/ieu-a-7.vcf.gz">https://gwas.mrcieu.ac.uk/files/ieu-a-7/ieu-a-7.vcf.gz</a></li>
+<li><a href="https://gwas.mrcieu.ac.uk/files/ieu-a-7/ieu-a-7.vcf.gz.tbi">https://gwas.mrcieu.ac.uk/files/ieu-a-7/ieu-a-7.vcf.gz.tbi</a></li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>vout &lt;-<span class="st"> </span><span class="kw"><a href="../reference/gwasvcf_to_coloc.html">gwasvcf_to_coloc</a></span>(<span class="st">"ieu-a-300.vcf.gz"</span>, <span class="st">"ieu-a-7.vcf.gz"</span>, chrpos)</span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="co">#&gt; Warning: multiple methods tables found for 'type'</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="co">#&gt; Warning: replacing previous import 'BiocGenerics::type' by</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="co">#&gt; 'DelayedArray::type' when loading 'SummarizedExperiment'</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="co">#&gt; 'tools_bcftools' option is not set, using native read which may be substantially slower. See 'set_bcftools' for information.</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="co">#&gt; 'tools_bcftools' option is not set, using native read which may be substantially slower. See 'set_bcftools' for information.</span></span></code></pre></div>
+<p>Run colocalisation analysis</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>vres &lt;-<span class="st"> </span>coloc<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/coloc/man/coloc.abf.html">coloc.abf</a></span>(vout[[<span class="dv">1</span>]], vout[[<span class="dv">2</span>]])</span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="co">#&gt; Warning in sdY.est(d$varbeta, d$MAF, d$N): estimating sdY from maf and</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="co">#&gt; varbeta, please directly supply sdY if known</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="co">#&gt; Warning in sdY.est(d$varbeta, d$MAF, d$N): estimating sdY from maf and</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="co">#&gt; varbeta, please directly supply sdY if known</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="co">#&gt; PP.H0.abf PP.H1.abf PP.H2.abf PP.H3.abf PP.H4.abf </span></span>
+<span id="cb9-8"><a href="#cb9-8"></a><span class="co">#&gt; 2.54e-304  2.49e-19 3.67e-288  2.61e-03  9.97e-01 </span></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="co">#&gt; [1] "PP abf for shared variant: 99.7%"</span></span></code></pre></div>
+<p>Plot</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>temp &lt;-<span class="st"> </span><span class="kw"><a href="../reference/coloc_to_gassocplot.html">coloc_to_gassocplot</a></span>(vout)</span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="co">#&gt; Extracting LD matrix for 253 variants</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="co">#&gt; Warning in ieugwasr::ld_matrix(markers[["marker"]], with_alleles = FALSE, : The following variants are not present in the LD reference panel</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="co">#&gt; rs115867281</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="co">#&gt; rs41279710</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a><span class="co">#&gt; rs41279722</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="co">#&gt; rs116711509</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="co">#&gt; rs114570757</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a><span class="co">#&gt; rs6683212</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a><span class="co">#&gt; Found 247 variants in LD reference panel</span></span>
+<span id="cb10-11"><a href="#cb10-11"></a>gassocplot<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/gassocplot/man/stack_assoc_plot.html">stack_assoc_plot</a></span>(temp<span class="op">$</span>markers, temp<span class="op">$</span>z, temp<span class="op">$</span>corr, <span class="dt">traits=</span>temp<span class="op">$</span>traits)</span></code></pre></div>
+<p><img src="colocalisation_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
+<pre><code>#&gt; TableGrob (2 x 1) "arrange": 2 grobs
+#&gt;   z     cells    name              grob
+#&gt; 1 1 (1-1,1-1) arrange    gtable[layout]
+#&gt; 2 2 (2-2,1-1) arrange gtable[guide-box]</code></pre>
 </div>
   </div>
 

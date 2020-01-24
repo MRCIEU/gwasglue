@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Generate coloc dataset from vcf files — gwasvcf_to_coloc • gwasglue</title>
+<title>Convert coloc dataset to gassocplot dataset — coloc_to_gassocplot • gwasglue</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Generate coloc dataset from vcf files — gwasvcf_to_coloc" />
-<meta property="og:description" content="Generate coloc dataset from vcf files" />
+<meta property="og:title" content="Convert coloc dataset to gassocplot dataset — coloc_to_gassocplot" />
+<meta property="og:description" content="Convert coloc dataset to gassocplot dataset" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -129,37 +129,37 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Generate coloc dataset from vcf files</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mrcieu/gwasglue/blob/master/R/coloc.r'><code>R/coloc.r</code></a></small>
-    <div class="hidden name"><code>gwasvcf_to_coloc.Rd</code></div>
+    <h1>Convert coloc dataset to gassocplot dataset</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mrcieu/gwasglue/blob/master/R/gassocplot.r'><code>R/gassocplot.r</code></a></small>
+    <div class="hidden name"><code>coloc_to_gassocplot.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Generate coloc dataset from vcf files</p>
+    <p>Convert coloc dataset to gassocplot dataset</p>
     </div>
 
-    <pre class="usage"><span class='fu'>gwasvcf_to_coloc</span>(<span class='no'>vcf1</span>, <span class='no'>vcf2</span>, <span class='no'>chrompos</span>, <span class='kw'>type1</span> <span class='kw'>=</span> <span class='st'>"quant"</span>, <span class='kw'>type2</span> <span class='kw'>=</span> <span class='st'>"quant"</span>)</pre>
+    <pre class="usage"><span class='fu'>coloc_to_gassocplot</span>(<span class='no'>coloclist</span>, <span class='kw'>bfile</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>plink_bin</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>vcf1</th>
-      <td><p>VCF object or path to vcf file</p></td>
+      <th>coloclist</th>
+      <td><p>Output from *_to_coloc</p></td>
     </tr>
     <tr>
-      <th>vcf2</th>
-      <td><p>VCF object or path to vcf file</p></td>
+      <th>bfile</th>
+      <td><p>If number of SNPs &gt; 500 then need to provide your own LD reference panel. Provide plink dataset here.</p></td>
     </tr>
     <tr>
-      <th>chrompos</th>
-      <td><p>Character of chr:pos1-pos2</p></td>
+      <th>plink_bin</th>
+      <td><p>If number of SNPs &gt; 500 then need to provide your own LD reference panel. Provide plink executable here</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>List of datasets to feed into coloc</p>
+    <p>List to feed into gassocplot</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

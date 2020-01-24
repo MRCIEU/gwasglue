@@ -14,3 +14,121 @@ knitr::opts_chunk$set(
 )
 ```
 
+To use the [IEU GWAS database](https://gwas.mrcieu.ac.uk/) for MR analysis, see the [TwoSampleMR](https://mrcieu.github.io/TwoSampleMR/) R package.
+
+Here we'll demonstrate how to achieve the same data extractions using the [GWAS VCF](https://github.com/MRCIEU/gwas_vcf_spec) files.
+
+We'll use the example of LDL cholesterol [ieu-a-300](https://gwas.mrcieu.ac.uk/datasets/ieu-a-300/) and coronary heart disease [ieu-a-7](https://gwas.mrcieu.ac.uk/datasets/ieu-a-7/). 
+
+Load libraries:
+
+```{r}
+suppressPackageStartupMessages(suppressWarnings({
+	library(TwoSampleMR)
+	library(gwasglue)
+	library(gwasvcf)
+	library(ieugwasr)
+	library(dplyr)
+}))
+```
+
+## Using TwoSampleMR
+
+This is a simple procedure for MR using the TwoSampleMR package:
+
+```{r}
+# Extract the instruments for LDL
+expd1 <- TwoSampleMR::extract_instruments("ieu-a-300")
+
+# Extract those SNP effects for CHD
+outd1 <- TwoSampleMR::extract_outcome_data(expd1$SNP, "ieu-a-7", proxies=FALSE)
+
+# Harmonise the exposure and outcome data
+dat1 <- TwoSampleMR::harmonise_data(expd1, outd1)
+
+# Perform MR
+TwoSampleMR::mr(dat1)
+```
+
+## Using GWAS VCF files
+
+Let's do the same with the vcf files (and the indexes). Download from here:
+
+```bash
+wget https://gwas.mrcieu.ac.uk/files/ieu-a-300/ieu-a-300.vcf.gz
+wget https://gwas.mrcieu.ac.uk/files/ieu-a-300/ieu-a-300.vcf.gz.tbi
+wget https://gwas.mrcieu.ac.uk/files/ieu-a-7/ieu-a-7.vcf.gz
+wget https://gwas.mrcieu.ac.uk/files/ieu-a-7/ieu-a-7.vcf.gz.tbi
+```
+
+First get the tophits for LDL cholesterol
+
+```{r}
+set_bcftools()
+expd2 <- gwasvcf::query_gwas("ieu-a-300.vcf.gz", chrompos=paste0(expd1$chr.exposure, ":", expd1$pos.exposure))
+```
+
+Convert to TwoSampleMR format:
+
+```{r}
+expd2 <- gwasglue::gwasvcf_to_TwoSampleMR(expd2, type="exposure")
+```
+
+Extract those SNPs from the outcome vcf file and convert to TwoSampleMR format
+
+```{r}
+outd2 <- gwasvcf::query_gwas("ieu-a-7.vcf.gz", chrompos = paste0(expd1$chr.exposure, ":", expd1$pos.exposure))
+outd2 <- gwasglue::gwasvcf_to_TwoSampleMR(outd2, "outcome")
+```
+
+Proceed with harmonising and performing MR
+
+```{r}
+dat2 <- TwoSampleMR::harmonise_data(expd2, outd2)
+TwoSampleMR::mr(dat2)
+```
+
+
+
+## Other options
+
+### Clumping vcf files
+
+If we want to extract top hits based on a threshold and clump locally. First download the LD reference dataset:
+
+```bash
+wget http://fileserve.mrcieu.ac.uk/ld/data_maf0.01_rs_ref.tgz
+tar xzvf data_maf0.01_rs_ref.tgz
+```
+
+Now extract the top hits based on a p-value threshold
+
+```{r}
+set_bcftools()
+expd3 <- gwasvcf::query_gwas("ieu-a-300.vcf.gz", pval=5e-8)
+expd3
+```
+
+Convert to TwoSampleMR format:
+
+```{r}
+expd3 <- gwasglue::gwasvcf_to_TwoSampleMR(expd3, type="exposure")
+```
+
+Get a list of SNPs to retain after clumping and subset the data
+
+```{r}
+retain_snps <- expd3 %>% dplyr::select(rsid=SNP, pval=pval.exposure) %>%
+	ieugwasr::ld_clump(., plink_bin=genetics.binaRies::get_plink_binary(), bfile="data_maf0.01_rs_ref") %>%
+	{.$rsid}
+expd3 <- subset(expd3, SNP %in% retain_snps)
+```
+
+### Extracting outcome data with LD proxies
+
+This only works if you extract on rsids at the moment, and is quite slow. But here it is:
+
+```{r}
+outd2 <- gwasvcf::query_gwas("ieu-a-7.vcf.gz", rsid = expd3$SNP, proxies="yes", bfile="data_maf0.01_rs_ref")
+outd2 <- gwasglue::gwasvcf_to_TwoSampleMR(outd2, "outcome")
+```
