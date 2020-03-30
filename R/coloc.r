@@ -15,6 +15,17 @@ gwasvcf_to_coloc <- function(vcf1, vcf2, chrompos)
 	vcf1 <- o[[1]]
 	vcf2 <- o[[2]]
 
+	if(length(vcf1) == 0)
+	{
+		message("No overlaps in vcf1")
+		return(NULL)
+	}
+	if(length(vcf2) == 0)
+	{
+		message("No overlaps in vcf2")
+		return(NULL)
+	}
+
 	stopifnot(length(vcf1) == length(vcf2))
 	tab1 <- vcf1 %>% gwasvcf::vcf_to_granges() %>% dplyr::as_tibble()
 	tab2 <- vcf2 %>% gwasvcf::vcf_to_granges() %>% dplyr::as_tibble()
