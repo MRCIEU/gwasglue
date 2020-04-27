@@ -4,7 +4,7 @@
 \alias{ieugwasr_to_coloc}
 \title{Generate coloc dataset from the IEU GWAS database}
 \usage{
-ieugwasr_to_coloc(id1, id2, chrompos)
+ieugwasr_to_coloc(id1, id2, chrompos, type1 = NULL, type2 = NULL)
 }
 \arguments{
 \item{id1}{ID for trait 1}
@@ -12,6 +12,10 @@ ieugwasr_to_coloc(id1, id2, chrompos)
 \item{id2}{ID for trait 2}
 
 \item{chrompos}{Character of chr:pos1-pos2}
+
+\item{type1}{Provide "cc" or "quant" to override automatic lookup of trait type for trait 1}
+
+\item{type2}{Provide "cc" or "quant" to override automatic lookup of trait type for trait 2}
 }
 \value{
 List of datasets to feed into coloc

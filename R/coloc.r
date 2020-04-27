@@ -65,10 +65,12 @@ gwasvcf_to_coloc <- function(vcf1, vcf2, chrompos)
 #' @param id1 ID for trait 1
 #' @param id2 ID for trait 2
 #' @param chrompos Character of chr:pos1-pos2
+#' @param type1 Provide "cc" or "quant" to override automatic lookup of trait type for trait 1
+#' @param type2 Provide "cc" or "quant" to override automatic lookup of trait type for trait 2
 #'
 #' @export
 #' @return List of datasets to feed into coloc
-ieugwasr_to_coloc <- function(id1, id2, chrompos)
+ieugwasr_to_coloc <- function(id1, id2, chrompos, type1=NULL, type2=NULL)
 {
 	tab1 <- ieugwasr::associations(id=id1, variants=chrompos) %>% subset(., !duplicated(rsid))
 	tab2 <- ieugwasr::associations(id=id2, variants=chrompos) %>% subset(., !duplicated(rsid))
@@ -88,9 +90,9 @@ ieugwasr_to_coloc <- function(id1, id2, chrompos)
 	tab2$eaf[which(tab2$eaf > 0.5)] <- 1 - tab2$eaf[which(tab2$eaf > 0.5)]
 
 	info1 <- ieugwasr::gwasinfo(id1)
-	type1 <- info1 %>% {ifelse(.$unit == "logOR", "cc", "quant")}
+	type1 <- get_type(info1, type1)
 	info2 <- ieugwasr::gwasinfo(id2)
-	type2 <- info2 %>% {ifelse(.$unit == "logOR", "cc", "quant")}
+	type2 <- get_type(info2, type2)
 
 	tab1 <- tab1[index,] %>% {list(pvalues = .$p, N = .$n, MAF = .$eaf, beta = .$beta, varbeta = .$se^2, type = type1, snp = .$rsid, z = .$beta / .$se, chr = .$chr, pos = .$position, id = id1)}
 	tab2 <- tab2[index,] %>% {list(pvalues = .$p, N = .$n, MAF = .$eaf, beta = .$beta, varbeta = .$se^2, type = type2, snp = .$rsid, z = .$beta / .$se, chr = .$chr, pos = .$position, id = id2)}
@@ -108,4 +110,18 @@ ieugwasr_to_coloc <- function(id1, id2, chrompos)
 	return(list(dataset1=tab1, dataset2=tab2))
 }
 
+
+get_type <- function(info, typex)
+{
+	if(!is.null(typex))
+	{
+		stopifnot(! typex %in% c("cc", "quant"))
+		return(typex)
+	} else if(is.na(info$unit)) {
+		message("Type information not available for ", info$id, ". Assuming 'quant' but override using 'type' arguments.")
+		return("quant")
+	} else {
+		return(ifelse(.$unit %in% c("logOR", "log odds"), "cc", "quant"))
+	}
+}
 
