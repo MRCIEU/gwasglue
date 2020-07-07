@@ -66,7 +66,11 @@ Example GWAS VCF (GIANT 2010 BMI):
 - http://fileserve.mrcieu.ac.uk/vcf/IEU-a-2.vcf.gz
 - http://fileserve.mrcieu.ac.uk/vcf/IEU-a-2.vcf.gz.tbi
 
-1kg European reference panel for LD:
+Updated 1000 genomes LD reference panels (multiple populations):
+
+- http://fileserve.mrcieu.ac.uk/ld/1kg.v3.tgz
+
+1kg European reference panel for LD (legacy):
 
 - http://fileserve.mrcieu.ac.uk/ld/data_maf0.01_rs_ref.tgz
 
