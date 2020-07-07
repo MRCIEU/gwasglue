@@ -23,7 +23,9 @@ Imports:
     RadialMR,
     MRMix,
     TwoSampleMR,
-    magrittr
+    magrittr,
+    susieR,
+    finemapr
 Remotes:
     mrcieu/gwasvcf,
     rondolab/MR-PRESSO,
@@ -31,7 +33,9 @@ Remotes:
     mrcieu/TwoSampleMR,
     mrcieu/MRInstruments,
     WSpiller/RadialMR,
-    gqi/MRMix
+    gqi/MRMix,
+    stephenslab/susieR,
+    variani/finemapr
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

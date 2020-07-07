@@ -1,0 +1,43 @@
+---
+title: "Conditional analysis of VCF files"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Conditional analysis of VCF files}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(gwasglue)
+```
+
+
+Conditional analysis of VCF files can be performed using GCTA's COJO routine. The procedure implemented here is as follows
+
+1. Obtain clumped top-hits
+2. Assign each top-hit to an LD region. The LD regions are demarkated using [this approach](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4731402/).
+3. Perform finemapping within each LD region that has a top-hit, retaining a representative variant for every credible set
+4. For each LD region that has multiple finemapped loci, perform conditional analysis. e.g. If there are three finemapped loci in a particular region, three conditional analyses will be performed. First, obtain the effects of variant 1 conditional on variants 2 and 3; then variant 2 conditional on variants 1 and 3; then variant 3 conditional on variants 1 and 2.
+
+Ultimately, a list of results will be returned where every fine-mapped variant has a regional set of summary data that is conditionally independent of all neighbouring fine-mapped variants.
+
+
+Read in a VCF file
+
+```{r}
+vcffile <- "ieu-a-300.vcf.gz"
+top <- ieugwasr::tophits('ieu-a-300')
+snplist <- top$rsid
+chrpos <-  top %>% {paste0(.$chr, ":", .$position)} %>% sort
+```
+
+
+
+
