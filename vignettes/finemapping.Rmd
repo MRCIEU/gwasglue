@@ -1,48 +1,137 @@
 ---
-title: "finemapping"
+title: "Clumping and finemapping"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{finemapping}
+  %\VignetteIndexEntry{Clumping and finemapping}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
+  eval=FALSE,
   collapse = TRUE,
   comment = "#>"
 )
 library(gwasglue)
-library(dplyr)
-
 ```
 
+## Clumping
 
-library(devtools)
-load_all()
+Here, we use an LD reference panel to identify SNPs that are in LD with the top signals from a GWAS. The algorithm sequentially chooses the top SNP, removes all SNPs in LD above some threshold within some window, then goes on to the next top hit and repeats the pruning process, until no more SNPs are left above the specified p-value threshold.
+
+The data to be clumped can be retrieved either from the VCF files or data from the OpenGWAS database. Once the data has been retrieved, clumping can be performed either using the clumping routines in the cloud via the API, or locally using local LD reference data. The latter is recommended, it allows you to run things in parallel, to use larger LD reference panels, and avoids killing the servers!
 
 
-Finemapr
+### Data from OpenGWAS
+
+Extract top hits for LDL cholesterol (`ieu-a-300`)
+
+```{r}
+dat <- ieugwasr::tophits("ieu-a-300")
+```
+
+This is very quick because it extracts the pre-clumped top hits for this dataset. If you specify a different threshold from the default it will be a bit slower e.g.
+
+```{r}
+dat <- ieugwasr::tophits("ieu-a-300", pval=5e-7)
+```
+
+Performing clumping using local data is possible. For example, extract the data without clumping:
+
+```{r}
+dat <- ieugwasr::tophits("ieu-a-300", clump=FALSE)
+```
+
+Obtain the `plink` binary for your operating system. For convenience you can use the [genetics.binaRies](https://github.com/explodecomputer/genetics.binaRies/) R package which has a few different widely used utilities bundled within it:
+
+```{r}
+plink_bin <- genetics.binaRies::get_plink_binary()
+```
+
+Obtain some LD reference data. See the homepage of this site for options for downloading LD reference data. Here we'll be using the same LD reference data as that used by the API by default, which is Europeans from the 1000 genomes reference panel
 
 
 ```{r}
-
-v <- ieugwasr::variants_rsid("rs7528419")
-r <- paste0(v[["chr"]], ":", v[["pos"]]-100000, "-", v[["pos"]]+100000)
-a <- ieugwasr_to_finemapr(r, c("ieu-a-7", "ieu-a-2"))
-
-options(finemapr_caviar = "/Users/gh13047/bin/caviar")
-o <- finemapr::run_caviar(a[["ieu-a-7"]]$z, a[["ieu-a-7"]]$ld, args = "-c 3")
-
+ldref <- "/path/to/EUR"
 ```
 
-SusieR
+Perform clumping
 
+```{r}
+clumped <- ld_clump(dat, bfile=ldref, plink_bin=plink_bin)
+```
+
+
+### Data from VCF
+
+There is a single function that can be used to perform clumping on the VCF files. It will either run locally or run using the API, depending on the arguments you supply.
+
+Running locally:
+
+```{r}
+# Set path to file
+vcffile <- "/path/to/ieu-a-300.vcf.gz"
+
+# Set path to bcftools
+gwasvcf::set_bcftools()
+
+# Perform clumping
+clumped <- clump_gwasvcf(vcffile, bfile=ldref, plink_bin=plink_bin)
+```
+
+Running remotely:
+
+```{r}
+clumped <- clump_gwasvcf(vcffile, pop="EUR")
+```
+
+Here, the `pop` argument is passed to the API specifying which super-population to use for the LD reference.
+
+
+## Finemapping
+
+Here, the objective is to extract a slice of the data with relevant fields, and its corresponding LD matrix. Then the data can be applied to a few different packages quite easily
+
+-  [`finemapr`](https://github.com/variani/finemapr) package - which simplifies analysis using FINEMAP, PAINTOR and CAVIAR
+- [`susieR`](https://stephenslab.github.io/susieR) package - new approach called "Sum of Single Effects"
+
+The required data format can be generated from the OpenGWAS database or from VCF files
+
+
+### Data from OpenGWAS
+
+One of the tophits for LDL cholesterol is `rs10903129`, which is located at `1:25768937` on hg19. Determining the region to finemap around this variant is simplified by knowing the natural LD break points in a the European population, which is where the LDL GWAS was performed (`ieu-a-300`). [Berisa and Pickrell 2016](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4731402/) provide a useful dataset of natural breakpoints, which has been incorporated into this package.
+
+Identify LD region to perform finemapping:
+
+```{r}
+region <- map_variants_to_regions(chrpos="1:25768937", pop="EUR")
+```
+
+Extract data from that region into a format for finemapping
+
+```{r}
+dat <- ieugwasr_to_finemapr(region$region, "ieu-a-300")
+```
+
+This returns a nested list. The top level of results is an item for every GWAS dataset requested. Each item contains a dataframe of rsids and their z-scores within the region, and an LD matrix for those variants, and the sample size for each of the variants.
+
+Perform finemapping e.g. using CAVIAR (see [https://github.com/variani/finemapr](https://github.com/variani/finemapr) for more info:
+
+```{r}
+options(finemapr_caviar = "/path/to/caviar")
+library(dplyr)
+o <- finemapr::run_caviar(dat[[1]]$z, dat[[1]]$ld, args = "-c 3")
+```
+
+
+Perform finemapping e.g using susieR (see [https://stephenslab.github.io/susieR/](https://stephenslab.github.io/susieR/) for more info):
 
 ```{r}
 fitted_rss <- susieR::susie_rss(
-	a[["ieu-a-7"]]$z$zscore, 
-	a[["ieu-a-7"]]$ld, L=10, 
+	dat[[1]]$z$zscore, 
+	dat[[1]]$ld, L=10, 
 	estimate_residual_variance=TRUE, 
 	estimate_prior_variance=TRUE, 
 	check_R=FALSE, 
@@ -51,3 +140,33 @@ fitted_rss <- susieR::susie_rss(
 summary(fitted_rss)
 susieR::susie_plot(fitted_rss, y="PIP")
 ```
+
+### Data from VCF
+
+Let's perform a similar analysis for the VCF files
+
+```{r}
+# extract data from vcf
+dat <- gwasvcf_to_finemapr(region = region$region, vcf=vcffile, bfile=ldref, plink_bin=plink_bin)
+
+# Perform finemapping
+fitted_rss <- susieR::susie_rss(
+	dat[[1]]$z$zscore, 
+	dat[[1]]$ld, L=10, 
+	estimate_residual_variance=TRUE, 
+	estimate_prior_variance=TRUE, 
+	check_R=FALSE, 
+	z_ld_weight=1/500
+)
+summary(fitted_rss)
+susieR::susie_plot(fitted_rss, y="PIP")
+```
+
+
+### Finemapping across the whole dataset
+
+1. Perform clumping to get a set of regions to interrogate
+2. Finemap within each region
+
+Output: A list of regions for the dataset which has 
+

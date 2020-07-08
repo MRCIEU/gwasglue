@@ -54,10 +54,13 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="../articles/cojo.html">Conditional analysis of VCF files</a>
+    </li>
+    <li>
       <a href="../articles/colocalisation.html">Genetic colocalisation</a>
     </li>
     <li>
-      <a href="../articles/finemapping.html">finemapping</a>
+      <a href="../articles/finemapping.html">Clumping and finemapping</a>
     </li>
     <li>
       <a href="../articles/gwas2020.html">Major changes to the IEU GWAS resources for 2020</a>
@@ -122,18 +125,18 @@
 <span class="co">#&gt; API: public: http://gwas-api.mrcieu.ac.uk/</span>
 <span class="no">top</span>
 <span class="co">#&gt; # A tibble: 81 x 12</span>
-<span class="co">#&gt;       beta position     se         p chr        n id    rsid  ea    nea   eaf  </span>
-<span class="co">#&gt;      &lt;dbl&gt;    &lt;int&gt;  &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;  &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;</span>
-<span class="co">#&gt;  1 -0.221    1.12e7 0.0061 1.00e-200 19    170608 ieu-… rs65… T     G     0.09…</span>
-<span class="co">#&gt;  2 -0.485    4.54e7 0.0119 1.00e-200 19    139198 ieu-… rs72… A     G     0.03…</span>
-<span class="co">#&gt;  3 -0.150    1.10e8 0.0047 1.00e-200 1     172825 ieu-… rs49… T     C     0.18…</span>
-<span class="co">#&gt;  4  0.119    2.13e7 0.004  9.48e-183 2     173007 ieu-… rs13… A     G     0.28…</span>
-<span class="co">#&gt;  5 -0.497    5.55e7 0.018  8.57e-143 1      77417 ieu-… rs11… T     G     0.01…</span>
-<span class="co">#&gt;  6 -0.446    4.54e7 0.0183 2.99e-122 19     99409 ieu-… rs12… A     G     0.01…</span>
-<span class="co">#&gt;  7 -0.0806   4.41e7 0.0041 4.84e- 83 2     172940 ieu-… rs65… C     T     0.70…</span>
-<span class="co">#&gt;  8  0.0733   7.47e7 0.0038 7.79e- 78 5     168357 ieu-… rs12… C     T     0.43…</span>
-<span class="co">#&gt;  9 -0.189    4.52e7 0.0112 7.29e- 62 19    170260 ieu-… rs29… C     T     0.02…</span>
-<span class="co">#&gt; 10 -0.0564   1.26e8 0.0036 2.10e- 50 8     172963 ieu-… rs29… T     A     0.46…</span>
+<span class="co">#&gt;       beta position     se         p chr        n id    rsid  ea    nea      eaf</span>
+<span class="co">#&gt;      &lt;dbl&gt;    &lt;int&gt;  &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;  &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt;</span>
+<span class="co">#&gt;  1 -0.221    1.12e7 0.0061 1.00e-200 19    170608 ieu-… rs65… T     G     0.0976</span>
+<span class="co">#&gt;  2 -0.485    4.54e7 0.0119 1.00e-200 19    139198 ieu-… rs72… A     G     0.0317</span>
+<span class="co">#&gt;  3 -0.150    1.10e8 0.0047 1.00e-200 1     172825 ieu-… rs49… T     C     0.187 </span>
+<span class="co">#&gt;  4  0.119    2.13e7 0.004  9.48e-183 2     173007 ieu-… rs13… A     G     0.288 </span>
+<span class="co">#&gt;  5 -0.497    5.55e7 0.018  8.57e-143 1      77417 ieu-… rs11… T     G     0.0172</span>
+<span class="co">#&gt;  6 -0.446    4.54e7 0.0183 2.99e-122 19     99409 ieu-… rs12… A     G     0.0172</span>
+<span class="co">#&gt;  7 -0.0806   4.41e7 0.0041 4.84e- 83 2     172940 ieu-… rs65… C     T     0.706 </span>
+<span class="co">#&gt;  8  0.0733   7.47e7 0.0038 7.79e- 78 5     168357 ieu-… rs12… C     T     0.431 </span>
+<span class="co">#&gt;  9 -0.189    4.52e7 0.0112 7.29e- 62 19    170260 ieu-… rs29… C     T     0.0211</span>
+<span class="co">#&gt; 10 -0.0564   1.26e8 0.0036 2.10e- 50 8     172963 ieu-… rs29… T     A     0.468 </span>
 <span class="co">#&gt; # … with 71 more rows, and 1 more variable: trait &lt;chr&gt;</span></pre></body></html></div>
 <p>Choose the best signal and create a range</p>
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">chrpos</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="no">top</span>$<span class="no">chr</span>[<span class="fl">1</span>], <span class="st">":"</span>, <span class="no">top</span>$<span class="no">position</span>[<span class="fl">1</span>] - <span class="fl">90000</span>, <span class="st">"-"</span>, <span class="no">top</span>$<span class="no">position</span>[<span class="fl">1</span>] + <span class="fl">90000</span>)
@@ -156,7 +159,12 @@
 <p>Plot</p>
 <div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">temp</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/coloc_to_gassocplot.html">coloc_to_gassocplot</a></span>(<span class="no">out</span>)
 <span class="co">#&gt; Extracting LD matrix for 148 variants</span>
-<span class="co">#&gt; Found 148 variants in LD reference panel</span>
+<span class="co">#&gt; Please look at vignettes for options on running this locally if you need to run many instances of this command.</span>
+<span class="co">#&gt; Warning in ieugwasr::ld_matrix(markers[["marker"]], with_alleles = FALSE, : The following variants are not present in the LD reference panel</span>
+<span class="co">#&gt; rs17001200</span>
+<span class="co">#&gt; rs2738459</span>
+<span class="co">#&gt; rs8110695</span>
+<span class="co">#&gt; Found 145 variants in LD reference panel</span>
 <span class="kw pkg">gassocplot</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/gassocplot/man/stack_assoc_plot.html">stack_assoc_plot</a></span>(<span class="no">temp</span>$<span class="no">markers</span>, <span class="no">temp</span>$<span class="no">z</span>, <span class="no">temp</span>$<span class="no">corr</span>, <span class="kw">traits</span><span class="kw">=</span><span class="no">temp</span>$<span class="no">traits</span>)</pre></body></html></div>
 <p><img src="colocalisation_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
 <pre><code>#&gt; TableGrob (2 x 1) "arrange": 2 grobs
@@ -179,7 +187,6 @@
 <p>Extract region from vcf files and convert to coloc object</p>
 <div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">vout</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/gwasvcf_to_coloc.html">gwasvcf_to_coloc</a></span>(<span class="st">"ieu-a-300.vcf.gz"</span>, <span class="st">"ieu-a-7.vcf.gz"</span>, <span class="no">chrpos</span>)
 <span class="co">#&gt; Warning: multiple methods tables found for 'type'</span>
-<span class="co">#&gt; Warning: multiple methods tables found for 'splitAsList'</span>
 <span class="co">#&gt; Warning: replacing previous import 'BiocGenerics::type' by 'DelayedArray::type'</span>
 <span class="co">#&gt; when loading 'SummarizedExperiment'</span>
 <span class="co">#&gt; 'tools_bcftools' option is not set, using native read which may be substantially slower. See 'set_bcftools' for information.</span>
@@ -198,7 +205,12 @@
 <div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">gassocplot</span>)
 <span class="no">temp</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/coloc_to_gassocplot.html">coloc_to_gassocplot</a></span>(<span class="no">vout</span>)
 <span class="co">#&gt; Extracting LD matrix for 148 variants</span>
-<span class="co">#&gt; Found 148 variants in LD reference panel</span>
+<span class="co">#&gt; Please look at vignettes for options on running this locally if you need to run many instances of this command.</span>
+<span class="co">#&gt; Warning in ieugwasr::ld_matrix(markers[["marker"]], with_alleles = FALSE, : The following variants are not present in the LD reference panel</span>
+<span class="co">#&gt; rs8110695</span>
+<span class="co">#&gt; rs2738459</span>
+<span class="co">#&gt; rs17001200</span>
+<span class="co">#&gt; Found 145 variants in LD reference panel</span>
 <span class="kw pkg">gassocplot</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/gassocplot/man/stack_assoc_plot.html">stack_assoc_plot</a></span>(<span class="no">temp</span>$<span class="no">markers</span>, <span class="no">temp</span>$<span class="no">z</span>, <span class="no">temp</span>$<span class="no">corr</span>, <span class="kw">traits</span><span class="kw">=</span><span class="no">temp</span>$<span class="no">traits</span>)</pre></body></html></div>
 <p><img src="colocalisation_files/figure-html/unnamed-chunk-11-1.png" width="700"></p>
 <pre><code>#&gt; TableGrob (2 x 1) "arrange": 2 grobs

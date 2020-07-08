@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Page not found (404) • gwasglue</title>
+<title>Perform conditional analysis using GCTA COJO — cojo_cond • gwasglue</title>
 
 
 <!-- jquery -->
@@ -18,8 +18,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
 
 <!-- bootstrap-toc -->
-<link rel="stylesheet" href="bootstrap-toc.css">
-<script src="bootstrap-toc.js"></script>
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
@@ -33,13 +33,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
-<link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script>
+<link href="../pkgdown.css" rel="stylesheet">
+<script src="../pkgdown.js"></script>
 
 
 
 
-<meta property="og:title" content="Page not found (404)" />
+<meta property="og:title" content="Perform conditional analysis using GCTA COJO — cojo_cond" />
+<meta property="og:description" content="For a list of fine-mapped rsids, will assign to regions and generate conditionally independent summary stats for each rsid" />
 
 
 
@@ -58,7 +59,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-title-body">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -70,7 +71,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="index.html">gwasglue</a>
+        <a class="navbar-link" href="../index.html">gwasglue</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
       </span>
     </div>
@@ -78,13 +79,13 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="index.html">
+  <a href="../index.html">
     <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="reference/index.html">Reference</a>
+  <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -94,24 +95,24 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="articles/cojo.html">Conditional analysis of VCF files</a>
+      <a href="../articles/cojo.html">Conditional analysis of VCF files</a>
     </li>
     <li>
-      <a href="articles/colocalisation.html">Genetic colocalisation</a>
+      <a href="../articles/colocalisation.html">Genetic colocalisation</a>
     </li>
     <li>
-      <a href="articles/finemapping.html">Clumping and finemapping</a>
+      <a href="../articles/finemapping.html">Clumping and finemapping</a>
     </li>
     <li>
-      <a href="articles/gwas2020.html">Major changes to the IEU GWAS resources for 2020</a>
+      <a href="../articles/gwas2020.html">Major changes to the IEU GWAS resources for 2020</a>
     </li>
     <li>
-      <a href="articles/mr.html">Mendelian randomization</a>
+      <a href="../articles/mr.html">Mendelian randomization</a>
     </li>
   </ul>
 </li>
 <li>
-  <a href="news/index.html">Changelog</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -132,23 +133,71 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Page not found (404)</h1>
+    <h1>Perform conditional analysis using GCTA COJO</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mrcieu/gwasglue/blob/master/R/cojo.r'><code>R/cojo.r</code></a></small>
+    <div class="hidden name"><code>cojo_cond.Rd</code></div>
     </div>
 
-Content not found. Please use links in the navbar.
+    <div class="ref-description">
+    <p>For a list of fine-mapped rsids, will assign to regions and generate conditionally independent summary stats for each rsid</p>
+    </div>
+
+    <pre class="usage"><span class='fu'>cojo_cond</span>(
+  <span class='no'>vcffile</span>,
+  <span class='no'>bfile</span>,
+  <span class='no'>snplist</span>,
+  <span class='no'>pop</span>,
+  <span class='kw'>gcta</span> <span class='kw'>=</span> <span class='kw pkg'>genetics.binaRies</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/genetics.binaRies/man/get_gcta_binary.html'>get_gcta_binary</a></span>(),
+  <span class='kw'>workdir</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>(),
+  <span class='kw'>threads</span> <span class='kw'>=</span> <span class='fl'>1</span>
+)</pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>vcffile</th>
+      <td><p>Path to vcffile</p></td>
+    </tr>
+    <tr>
+      <th>bfile</th>
+      <td><p>LD reference panel</p></td>
+    </tr>
+    <tr>
+      <th>snplist</th>
+      <td><p>List of rsids</p></td>
+    </tr>
+    <tr>
+      <th>pop</th>
+      <td><p>EUR, ASN or AFR</p></td>
+    </tr>
+    <tr>
+      <th>gcta</th>
+      <td><p>Path to gcta binary. For convenience can use default=genetics.binaRies::get_gcta_binary()</p></td>
+    </tr>
+    <tr>
+      <th>workdir</th>
+      <td><p>Location to store temporary files. Default=tempdir()</p></td>
+    </tr>
+    <tr>
+      <th>threads</th>
+      <td><p>Number of parallel threads. Default=1</p></td>
+    </tr>
+    </table>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>List of independent summary stats</p>
 
   </div>
-
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
-
 </div>
-
 
 
       <footer>

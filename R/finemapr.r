@@ -51,9 +51,39 @@ print.FinemaprList <- function(x)
 }
 
 
-gwasvcf_to_finemapr <- function(region, vcf)
+#' Generate data for fine mapping analysis
+#'
+#' For a given region and VCF file, extracts the variants in the region along with LD matrix from a reference panel
+#'
+#' @param region Region of the genome to extract eg 1:109317192-110317192". Can be array
+#' @param vcf Path to VCF file or VCF object
+#' @param bfile LD reference panel
+#' @param plink_bin Path to plink. Default = genetics.binaRies::get_plink_binary()
+#' @param threads Number of threads to run in parallel. Default=1
+#'
+#' @export
+#' @return List of datasets for finemapping
+gwasvcf_to_finemapr <- function(region, vcf, bfile, plink_bin=genetics.binaRies::get_plink_binary(), threads=1)
 {
-	NULL
+	message("Extracting data from vcf")
+	ext <- gwasvcf::query_gwas(vcf=vcf, chrompos=region)
+	out <- parallel::mclapply(unique(region), function(i){
+		message(i)
+		m <- list()
+		temp <- gwasvcf::query_gwas(vcf=ext, chrompos=i)
+		m[["ld"]] <- ieugwasr::ld_matrix(names(temp), bfile=bfile, plink_bin=plink_bin, with_alleles=FALSE) %>%
+			greedy_remove()
+		tib <- gwasvcf::vcf_to_tibble(temp)
+		m[["z"]] <- tib %>%
+		subset(rsid %in% rownames(m[["ld"]])) %>%
+		dplyr::mutate(z=ES/SE) %>%
+		dplyr::select(snp=rsid, zscore=z)
+		m[["n"]] <- tib[["SS"]]
+		out[[i]] <- m
+		return(out)
+	}, mc.cores=threads)
+	class(out) <- "FinemaprList"
+	return(out)
 }
 
 

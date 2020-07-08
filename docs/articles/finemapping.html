@@ -5,13 +5,13 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>finemapping • gwasglue</title>
+<title>Clumping and finemapping • gwasglue</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="finemapping">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Clumping and finemapping">
 <meta property="og:description" content="gwasglue">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -54,10 +54,13 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="../articles/cojo.html">Conditional analysis of VCF files</a>
+    </li>
+    <li>
       <a href="../articles/colocalisation.html">Genetic colocalisation</a>
     </li>
     <li>
-      <a href="../articles/finemapping.html">finemapping</a>
+      <a href="../articles/finemapping.html">Clumping and finemapping</a>
     </li>
     <li>
       <a href="../articles/gwas2020.html">Major changes to the IEU GWAS resources for 2020</a>
@@ -91,7 +94,7 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>finemapping</h1>
+      <h1 data-toc-skip>Clumping and finemapping</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/mrcieu/gwasglue/blob/master/vignettes/finemapping.Rmd"><code>vignettes/finemapping.Rmd</code></a></small>
@@ -101,12 +104,117 @@
 
     
     
+<div id="clumping" class="section level2">
+<h2 class="hasAnchor">
+<a href="#clumping" class="anchor"></a>Clumping</h2>
+<p>Here, we use an LD reference panel to identify SNPs that are in LD with the top signals from a GWAS. The algorithm sequentially chooses the top SNP, removes all SNPs in LD above some threshold within some window, then goes on to the next top hit and repeats the pruning process, until no more SNPs are left above the specified p-value threshold.</p>
+<p>The data to be clumped can be retrieved either from the VCF files or data from the OpenGWAS database. Once the data has been retrieved, clumping can be performed either using the clumping routines in the cloud via the API, or locally using local LD reference data. The latter is recommended, it allows you to run things in parallel, to use larger LD reference panels, and avoids killing the servers!</p>
+<div id="data-from-opengwas" class="section level3">
+<h3 class="hasAnchor">
+<a href="#data-from-opengwas" class="anchor"></a>Data from OpenGWAS</h3>
+<p>Extract top hits for LDL cholesterol (<code>ieu-a-300</code>)</p>
+<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="no">dat</span> <span class="kw">&lt;-</span> <span class="kw pkg">ieugwasr</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/ieugwasr/man/tophits.html">tophits</a></span>(<span class="st">"ieu-a-300"</span>)</pre></body></html></div>
+<p>This is very quick because it extracts the pre-clumped top hits for this dataset. If you specify a different threshold from the default it will be a bit slower e.g.</p>
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">dat</span> <span class="kw">&lt;-</span> <span class="kw pkg">ieugwasr</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/ieugwasr/man/tophits.html">tophits</a></span>(<span class="st">"ieu-a-300"</span>, <span class="kw">pval</span><span class="kw">=</span><span class="fl">5e-7</span>)</pre></body></html></div>
+<p>Performing clumping using local data is possible. For example, extract the data without clumping:</p>
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">dat</span> <span class="kw">&lt;-</span> <span class="kw pkg">ieugwasr</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/ieugwasr/man/tophits.html">tophits</a></span>(<span class="st">"ieu-a-300"</span>, <span class="kw">clump</span><span class="kw">=</span><span class="fl">FALSE</span>)</pre></body></html></div>
+<p>Obtain the <code>plink</code> binary for your operating system. For convenience you can use the <a href="https://github.com/explodecomputer/genetics.binaRies/">genetics.binaRies</a> R package which has a few different widely used utilities bundled within it:</p>
+<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">plink_bin</span> <span class="kw">&lt;-</span> <span class="kw pkg">genetics.binaRies</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/genetics.binaRies/man/get_plink_binary.html">get_plink_binary</a></span>()</pre></body></html></div>
+<p>Obtain some LD reference data. See the homepage of this site for options for downloading LD reference data. Here we’ll be using the same LD reference data as that used by the API by default, which is Europeans from the 1000 genomes reference panel</p>
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">ldref</span> <span class="kw">&lt;-</span> <span class="st">"/path/to/EUR"</span></pre></body></html></div>
+<p>Perform clumping</p>
+<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">clumped</span> <span class="kw">&lt;-</span> <span class="fu">ld_clump</span>(<span class="no">dat</span>, <span class="kw">bfile</span><span class="kw">=</span><span class="no">ldref</span>, <span class="kw">plink_bin</span><span class="kw">=</span><span class="no">plink_bin</span>)</pre></body></html></div>
+</div>
+<div id="data-from-vcf" class="section level3">
+<h3 class="hasAnchor">
+<a href="#data-from-vcf" class="anchor"></a>Data from VCF</h3>
+<p>There is a single function that can be used to perform clumping on the VCF files. It will either run locally or run using the API, depending on the arguments you supply.</p>
+<p>Running locally:</p>
+<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="co"># Set path to file</span>
+<span class="no">vcffile</span> <span class="kw">&lt;-</span> <span class="st">"/path/to/ieu-a-300.vcf.gz"</span>
 
+<span class="co"># Set path to bcftools</span>
+<span class="kw pkg">gwasvcf</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/gwasvcf/man/set_bcftools.html">set_bcftools</a></span>()
+
+<span class="co"># Perform clumping</span>
+<span class="no">clumped</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/clump_gwasvcf.html">clump_gwasvcf</a></span>(<span class="no">vcffile</span>, <span class="kw">bfile</span><span class="kw">=</span><span class="no">ldref</span>, <span class="kw">plink_bin</span><span class="kw">=</span><span class="no">plink_bin</span>)</pre></body></html></div>
+<p>Running remotely:</p>
+<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">clumped</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/clump_gwasvcf.html">clump_gwasvcf</a></span>(<span class="no">vcffile</span>, <span class="kw">pop</span><span class="kw">=</span><span class="st">"EUR"</span>)</pre></body></html></div>
+<p>Here, the <code>pop</code> argument is passed to the API specifying which super-population to use for the LD reference.</p>
+</div>
+</div>
+<div id="finemapping" class="section level2">
+<h2 class="hasAnchor">
+<a href="#finemapping" class="anchor"></a>Finemapping</h2>
+<p>Here, the objective is to extract a slice of the data with relevant fields, and its corresponding LD matrix. Then the data can be applied to a few different packages quite easily</p>
+<ul>
+<li>
+<a href="https://github.com/variani/finemapr"><code>finemapr</code></a> package - which simplifies analysis using FINEMAP, PAINTOR and CAVIAR</li>
+<li>
+<a href="https://stephenslab.github.io/susieR"><code>susieR</code></a> package - new approach called “Sum of Single Effects”</li>
+</ul>
+<p>The required data format can be generated from the OpenGWAS database or from VCF files</p>
+<div id="data-from-opengwas-1" class="section level3">
+<h3 class="hasAnchor">
+<a href="#data-from-opengwas-1" class="anchor"></a>Data from OpenGWAS</h3>
+<p>One of the tophits for LDL cholesterol is <code>rs10903129</code>, which is located at <code>1:25768937</code> on hg19. Determining the region to finemap around this variant is simplified by knowing the natural LD break points in a the European population, which is where the LDL GWAS was performed (<code>ieu-a-300</code>). <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4731402/">Berisa and Pickrell 2016</a> provide a useful dataset of natural breakpoints, which has been incorporated into this package.</p>
+<p>Identify LD region to perform finemapping:</p>
+<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">region</span> <span class="kw">&lt;-</span> <span class="fu">map_variants_to_regions</span>(<span class="kw">chrpos</span><span class="kw">=</span><span class="st">"1:25768937"</span>, <span class="kw">pop</span><span class="kw">=</span><span class="st">"EUR"</span>)</pre></body></html></div>
+<p>Extract data from that region into a format for finemapping</p>
+<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">dat</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/ieugwasr_to_finemapr.html">ieugwasr_to_finemapr</a></span>(<span class="no">region</span>$<span class="no">region</span>, <span class="st">"ieu-a-300"</span>)</pre></body></html></div>
+<p>This returns a nested list. The top level of results is an item for every GWAS dataset requested. Each item contains a dataframe of rsids and their z-scores within the region, and an LD matrix for those variants, and the sample size for each of the variants.</p>
+<p>Perform finemapping e.g. using CAVIAR (see <a href="https://github.com/variani/finemapr">https://github.com/variani/finemapr</a> for more info:</p>
+<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span>(<span class="kw">finemapr_caviar</span> <span class="kw">=</span> <span class="st">"/path/to/caviar"</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)
+<span class="no">o</span> <span class="kw">&lt;-</span> <span class="kw pkg">finemapr</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/finemapr/man/run_caviar.html">run_caviar</a></span>(<span class="no">dat</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="no">z</span>, <span class="no">dat</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="no">ld</span>, <span class="kw">args</span> <span class="kw">=</span> <span class="st">"-c 3"</span>)</pre></body></html></div>
+<p>Perform finemapping e.g using susieR (see <a href="https://stephenslab.github.io/susieR/">https://stephenslab.github.io/susieR/</a> for more info):</p>
+<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">fitted_rss</span> <span class="kw">&lt;-</span> <span class="kw pkg">susieR</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/susieR/man/susie_rss.html">susie_rss</a></span>(
+    <span class="no">dat</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="no">z</span>$<span class="no">zscore</span>,
+    <span class="no">dat</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="no">ld</span>, <span class="kw">L</span><span class="kw">=</span><span class="fl">10</span>,
+    <span class="kw">estimate_residual_variance</span><span class="kw">=</span><span class="fl">TRUE</span>,
+    <span class="kw">estimate_prior_variance</span><span class="kw">=</span><span class="fl">TRUE</span>,
+    <span class="kw">check_R</span><span class="kw">=</span><span class="fl">FALSE</span>,
+    <span class="kw">z_ld_weight</span><span class="kw">=</span><span class="fl">1</span>/<span class="fl">500</span>
+)
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">fitted_rss</span>)
+<span class="kw pkg">susieR</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/susieR/man/susie_plot.html">susie_plot</a></span>(<span class="no">fitted_rss</span>, <span class="kw">y</span><span class="kw">=</span><span class="st">"PIP"</span>)</pre></body></html></div>
+</div>
+<div id="data-from-vcf-1" class="section level3">
+<h3 class="hasAnchor">
+<a href="#data-from-vcf-1" class="anchor"></a>Data from VCF</h3>
+<p>Let’s perform a similar analysis for the VCF files</p>
+<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="co"># extract data from vcf</span>
+<span class="no">dat</span> <span class="kw">&lt;-</span> <span class="fu">gwasvcf_to_finemapr</span>(<span class="kw">region</span> <span class="kw">=</span> <span class="no">region</span>$<span class="no">region</span>, <span class="kw">vcf</span><span class="kw">=</span><span class="no">vcffile</span>, <span class="kw">bfile</span><span class="kw">=</span><span class="no">ldref</span>, <span class="kw">plink_bin</span><span class="kw">=</span><span class="no">plink_bin</span>)
+
+<span class="co"># Perform finemapping</span>
+<span class="no">fitted_rss</span> <span class="kw">&lt;-</span> <span class="kw pkg">susieR</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/susieR/man/susie_rss.html">susie_rss</a></span>(
+    <span class="no">dat</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="no">z</span>$<span class="no">zscore</span>,
+    <span class="no">dat</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="no">ld</span>, <span class="kw">L</span><span class="kw">=</span><span class="fl">10</span>,
+    <span class="kw">estimate_residual_variance</span><span class="kw">=</span><span class="fl">TRUE</span>,
+    <span class="kw">estimate_prior_variance</span><span class="kw">=</span><span class="fl">TRUE</span>,
+    <span class="kw">check_R</span><span class="kw">=</span><span class="fl">FALSE</span>,
+    <span class="kw">z_ld_weight</span><span class="kw">=</span><span class="fl">1</span>/<span class="fl">500</span>
+)
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">fitted_rss</span>)
+<span class="kw pkg">susieR</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/susieR/man/susie_plot.html">susie_plot</a></span>(<span class="no">fitted_rss</span>, <span class="kw">y</span><span class="kw">=</span><span class="st">"PIP"</span>)</pre></body></html></div>
+</div>
+<div id="finemapping-across-the-whole-dataset" class="section level3">
+<h3 class="hasAnchor">
+<a href="#finemapping-across-the-whole-dataset" class="anchor"></a>Finemapping across the whole dataset</h3>
+<ol style="list-style-type: decimal">
+<li>Perform clumping to get a set of regions to interrogate</li>
+<li>Finemap within each region</li>
+</ol>
+<p>Output: A list of regions for the dataset which has</p>
+</div>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
-      </div>
+        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
+    </nav>
+</div>
 
 </div>
 

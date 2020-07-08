@@ -9,6 +9,7 @@ vignette: >
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
+  eval=FALSE,
   collapse = TRUE,
   comment = "#>"
 )
@@ -16,6 +17,7 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(gwasglue)
+library(gwasvcf)
 ```
 
 
@@ -29,15 +31,68 @@ Conditional analysis of VCF files can be performed using GCTA's COJO routine. Th
 Ultimately, a list of results will be returned where every fine-mapped variant has a regional set of summary data that is conditionally independent of all neighbouring fine-mapped variants.
 
 
-Read in a VCF file
+
+## Finemapping pipeline
+
+1. Clump dataset
+2. Map clumps to LD regions
+3. Perform fine mapping in each LD region
+
+Setup:
 
 ```{r}
 vcffile <- "ieu-a-300.vcf.gz"
-top <- ieugwasr::tophits('ieu-a-300')
-snplist <- top$rsid
-chrpos <-  top %>% {paste0(.$chr, ":", .$position)} %>% sort
+ldref <- "/Users/gh13047/repo/mr-base-api/app/ld_files/EUR"
+gwasvcf::set_bcftools()
 ```
 
+Perform susieR pipeline:
 
+```{r}
+out <- susieR_pipeline(
+	vcffile=vcffile,
+	bfile=ldref,
+	plink_bin=genetics.binaRies::get_plink_binary(),
+	pop="EUR",
+	threads=1,
+	L=10, 
+	estimate_residual_variance=TRUE, 
+	estimate_prior_variance=TRUE, 
+	check_R=FALSE, 
+	z_ld_weight=1/500
+)
+```
+
+Each detected region now has a finemapped object stored against it. You can see them for example like this:
+
+```{r}
+summary(out[[1]]$susieR)
+susieR::susie_plot(fitted_rss, y="PIP")
+```
+
+For each region we can extract the variants with the highest posterior inclusion probability per credible set, e.g.:
+
+```{r}
+m[[1]]$susieR$fmset
+```
+
+## Conditional analysis pipeline
+
+Now we can perform conditional analysis at each region using knowledge of the finemapped variants. The `cojo_cond` function does the following
+
+1. Creates temporary directory to store files
+2. Writes vcf file to summary stats file in COJO format
+3. Determines regions that have multiple fine-mapped variants
+4. For each fine-mapped variant, obtains summary stats conditional on other fine-mapped variants in the region
+
+The result is a list of regions, with a set of conditional summary stats for every fine-mapped variant in that region.
+
+```{r}
+out <- cojo_cond(
+	vcffile=vcffile, 
+	bfile=ldref,
+	snplist=unlist(sapply(m, function(x) x$susieR$fmset))
+)
+```
 
 

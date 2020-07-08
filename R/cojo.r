@@ -33,36 +33,69 @@ map_variants_to_regions <- function(chrpos, pop)
 }
 
 
-cojo_cond <- function(vcffile, bfile, snplist, pop, plink=genetics.binaRies::get_plink_binary(), bcftools=genetics.binaRies::get_bcftools_binary(), gcta=genetics.binaRies::get_gcta_binary(), wd=tempdir())
+#' Perform conditional analysis using GCTA COJO
+#'
+#' For a list of fine-mapped rsids, will assign to regions and generate conditionally independent summary stats for each rsid
+#'
+#' @param vcffile Path to vcffile
+#' @param bfile LD reference panel
+#' @param snplist List of rsids
+#' @param pop EUR, ASN or AFR
+#' @param gcta Path to gcta binary. For convenience can use default=genetics.binaRies::get_gcta_binary()
+#' @param workdir Location to store temporary files. Default=tempdir()
+#' @param threads Number of parallel threads. Default=1
+#'
+#' @export
+#' @return List of independent summary stats
+cojo_cond <- function(vcffile, bfile, snplist, pop, gcta=genetics.binaRies::get_gcta_binary(), workdir=tempdir(), threads=1)
 {
-	vcf <- cojo_sumstat_file(vcffile, file.path(wd, "sum.txt"))
-	rr <- SummarizedExperiment::rowRanges(vcf) %>% dplyr::as_tibble()
+	message("Formatting sumstats")
+	vcf <- cojo_sumstat_file(vcffile, file.path(workdir, "sum.txt"))
 
 	ext <- vcf[names(vcf) %in% snplist] %>%
 		SummarizedExperiment::rowRanges() 
 	chrpos <- paste0(SummarizedExperiment::seqnames(ext), ":", SummarizedExperiment::ranges(ext)@start)
 
-	# Get regions
+	message("Organising regions")
 	regions <- map_variants_to_regions(chrpos, pop)
 	regions$rsid <- names(ext)[match(regions$variant, chrpos)]
-	dup_reg <- regions$region[duplicated(regions$region)]
+	dup_reg <- unique(regions$region[duplicated(regions$region)])
 
-	l <- list()
-	for(i in dup_reg)
+	message(length(dup_reg), " out of ", nrow(regions), " regions have multiple variants")
+
+	l <- mclapply(dup_reg, function(i)
 	{
+		message(i)
 		x <- subset(regions, region == i)
 		m <- list()
-		extract_list <- names(query_gwas(vcf, chrompos=i))
-		write.table(extract_list, file=file.path(wd, "extract.txt"), row=F, col=F, qu=F)
+		y <- gwasvcf::query_gwas(vcf, chrompos=i)
+		extract_list <- names(y)
+		write.table(extract_list, file=file.path(workdir, "extract.txt"), row=F, col=F, qu=F)
 		for(j in x$variant)
 		{
+			message(j)
 			condsnps <- subset(x, variant != j)$rsid
-			write.table(condsnps, file=file.path(wd, "cond.txt"), row=F, col=F, qu=F)
-			cmd <- glue::glue("{gcta} --bfile {bfile} --extract {file.path(wd, 'extract.txt')} --cojo-file {file.path(wd, 'sum.txt')} --cojo-cond {file.path(wd, 'cond.txt')} --out {file.path(wd, 'out')}")
+			write.table(condsnps, file=file.path(workdir, "cond.txt"), row=F, col=F, qu=F)
+			cmd <- glue::glue("{gcta} --bfile {bfile} --extract {file.path(workdir, 'extract.txt')} --cojo-file {file.path(workdir, 'sum.txt')} --cojo-cond {file.path(workdir, 'cond.txt')} --out {file.path(workdir, 'out')}")
 			system(cmd)
-			m[[j]] <- fread(file.path(wd, 'out.cma'))
+			res <- data.table::fread(file.path(workdir, 'out.cma.cojo'))
+			m[[j]] <- select(rsid=SNP, chr=Chr, pos=bp, alt=refA, ES=bC, SE=bC_se, pval=pC, n=n)
 		}
-		l[[i]] <- m
+		return(m)
+	}, mc.cores=threads)
+
+	message("Adding in remaining regions in the same format")
+	single_reg <- regions$region[!regions$region %in% dup_reg]
+
+	for(i in single_reg)
+	{
+		message(i)
+		x <- subset(regions, region == i)
+		j <- x$variant
+		y <- gwasvcf::query_gwas(vcf, chrompos=i) %>% gwasvcf::vcf_to_tibble() %>%
+			mutate(pval=10^{-LP})
+		l[[i]][[j]] <- dplyr::select(y, rsid=rsid, chr=seqnames, pos=start, alt=ALT, ES=ES, SE=SE, pval=pval, n=SS)
 	}
+
 	return(l)
 }
