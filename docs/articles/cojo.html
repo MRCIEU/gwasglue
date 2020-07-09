@@ -140,10 +140,10 @@
     <span class="kw">z_ld_weight</span><span class="kw">=</span><span class="fl">1</span>/<span class="fl">500</span>
 )</pre></body></html></div>
 <p>Each detected region now has a finemapped object stored against it. You can see them for example like this:</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">out</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="no">susieR</span>)
-<span class="kw pkg">susieR</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/susieR/man/susie_plot.html">susie_plot</a></span>(<span class="no">fitted_rss</span>, <span class="kw">y</span><span class="kw">=</span><span class="st">"PIP"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">out</span>$<span class="no">res</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="no">susieR</span>)
+<span class="kw pkg">susieR</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/susieR/man/susie_plot.html">susie_plot</a></span>(<span class="no">out</span>$<span class="no">res</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="no">susieR</span>, <span class="kw">y</span><span class="kw">=</span><span class="st">"PIP"</span>)</pre></body></html></div>
 <p>For each region we can extract the variants with the highest posterior inclusion probability per credible set, e.g.:</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">m</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="no">susieR</span>$<span class="no">fmset</span></pre></body></html></div>
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">out</span>$<span class="no">res</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="no">susieR</span>$<span class="no">fmset</span></pre></body></html></div>
 </div>
 <div id="conditional-analysis-pipeline" class="section level2">
 <h2 class="hasAnchor">
@@ -156,11 +156,18 @@
 <li>For each fine-mapped variant, obtains summary stats conditional on other fine-mapped variants in the region</li>
 </ol>
 <p>The result is a list of regions, with a set of conditional summary stats for every fine-mapped variant in that region.</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">out</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/cojo_cond.html">cojo_cond</a></span>(
+<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">out2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/cojo_cond.html">cojo_cond</a></span>(
     <span class="kw">vcffile</span><span class="kw">=</span><span class="no">vcffile</span>,
     <span class="kw">bfile</span><span class="kw">=</span><span class="no">ldref</span>,
-    <span class="kw">snplist</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span>(<span class="no">m</span>, <span class="kw">function</span>(<span class="no">x</span>) <span class="no">x</span>$<span class="no">susieR</span>$<span class="no">fmset</span>))
+    <span class="kw">pop</span><span class="kw">=</span><span class="st">"EUR"</span>,
+    <span class="kw">snplist</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span>(<span class="no">out</span>$<span class="no">res</span>, <span class="kw">function</span>(<span class="no">x</span>) <span class="no">x</span>$<span class="no">susieR</span>$<span class="no">fmset</span>))
 )</pre></body></html></div>
+<p>TODO</p>
+<ul>
+<li>Make sure finemapped variants are in reference panel</li>
+<li>Improve speed of cojo by implementing within R so don’t have to use GCTA</li>
+<li>Determine how to combine cojo with coloc</li>
+</ul>
 </div>
   </div>
 

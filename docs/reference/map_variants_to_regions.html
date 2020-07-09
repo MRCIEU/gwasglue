@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Perform LD clumping — clump_gwasvcf • gwasglue</title>
+<title>For a set of variants map to LD regions — map_variants_to_regions • gwasglue</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Perform LD clumping — clump_gwasvcf" />
-<meta property="og:description" content="&amp;lt;full description&amp;gt;" />
+<meta property="og:title" content="For a set of variants map to LD regions — map_variants_to_regions" />
+<meta property="og:description" content="LD regions defined here https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4731402/" />
 
 
 
@@ -135,66 +135,35 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Perform LD clumping</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mrcieu/gwasglue/blob/master/R/clump.r'><code>R/clump.r</code></a></small>
-    <div class="hidden name"><code>clump_gwasvcf.Rd</code></div>
+    <h1>For a set of variants map to LD regions</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mrcieu/gwasglue/blob/master/R/cojo.r'><code>R/cojo.r</code></a></small>
+    <div class="hidden name"><code>map_variants_to_regions.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>&lt;full description&gt;</p>
+    <p>LD regions defined here https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4731402/</p>
     </div>
 
-    <pre class="usage"><span class='fu'>clump_gwasvcf</span>(
-  <span class='no'>vcf</span>,
-  <span class='kw'>clump_kb</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
-  <span class='kw'>clump_r2</span> <span class='kw'>=</span> <span class='fl'>0.001</span>,
-  <span class='kw'>clump_p</span> <span class='kw'>=</span> <span class='fl'>5e-08</span>,
-  <span class='kw'>pop</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>bfile</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>plink_bin</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>access_token</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>map_variants_to_regions</span>(<span class='no'>chrpos</span>, <span class='no'>pop</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>vcf</th>
-      <td><p>VCF file or VCF object</p></td>
-    </tr>
-    <tr>
-      <th>clump_kb</th>
-      <td><p>Clumping kb window. Default is very strict, 10000</p></td>
-    </tr>
-    <tr>
-      <th>clump_r2</th>
-      <td><p>Clumping r2 threshold. Default is very strict, 0.001</p></td>
-    </tr>
-    <tr>
-      <th>clump_p</th>
-      <td><p>Clumping sig level for index variants. Default = 1 (i.e. no threshold)</p></td>
+      <th>chrpos</th>
+      <td><p>Array of chr:pos</p></td>
     </tr>
     <tr>
       <th>pop</th>
-      <td><p>Super-population to use as reference panel. Default = "EUR". Options are EUR, SAS, EAS, AFR, AMR. 'legacy' also available - which is a previously used verison of the EUR panel with a slightly different set of markers</p></td>
-    </tr>
-    <tr>
-      <th>bfile</th>
-      <td><p>If this is provided then will use the API. Default = NULL</p></td>
-    </tr>
-    <tr>
-      <th>plink_bin</th>
-      <td><p>If null and bfile is not null then will detect packaged plink binary for specific OS. Otherwise specify path to plink binary. Default = NULL</p></td>
-    </tr>
-    <tr>
-      <th>access_token</th>
-      <td><p>Google OAuth2 access token. Used to authenticate level of access to data</p></td>
+      <td><p>EUR, AFR or ASN</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>data frame of clumped results</p>
+    
+
+
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

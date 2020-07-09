@@ -1,3 +1,10 @@
+#' Write vcf file to cojo sumstat file
+#'
+#' @param vcffile Path to vcf file
+#' @param outfile Path to output file
+#'
+#' @export
+#' @return vcf object
 cojo_sumstat_file <- function(vcffile, outfile)
 {
 	vcf <- VariantAnnotation::readVcf(vcffile)
@@ -9,6 +16,15 @@ cojo_sumstat_file <- function(vcffile, outfile)
 	return(vcf)
 }
 
+#' For a set of variants map to LD regions
+#'
+#' LD regions defined here https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4731402/
+#'
+#' @param chrpos Array of chr:pos
+#' @param pop EUR, AFR or ASN
+#'
+#' @export
+#' @return
 map_variants_to_regions <- function(chrpos, pop)
 {
 	regionfile <- system.file("extdata", "ldetect", paste0(pop, ".bed"), package="gwasglue")
@@ -63,7 +79,7 @@ cojo_cond <- function(vcffile, bfile, snplist, pop, gcta=genetics.binaRies::get_
 
 	message(length(dup_reg), " out of ", nrow(regions), " regions have multiple variants")
 
-	l <- mclapply(dup_reg, function(i)
+	l <- parallel::mclapply(dup_reg, function(i)
 	{
 		message(i)
 		x <- subset(regions, region == i)
@@ -79,7 +95,7 @@ cojo_cond <- function(vcffile, bfile, snplist, pop, gcta=genetics.binaRies::get_
 			cmd <- glue::glue("{gcta} --bfile {bfile} --extract {file.path(workdir, 'extract.txt')} --cojo-file {file.path(workdir, 'sum.txt')} --cojo-cond {file.path(workdir, 'cond.txt')} --out {file.path(workdir, 'out')}")
 			system(cmd)
 			res <- data.table::fread(file.path(workdir, 'out.cma.cojo'))
-			m[[j]] <- select(rsid=SNP, chr=Chr, pos=bp, alt=refA, ES=bC, SE=bC_se, pval=pC, n=n)
+			m[[j]] <- dplyr::select(res, rsid=SNP, chr=Chr, pos=bp, alt=refA, ES=bC, SE=bC_se, pval=pC, n=n)
 		}
 		return(m)
 	}, mc.cores=threads)
@@ -93,7 +109,7 @@ cojo_cond <- function(vcffile, bfile, snplist, pop, gcta=genetics.binaRies::get_
 		x <- subset(regions, region == i)
 		j <- x$variant
 		y <- gwasvcf::query_gwas(vcf, chrompos=i) %>% gwasvcf::vcf_to_tibble() %>%
-			mutate(pval=10^{-LP})
+			dplyr::mutate(pval=10^{-LP})
 		l[[i]][[j]] <- dplyr::select(y, rsid=rsid, chr=seqnames, pos=start, alt=ALT, ES=ES, SE=SE, pval=pval, n=SS)
 	}
 

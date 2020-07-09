@@ -66,14 +66,14 @@ out <- susieR_pipeline(
 Each detected region now has a finemapped object stored against it. You can see them for example like this:
 
 ```{r}
-summary(out[[1]]$susieR)
-susieR::susie_plot(fitted_rss, y="PIP")
+summary(out$res[[1]]$susieR)
+susieR::susie_plot(out$res[[1]]$susieR, y="PIP")
 ```
 
 For each region we can extract the variants with the highest posterior inclusion probability per credible set, e.g.:
 
 ```{r}
-m[[1]]$susieR$fmset
+out$res[[1]]$susieR$fmset
 ```
 
 ## Conditional analysis pipeline
@@ -88,11 +88,17 @@ Now we can perform conditional analysis at each region using knowledge of the fi
 The result is a list of regions, with a set of conditional summary stats for every fine-mapped variant in that region.
 
 ```{r}
-out <- cojo_cond(
+out2 <- cojo_cond(
 	vcffile=vcffile, 
 	bfile=ldref,
-	snplist=unlist(sapply(m, function(x) x$susieR$fmset))
+	pop="EUR",
+	snplist=unlist(sapply(out$res, function(x) x$susieR$fmset))
 )
 ```
 
 
+TODO
+
+- Make sure finemapped variants are in reference panel
+- Improve speed of cojo by implementing within R so don't have to use GCTA
+- Determine how to combine cojo with coloc
