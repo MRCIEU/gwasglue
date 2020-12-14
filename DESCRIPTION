@@ -11,10 +11,10 @@ Description: Many tools exist that use GWAS summary data for colocalisation, fin
 URL: https://github.com/mrcieu/gwasglue
 BugReports: https://github.com/mrcieu/gwasglue/issues
 Depends: 
-    R (>= 3.6.0)
-Imports:
+    R (>= 3.6.0),
     gwasvcf,
-    ieugwasr,
+    ieugwasr
+Imports:
     dplyr,
     testthat,
     mr.raps,

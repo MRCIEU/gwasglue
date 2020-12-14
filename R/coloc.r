@@ -75,8 +75,8 @@ ieugwasr_to_coloc <- function(id1, id2, chrompos, type1=NULL, type2=NULL)
 	tab1 <- ieugwasr::associations(id=id1, variants=chrompos) %>% subset(., !duplicated(rsid))
 	tab2 <- ieugwasr::associations(id=id2, variants=chrompos) %>% subset(., !duplicated(rsid))
 	commonsnps <- tab1$rsid[tab1$rsid %in% tab2$rsid]
-	tab1 <- tab1[tab1$rsid %in% commonsnps, ] %>% arrange(rsid)
-	tab2 <- tab2[tab2$rsid %in% commonsnps, ] %>% arrange(rsid)
+	tab1 <- tab1[tab1$rsid %in% commonsnps, ] %>% dplyr::arrange(rsid)
+	tab2 <- tab2[tab2$rsid %in% commonsnps, ] %>% dplyr::arrange(rsid)
 	stopifnot(all(tab1$rsid == tab2$rsid))
 
 	index <- as.character(tab1$ea) == as.character(tab2$ea) &
@@ -121,7 +121,7 @@ get_type <- function(info, typex)
 		message("Type information not available for ", info$id, ". Assuming 'quant' but override using 'type' arguments.")
 		return("quant")
 	} else {
-		return(ifelse(.$unit %in% c("logOR", "log odds"), "cc", "quant"))
+		return(ifelse(info$unit %in% c("logOR", "log odds"), "cc", "quant"))
 	}
 }
 
