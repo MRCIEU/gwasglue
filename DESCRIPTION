@@ -24,7 +24,8 @@ Imports:
     MRMix,
     TwoSampleMR,
     magrittr,
-    susieR,
+    susieR
+Suggests:
     finemapr
 Remotes:
     mrcieu/gwasvcf,
