@@ -25,8 +25,11 @@ Imports:
     TwoSampleMR,
     magrittr,
     susieR
-Suggests:
-    finemapr
+Suggests: 
+    knitr,
+    rmarkdown,
+    finemapr,
+    covr
 Remotes:
     mrcieu/gwasvcf,
     rondolab/MR-PRESSO,
@@ -41,8 +44,4 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.0
-Suggests: 
-    knitr,
-    rmarkdown,
-    covr
 VignetteBuilder: knitr
