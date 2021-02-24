@@ -79,7 +79,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -106,6 +106,9 @@
       <a href="../articles/gwas2020.html">Major changes to the IEU GWAS resources for 2020</a>
     </li>
     <li>
+      <a href="../articles/ld_ref.html">Generate LD matrices</a>
+    </li>
+    <li>
       <a href="../articles/mr.html">Mendelian randomization</a>
     </li>
   </ul>
@@ -117,7 +120,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/mrcieu/gwasglue/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -244,9 +247,21 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="make_TwoSampleMR_dat.html">make_TwoSampleMR_dat()</a></code> </p>
+        </td>
+        <td><p>Create a harmonised dataset from lists of vcf files</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="map_variants_to_regions.html">map_variants_to_regions()</a></code> </p>
         </td>
         <td><p>For a set of variants map to LD regions</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="organise_ids.html">organise_ids()</a></code> </p>
+        </td>
+        <td><p>Figure out specific files and IDs depending on what files exist and whethet vcfdir is set</p></td>
       </tr><tr>
         
         <td>
@@ -259,6 +274,12 @@
           <p><code><a href="read_reference.html">read_reference()</a></code> </p>
         </td>
         <td><p>Read in reference dataset</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="set_bc4_files.html">set_bc4_files()</a></code> </p>
+        </td>
+        <td><p>Determine locations of useful reference datasets on bluecrystal4</p></td>
       </tr><tr>
         
         <td>
@@ -290,7 +311,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

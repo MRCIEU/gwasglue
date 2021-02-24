@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -107,6 +107,9 @@
       <a href="../articles/gwas2020.html">Major changes to the IEU GWAS resources for 2020</a>
     </li>
     <li>
+      <a href="../articles/ld_ref.html">Generate LD matrices</a>
+    </li>
+    <li>
       <a href="../articles/mr.html">Mendelian randomization</a>
     </li>
   </ul>
@@ -118,7 +121,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/mrcieu/gwasglue/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -144,16 +147,16 @@
     <p>&lt;full description&gt;</p>
     </div>
 
-    <pre class="usage"><span class='fu'>clump_gwasvcf</span>(
-  <span class='no'>vcf</span>,
-  <span class='kw'>clump_kb</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
-  <span class='kw'>clump_r2</span> <span class='kw'>=</span> <span class='fl'>0.001</span>,
-  <span class='kw'>clump_p</span> <span class='kw'>=</span> <span class='fl'>5e-08</span>,
-  <span class='kw'>pop</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>bfile</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>plink_bin</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>access_token</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>clump_gwasvcf</span><span class='op'>(</span>
+  <span class='va'>vcf</span>,
+  clump_kb <span class='op'>=</span> <span class='fl'>1000</span>,
+  clump_r2 <span class='op'>=</span> <span class='fl'>0.001</span>,
+  clump_p <span class='op'>=</span> <span class='fl'>5e-08</span>,
+  pop <span class='op'>=</span> <span class='cn'>NULL</span>,
+  bfile <span class='op'>=</span> <span class='cn'>NULL</span>,
+  plink_bin <span class='op'>=</span> <span class='cn'>NULL</span>,
+  access_token <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -211,7 +214,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

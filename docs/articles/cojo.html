@@ -39,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -66,6 +66,9 @@
       <a href="../articles/gwas2020.html">Major changes to the IEU GWAS resources for 2020</a>
     </li>
     <li>
+      <a href="../articles/ld_ref.html">Generate LD matrices</a>
+    </li>
+    <li>
       <a href="../articles/mr.html">Mendelian randomization</a>
     </li>
   </ul>
@@ -77,7 +80,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/mrcieu/gwasglue/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -91,7 +94,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="cojo_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Conditional analysis of VCF files</h1>
@@ -104,8 +107,9 @@
 
     
     
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">gwasglue</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">gwasvcf</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/mrcieu/gwasglue">gwasglue</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/mrcieu/gwasvcf">gwasvcf</a></span><span class="op">)</span></pre></div>
 <p>Conditional analysis of VCF files can be performed using GCTA’s COJO routine. The procedure implemented here is as follows</p>
 <ol style="list-style-type: decimal">
 <li>Obtain clumped top-hits</li>
@@ -123,27 +127,31 @@
 <li>Perform fine mapping in each LD region</li>
 </ol>
 <p>Setup:</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">vcffile</span> <span class="kw">&lt;-</span> <span class="st">"ieu-a-300.vcf.gz"</span>
-<span class="no">ldref</span> <span class="kw">&lt;-</span> <span class="st">"/Users/gh13047/repo/mr-base-api/app/ld_files/EUR"</span>
-<span class="kw pkg">gwasvcf</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/gwasvcf/man/set_bcftools.html">set_bcftools</a></span>()</pre></body></html></div>
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="va">vcffile</span> <span class="op">&lt;-</span> <span class="st">"ieu-a-300.vcf.gz"</span>
+<span class="va">ldref</span> <span class="op">&lt;-</span> <span class="st">"/Users/gh13047/repo/mr-base-api/app/ld_files/EUR"</span>
+<span class="fu">gwasvcf</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gwasvcf/man/set_bcftools.html">set_bcftools</a></span><span class="op">(</span><span class="op">)</span></pre></div>
 <p>Perform susieR pipeline:</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">out</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/susieR_pipeline.html">susieR_pipeline</a></span>(
-    <span class="kw">vcffile</span><span class="kw">=</span><span class="no">vcffile</span>,
-    <span class="kw">bfile</span><span class="kw">=</span><span class="no">ldref</span>,
-    <span class="kw">plink_bin</span><span class="kw">=</span><span class="kw pkg">genetics.binaRies</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/genetics.binaRies/man/get_plink_binary.html">get_plink_binary</a></span>(),
-    <span class="kw">pop</span><span class="kw">=</span><span class="st">"EUR"</span>,
-    <span class="kw">threads</span><span class="kw">=</span><span class="fl">1</span>,
-    <span class="kw">L</span><span class="kw">=</span><span class="fl">10</span>,
-    <span class="kw">estimate_residual_variance</span><span class="kw">=</span><span class="fl">TRUE</span>,
-    <span class="kw">estimate_prior_variance</span><span class="kw">=</span><span class="fl">TRUE</span>,
-    <span class="kw">check_R</span><span class="kw">=</span><span class="fl">FALSE</span>,
-    <span class="kw">z_ld_weight</span><span class="kw">=</span><span class="fl">1</span>/<span class="fl">500</span>
-)</pre></body></html></div>
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/susieR_pipeline.html">susieR_pipeline</a></span><span class="op">(</span>
+    vcffile<span class="op">=</span><span class="va">vcffile</span>,
+    bfile<span class="op">=</span><span class="va">ldref</span>,
+    plink_bin<span class="op">=</span><span class="fu">genetics.binaRies</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/genetics.binaRies/man/get_plink_binary.html">get_plink_binary</a></span><span class="op">(</span><span class="op">)</span>,
+    pop<span class="op">=</span><span class="st">"EUR"</span>,
+    threads<span class="op">=</span><span class="fl">1</span>,
+    L<span class="op">=</span><span class="fl">10</span>, 
+    estimate_residual_variance<span class="op">=</span><span class="cn">TRUE</span>, 
+    estimate_prior_variance<span class="op">=</span><span class="cn">TRUE</span>, 
+    check_R<span class="op">=</span><span class="cn">FALSE</span>, 
+    z_ld_weight<span class="op">=</span><span class="fl">1</span><span class="op">/</span><span class="fl">500</span>
+<span class="op">)</span></pre></div>
 <p>Each detected region now has a finemapped object stored against it. You can see them for example like this:</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">out</span>$<span class="no">res</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="no">susieR</span>)
-<span class="kw pkg">susieR</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/susieR/man/susie_plot.html">susie_plot</a></span>(<span class="no">out</span>$<span class="no">res</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="no">susieR</span>, <span class="kw">y</span><span class="kw">=</span><span class="st">"PIP"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">res</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">susieR</span><span class="op">)</span>
+<span class="fu">susieR</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/susieR/man/susie_plots.html">susie_plot</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">res</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">susieR</span>, y<span class="op">=</span><span class="st">"PIP"</span><span class="op">)</span></pre></div>
 <p>For each region we can extract the variants with the highest posterior inclusion probability per credible set, e.g.:</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">out</span>$<span class="no">res</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="no">susieR</span>$<span class="no">fmset</span></pre></body></html></div>
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="va">out</span><span class="op">$</span><span class="va">res</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">susieR</span><span class="op">$</span><span class="va">fmset</span></pre></div>
 </div>
 <div id="conditional-analysis-pipeline" class="section level2">
 <h2 class="hasAnchor">
@@ -156,12 +164,13 @@
 <li>For each fine-mapped variant, obtains summary stats conditional on other fine-mapped variants in the region</li>
 </ol>
 <p>The result is a list of regions, with a set of conditional summary stats for every fine-mapped variant in that region.</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">out2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/cojo_cond.html">cojo_cond</a></span>(
-    <span class="kw">vcffile</span><span class="kw">=</span><span class="no">vcffile</span>,
-    <span class="kw">bfile</span><span class="kw">=</span><span class="no">ldref</span>,
-    <span class="kw">pop</span><span class="kw">=</span><span class="st">"EUR"</span>,
-    <span class="kw">snplist</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span>(<span class="no">out</span>$<span class="no">res</span>, <span class="kw">function</span>(<span class="no">x</span>) <span class="no">x</span>$<span class="no">susieR</span>$<span class="no">fmset</span>))
-)</pre></body></html></div>
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="va">out2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/cojo_cond.html">cojo_cond</a></span><span class="op">(</span>
+    vcffile<span class="op">=</span><span class="va">vcffile</span>, 
+    bfile<span class="op">=</span><span class="va">ldref</span>,
+    pop<span class="op">=</span><span class="st">"EUR"</span>,
+    snplist<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">res</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span><span class="op">$</span><span class="va">susieR</span><span class="op">$</span><span class="va">fmset</span><span class="op">)</span><span class="op">)</span>
+<span class="op">)</span></pre></div>
 <p>TODO</p>
 <ul>
 <li>Make sure finemapped variants are in reference panel</li>
@@ -186,7 +195,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -39,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -66,6 +66,9 @@
       <a href="../articles/gwas2020.html">Major changes to the IEU GWAS resources for 2020</a>
     </li>
     <li>
+      <a href="../articles/ld_ref.html">Generate LD matrices</a>
+    </li>
+    <li>
       <a href="../articles/mr.html">Mendelian randomization</a>
     </li>
   </ul>
@@ -77,7 +80,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/mrcieu/gwasglue/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -91,7 +94,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="mr_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Mendelian randomization</h1>
@@ -108,33 +111,35 @@
 <p>Here we’ll demonstrate how to achieve the same data extractions using the <a href="https://github.com/MRCIEU/gwas_vcf_spec">GWAS VCF</a> files.</p>
 <p>We’ll use the example of LDL cholesterol <a href="https://gwas.mrcieu.ac.uk/datasets/ieu-a-300/">ieu-a-300</a> and coronary heart disease <a href="https://gwas.mrcieu.ac.uk/datasets/ieu-a-7/">ieu-a-7</a>.</p>
 <p>Load libraries:</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/message.html">suppressPackageStartupMessages</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/warning.html">suppressWarnings</a></span>({
-    <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">TwoSampleMR</span>)
-    <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">gwasglue</span>)
-    <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">gwasvcf</span>)
-    <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ieugwasr</span>)
-    <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)
-}))
-<span class="co">#&gt; API: public: http://gwas-api.mrcieu.ac.uk/</span></pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/message.html">suppressPackageStartupMessages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/warning.html">suppressWarnings</a></span><span class="op">(</span><span class="op">{</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">TwoSampleMR</span><span class="op">)</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/mrcieu/gwasglue">gwasglue</a></span><span class="op">)</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/mrcieu/gwasvcf">gwasvcf</a></span><span class="op">)</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/mrcieu/ieugwasr">ieugwasr</a></span><span class="op">)</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
+<span class="op">}</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; API: public: http://gwas-api.mrcieu.ac.uk/</span></pre></div>
 <div id="using-twosamplemr" class="section level2">
 <h2 class="hasAnchor">
 <a href="#using-twosamplemr" class="anchor"></a>Using TwoSampleMR</h2>
 <p>This is a simple procedure for MR using the TwoSampleMR package:</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="co"># Extract the instruments for LDL</span>
-<span class="no">expd1</span> <span class="kw">&lt;-</span> <span class="kw pkg">TwoSampleMR</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/TwoSampleMR/man/extract_instruments.html">extract_instruments</a></span>(<span class="st">"ieu-a-300"</span>)
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="co"># Extract the instruments for LDL</span>
+<span class="va">expd1</span> <span class="op">&lt;-</span> <span class="fu">TwoSampleMR</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/TwoSampleMR/man/extract_instruments.html">extract_instruments</a></span><span class="op">(</span><span class="st">"ieu-a-300"</span><span class="op">)</span>
 
 <span class="co"># Extract those SNP effects for CHD</span>
-<span class="no">outd1</span> <span class="kw">&lt;-</span> <span class="kw pkg">TwoSampleMR</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/TwoSampleMR/man/extract_outcome_data.html">extract_outcome_data</a></span>(<span class="no">expd1</span>$<span class="no">SNP</span>, <span class="st">"ieu-a-7"</span>, <span class="kw">proxies</span><span class="kw">=</span><span class="fl">FALSE</span>)
+<span class="va">outd1</span> <span class="op">&lt;-</span> <span class="fu">TwoSampleMR</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/TwoSampleMR/man/extract_outcome_data.html">extract_outcome_data</a></span><span class="op">(</span><span class="va">expd1</span><span class="op">$</span><span class="va">SNP</span>, <span class="st">"ieu-a-7"</span>, proxies<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>
 <span class="co">#&gt; Extracting data for 81 SNP(s) from 1 GWAS(s)</span>
 
 <span class="co"># Harmonise the exposure and outcome data</span>
-<span class="no">dat1</span> <span class="kw">&lt;-</span> <span class="kw pkg">TwoSampleMR</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/TwoSampleMR/man/harmonise_data.html">harmonise_data</a></span>(<span class="no">expd1</span>, <span class="no">outd1</span>)
+<span class="va">dat1</span> <span class="op">&lt;-</span> <span class="fu">TwoSampleMR</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/TwoSampleMR/man/harmonise_data.html">harmonise_data</a></span><span class="op">(</span><span class="va">expd1</span>, <span class="va">outd1</span><span class="op">)</span>
 <span class="co">#&gt; Harmonising LDL cholesterol || id:ieu-a-300 (ieu-a-300) and Coronary heart disease || id:ieu-a-7 (ieu-a-7)</span>
 <span class="co">#&gt; Removing the following SNPs for being palindromic with intermediate allele frequencies:</span>
 <span class="co">#&gt; rs2954029, rs964184</span>
 
 <span class="co"># Perform MR</span>
-<span class="kw pkg">TwoSampleMR</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/TwoSampleMR/man/mr.html">mr</a></span>(<span class="no">dat1</span>)
+<span class="fu">TwoSampleMR</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/TwoSampleMR/man/mr.html">mr</a></span><span class="op">(</span><span class="va">dat1</span><span class="op">)</span>
 <span class="co">#&gt; Analysing 'ieu-a-300' on 'ieu-a-7'</span>
 <span class="co">#&gt;   id.exposure id.outcome                              outcome</span>
 <span class="co">#&gt; 1   ieu-a-300    ieu-a-7 Coronary heart disease || id:ieu-a-7</span>
@@ -150,48 +155,55 @@
 <span class="co">#&gt; 5 LDL cholesterol || id:ieu-a-300             Weighted mode   78 0.5328338</span>
 <span class="co">#&gt;           se         pval</span>
 <span class="co">#&gt; 1 0.07837328 8.725962e-09</span>
-<span class="co">#&gt; 2 0.04469608 2.654913e-19</span>
+<span class="co">#&gt; 2 0.04408131 8.435541e-20</span>
 <span class="co">#&gt; 3 0.05096262 4.403664e-16</span>
-<span class="co">#&gt; 4 0.07891687 4.905257e-08</span>
-<span class="co">#&gt; 5 0.07742194 1.388095e-09</span></pre></body></html></div>
+<span class="co">#&gt; 4 0.08245883 1.451758e-07</span>
+<span class="co">#&gt; 5 0.07012909 6.025868e-11</span></pre></div>
+<p>Note that this extraction process can be simplified with:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="va">dat1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/TwoSampleMR/man/make_dat.html">make_dat</a></span><span class="op">(</span><span class="st">"ieu-a-300"</span>, <span class="st">"ieu-a-7"</span><span class="op">)</span></pre></div>
 </div>
 <div id="using-gwas-vcf-files" class="section level2">
 <h2 class="hasAnchor">
 <a href="#using-gwas-vcf-files" class="anchor"></a>Using GWAS VCF files</h2>
 <p>Let’s do the same with the vcf files (and the indexes). Download from here:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">wget</span> https://gwas.mrcieu.ac.uk/files/ieu-a-300/ieu-a-300.vcf.gz</span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">wget</span> https://gwas.mrcieu.ac.uk/files/ieu-a-300/ieu-a-300.vcf.gz.tbi</span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="fu">wget</span> https://gwas.mrcieu.ac.uk/files/ieu-a-7/ieu-a-7.vcf.gz</span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="fu">wget</span> https://gwas.mrcieu.ac.uk/files/ieu-a-7/ieu-a-7.vcf.gz.tbi</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">wget</span> https://gwas.mrcieu.ac.uk/files/ieu-a-300/ieu-a-300.vcf.gz</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="fu">wget</span> https://gwas.mrcieu.ac.uk/files/ieu-a-300/ieu-a-300.vcf.gz.tbi</span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="fu">wget</span> https://gwas.mrcieu.ac.uk/files/ieu-a-7/ieu-a-7.vcf.gz</span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="fu">wget</span> https://gwas.mrcieu.ac.uk/files/ieu-a-7/ieu-a-7.vcf.gz.tbi</span></code></pre></div>
 <p>First get the tophits for LDL cholesterol</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="kw pkg">gwasvcf</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/gwasvcf/man/set_bcftools.html">set_bcftools</a></span>()
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="fu">gwasvcf</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gwasvcf/man/set_bcftools.html">set_bcftools</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Loading required namespace: genetics.binaRies</span>
 <span class="co">#&gt; Path not provided, using binaries in the explodecomputer/genetics.binaRies package</span>
-<span class="no">expd2</span> <span class="kw">&lt;-</span> <span class="kw pkg">gwasvcf</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/gwasvcf/man/query_gwas.html">query_gwas</a></span>(<span class="st">"ieu-a-300.vcf.gz"</span>, <span class="kw">chrompos</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="no">expd1</span>$<span class="no">chr.exposure</span>, <span class="st">":"</span>, <span class="no">expd1</span>$<span class="no">pos.exposure</span>))</pre></body></html></div>
+<span class="va">expd2</span> <span class="op">&lt;-</span> <span class="fu">gwasvcf</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gwasvcf/man/query_gwas.html">query_gwas</a></span><span class="op">(</span><span class="st">"ieu-a-300.vcf.gz"</span>, chrompos<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">expd1</span><span class="op">$</span><span class="va">chr.exposure</span>, <span class="st">":"</span>, <span class="va">expd1</span><span class="op">$</span><span class="va">pos.exposure</span><span class="op">)</span><span class="op">)</span></pre></div>
 <p>Convert to TwoSampleMR format:</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">expd2</span> <span class="kw">&lt;-</span> <span class="kw pkg">gwasglue</span><span class="kw ns">::</span><span class="fu"><a href="../reference/gwasvcf_to_TwoSampleMR.html">gwasvcf_to_TwoSampleMR</a></span>(<span class="no">expd2</span>, <span class="kw">type</span><span class="kw">=</span><span class="st">"exposure"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="va">expd2</span> <span class="op">&lt;-</span> <span class="fu">gwasglue</span><span class="fu">::</span><span class="fu"><a href="../reference/gwasvcf_to_TwoSampleMR.html">gwasvcf_to_TwoSampleMR</a></span><span class="op">(</span><span class="va">expd2</span>, type<span class="op">=</span><span class="st">"exposure"</span><span class="op">)</span></pre></div>
 <p>Extract those SNPs from the outcome vcf file and convert to TwoSampleMR format</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">outd2</span> <span class="kw">&lt;-</span> <span class="kw pkg">gwasvcf</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/gwasvcf/man/query_gwas.html">query_gwas</a></span>(<span class="st">"ieu-a-7.vcf.gz"</span>, <span class="kw">chrompos</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="no">expd1</span>$<span class="no">chr.exposure</span>, <span class="st">":"</span>, <span class="no">expd1</span>$<span class="no">pos.exposure</span>))
-<span class="no">outd2</span> <span class="kw">&lt;-</span> <span class="kw pkg">gwasglue</span><span class="kw ns">::</span><span class="fu"><a href="../reference/gwasvcf_to_TwoSampleMR.html">gwasvcf_to_TwoSampleMR</a></span>(<span class="no">outd2</span>, <span class="st">"outcome"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb7"><pre class="downlit">
+<span class="va">outd2</span> <span class="op">&lt;-</span> <span class="fu">gwasvcf</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gwasvcf/man/query_gwas.html">query_gwas</a></span><span class="op">(</span><span class="st">"ieu-a-7.vcf.gz"</span>, chrompos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">expd1</span><span class="op">$</span><span class="va">chr.exposure</span>, <span class="st">":"</span>, <span class="va">expd1</span><span class="op">$</span><span class="va">pos.exposure</span><span class="op">)</span><span class="op">)</span>
+<span class="va">outd2</span> <span class="op">&lt;-</span> <span class="fu">gwasglue</span><span class="fu">::</span><span class="fu"><a href="../reference/gwasvcf_to_TwoSampleMR.html">gwasvcf_to_TwoSampleMR</a></span><span class="op">(</span><span class="va">outd2</span>, <span class="st">"outcome"</span><span class="op">)</span></pre></div>
 <p>Proceed with harmonising and performing MR</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">dat2</span> <span class="kw">&lt;-</span> <span class="kw pkg">TwoSampleMR</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/TwoSampleMR/man/harmonise_data.html">harmonise_data</a></span>(<span class="no">expd2</span>, <span class="no">outd2</span>)
-<span class="co">#&gt; Harmonising IEU-a-300 (W6h4L6) and IEU-a-7 (JRY7cy)</span>
+<div class="sourceCode" id="cb8"><pre class="downlit">
+<span class="va">dat2</span> <span class="op">&lt;-</span> <span class="fu">TwoSampleMR</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/TwoSampleMR/man/harmonise_data.html">harmonise_data</a></span><span class="op">(</span><span class="va">expd2</span>, <span class="va">outd2</span><span class="op">)</span>
+<span class="co">#&gt; Harmonising IEU-a-300 (jzZf94) and IEU-a-7 (4mIVjh)</span>
 <span class="co">#&gt; Removing the following SNPs for being palindromic with intermediate allele frequencies:</span>
 <span class="co">#&gt; rs2954029, rs3184504, rs964184</span>
-<span class="kw pkg">TwoSampleMR</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/TwoSampleMR/man/mr.html">mr</a></span>(<span class="no">dat2</span>)
-<span class="co">#&gt; Analysing 'W6h4L6' on 'JRY7cy'</span>
+<span class="fu">TwoSampleMR</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/TwoSampleMR/man/mr.html">mr</a></span><span class="op">(</span><span class="va">dat2</span><span class="op">)</span>
+<span class="co">#&gt; Analysing 'jzZf94' on '4mIVjh'</span>
 <span class="co">#&gt;   id.exposure id.outcome outcome  exposure                    method nsnp</span>
-<span class="co">#&gt; 1      W6h4L6     JRY7cy IEU-a-7 IEU-a-300                  MR Egger   77</span>
-<span class="co">#&gt; 2      W6h4L6     JRY7cy IEU-a-7 IEU-a-300           Weighted median   77</span>
-<span class="co">#&gt; 3      W6h4L6     JRY7cy IEU-a-7 IEU-a-300 Inverse variance weighted   77</span>
-<span class="co">#&gt; 4      W6h4L6     JRY7cy IEU-a-7 IEU-a-300               Simple mode   77</span>
-<span class="co">#&gt; 5      W6h4L6     JRY7cy IEU-a-7 IEU-a-300             Weighted mode   77</span>
+<span class="co">#&gt; 1      jzZf94     4mIVjh IEU-a-7 IEU-a-300                  MR Egger   77</span>
+<span class="co">#&gt; 2      jzZf94     4mIVjh IEU-a-7 IEU-a-300           Weighted median   77</span>
+<span class="co">#&gt; 3      jzZf94     4mIVjh IEU-a-7 IEU-a-300 Inverse variance weighted   77</span>
+<span class="co">#&gt; 4      jzZf94     4mIVjh IEU-a-7 IEU-a-300               Simple mode   77</span>
+<span class="co">#&gt; 5      jzZf94     4mIVjh IEU-a-7 IEU-a-300             Weighted mode   77</span>
 <span class="co">#&gt;           b         se         pval</span>
 <span class="co">#&gt; 1 0.4731258 0.07572869 2.299636e-08</span>
-<span class="co">#&gt; 2 0.3976896 0.04430251 2.790535e-19</span>
+<span class="co">#&gt; 2 0.3976896 0.04553169 2.450674e-18</span>
 <span class="co">#&gt; 3 0.4142950 0.04880527 2.088973e-17</span>
-<span class="co">#&gt; 4 0.4476460 0.07713274 1.414285e-07</span>
-<span class="co">#&gt; 5 0.5299800 0.07387678 4.124467e-10</span></pre></body></html></div>
+<span class="co">#&gt; 4 0.4476460 0.07993351 3.260123e-07</span>
+<span class="co">#&gt; 5 0.5299800 0.07260337 2.382535e-10</span></pre></div>
 </div>
 <div id="other-options" class="section level2">
 <h2 class="hasAnchor">
@@ -200,13 +212,14 @@
 <h3 class="hasAnchor">
 <a href="#clumping-vcf-files" class="anchor"></a>Clumping vcf files</h3>
 <p>If we want to extract top hits based on a threshold and clump locally. First download the LD reference dataset:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">wget</span> http://fileserve.mrcieu.ac.uk/ld/data_maf0.01_rs_ref.tgz</span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="fu">tar</span> xzvf data_maf0.01_rs_ref.tgz</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">wget</span> http://fileserve.mrcieu.ac.uk/ld/data_maf0.01_rs_ref.tgz</span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="fu">tar</span> xzvf data_maf0.01_rs_ref.tgz</span></code></pre></div>
 <p>Now extract the top hits based on a p-value threshold</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="kw pkg">gwasvcf</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/gwasvcf/man/set_bcftools.html">set_bcftools</a></span>()
+<div class="sourceCode" id="cb10"><pre class="downlit">
+<span class="fu">gwasvcf</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gwasvcf/man/set_bcftools.html">set_bcftools</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Path not provided, using binaries in the explodecomputer/genetics.binaRies package</span>
-<span class="no">expd3</span> <span class="kw">&lt;-</span> <span class="kw pkg">gwasvcf</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/gwasvcf/man/query_gwas.html">query_gwas</a></span>(<span class="st">"ieu-a-300.vcf.gz"</span>, <span class="kw">pval</span><span class="kw">=</span><span class="fl">5e-8</span>)
-<span class="no">expd3</span>
+<span class="va">expd3</span> <span class="op">&lt;-</span> <span class="fu">gwasvcf</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gwasvcf/man/query_gwas.html">query_gwas</a></span><span class="op">(</span><span class="st">"ieu-a-300.vcf.gz"</span>, pval<span class="op">=</span><span class="fl">5e-8</span><span class="op">)</span>
+<span class="va">expd3</span>
 <span class="co">#&gt; class: CollapsedVCF </span>
 <span class="co">#&gt; dim: 3051 1 </span>
 <span class="co">#&gt; rowRanges(vcf):</span>
@@ -219,7 +232,7 @@
 <span class="co">#&gt;    AC A      Integer Allele count in genotypes                  </span>
 <span class="co">#&gt;    AN 1      Integer Total number of alleles in called genotypes</span>
 <span class="co">#&gt; geno(vcf):</span>
-<span class="co">#&gt;   SimpleList of length 9: ES, SE, LP, AF, SS, EZ, SI, NC, ID</span>
+<span class="co">#&gt;   List of length 9: ES, SE, LP, AF, SS, EZ, SI, NC, ID</span>
 <span class="co">#&gt; geno(header(vcf)):</span>
 <span class="co">#&gt;       Number Type   Description                                                </span>
 <span class="co">#&gt;    ES A      Float  Effect size estimate relative to the alternative allele    </span>
@@ -230,36 +243,39 @@
 <span class="co">#&gt;    EZ A      Float  Z-score provided if it was used to derive the EFFECT and...</span>
 <span class="co">#&gt;    SI A      Float  Accuracy score of summary data imputation                  </span>
 <span class="co">#&gt;    NC A      Float  Number of cases used to estimate genetic effect            </span>
-<span class="co">#&gt;    ID 1      String Study variant identifier</span></pre></body></html></div>
+<span class="co">#&gt;    ID 1      String Study variant identifier</span></pre></div>
 <p>Convert to TwoSampleMR format:</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">expd3</span> <span class="kw">&lt;-</span> <span class="kw pkg">gwasglue</span><span class="kw ns">::</span><span class="fu"><a href="../reference/gwasvcf_to_TwoSampleMR.html">gwasvcf_to_TwoSampleMR</a></span>(<span class="no">expd3</span>, <span class="kw">type</span><span class="kw">=</span><span class="st">"exposure"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb11"><pre class="downlit">
+<span class="va">expd3</span> <span class="op">&lt;-</span> <span class="fu">gwasglue</span><span class="fu">::</span><span class="fu"><a href="../reference/gwasvcf_to_TwoSampleMR.html">gwasvcf_to_TwoSampleMR</a></span><span class="op">(</span><span class="va">expd3</span>, type<span class="op">=</span><span class="st">"exposure"</span><span class="op">)</span></pre></div>
 <p>Get a list of SNPs to retain after clumping and subset the data</p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="no">retain_snps</span> <span class="kw">&lt;-</span> <span class="no">expd3</span> <span class="kw">%&gt;%</span> <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="kw">rsid</span><span class="kw">=</span><span class="no">SNP</span>, <span class="kw">pval</span><span class="kw">=</span><span class="no">pval.exposure</span>) <span class="kw">%&gt;%</span>
-    <span class="kw pkg">ieugwasr</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/ieugwasr/man/ld_clump.html">ld_clump</a></span>(<span class="no">.</span>, <span class="kw">plink_bin</span><span class="kw">=</span><span class="kw pkg">genetics.binaRies</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/genetics.binaRies/man/get_plink_binary.html">get_plink_binary</a></span>(), <span class="kw">bfile</span><span class="kw">=</span><span class="st">"data_maf0.01_rs_ref"</span>) <span class="kw">%&gt;%</span>
-    {<span class="no">.</span>$<span class="no">rsid</span>}
-<span class="co">#&gt; Clumping Ea4pxd, 3051 variants, using EUR population reference</span>
+<div class="sourceCode" id="cb12"><pre class="downlit">
+<span class="va">retain_snps</span> <span class="op">&lt;-</span> <span class="va">expd3</span> <span class="op">%&gt;%</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span>rsid<span class="op">=</span><span class="va">SNP</span>, pval<span class="op">=</span><span class="va">pval.exposure</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu">ieugwasr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ieugwasr/man/ld_clump.html">ld_clump</a></span><span class="op">(</span><span class="va">.</span>, plink_bin<span class="op">=</span><span class="fu">genetics.binaRies</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/genetics.binaRies/man/get_plink_binary.html">get_plink_binary</a></span><span class="op">(</span><span class="op">)</span>, bfile<span class="op">=</span><span class="st">"data_maf0.01_rs_ref"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="op">{</span><span class="va">.</span><span class="op">$</span><span class="va">rsid</span><span class="op">}</span>
+<span class="co">#&gt; Clumping lg7xeC, 3051 variants, using EUR population reference</span>
 <span class="co">#&gt; Removing 2973 of 3051 variants due to LD with other variants or absence from LD reference panel</span>
-<span class="no">expd3</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="no">expd3</span>, <span class="no">SNP</span> <span class="kw">%in%</span> <span class="no">retain_snps</span>)</pre></body></html></div>
+<span class="va">expd3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/subset.data.table.html">subset</a></span><span class="op">(</span><span class="va">expd3</span>, <span class="va">SNP</span> <span class="op">%in%</span> <span class="va">retain_snps</span><span class="op">)</span></pre></div>
 </div>
 <div id="extracting-outcome-data-with-ld-proxies" class="section level3">
 <h3 class="hasAnchor">
 <a href="#extracting-outcome-data-with-ld-proxies" class="anchor"></a>Extracting outcome data with LD proxies</h3>
 <p>This only works if you extract on rsids at the moment, and is quite slow. But here it is:</p>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="kw pkg">gwasvcf</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/gwasvcf/man/set_plink.html">set_plink</a></span>()
+<div class="sourceCode" id="cb13"><pre class="downlit">
+<span class="fu">gwasvcf</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gwasvcf/man/set_plink.html">set_plink</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Path not provided, using binaries in the explodecomputer/genetics.binaRies package</span>
-<span class="no">outd2</span> <span class="kw">&lt;-</span> <span class="kw pkg">gwasvcf</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/gwasvcf/man/query_gwas.html">query_gwas</a></span>(<span class="st">"ieu-a-7.vcf.gz"</span>, <span class="kw">rsid</span> <span class="kw">=</span> <span class="no">expd3</span>$<span class="no">SNP</span>, <span class="kw">proxies</span><span class="kw">=</span><span class="st">"yes"</span>, <span class="kw">bfile</span><span class="kw">=</span><span class="st">"data_maf0.01_rs_ref"</span>)
+<span class="va">outd2</span> <span class="op">&lt;-</span> <span class="fu">gwasvcf</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gwasvcf/man/query_gwas.html">query_gwas</a></span><span class="op">(</span><span class="st">"ieu-a-7.vcf.gz"</span>, rsid <span class="op">=</span> <span class="va">expd3</span><span class="op">$</span><span class="va">SNP</span>, proxies<span class="op">=</span><span class="st">"yes"</span>, bfile<span class="op">=</span><span class="st">"data_maf0.01_rs_ref"</span><span class="op">)</span>
 <span class="co">#&gt; Initial search...</span>
 <span class="co">#&gt; Extracted 77 out of 78 rsids</span>
 <span class="co">#&gt; Searching for proxies for 1 rsids</span>
 <span class="co">#&gt; Determining searchspace...</span>
 <span class="co">#&gt; Proxy lookup...</span>
 <span class="co">#&gt; Finding proxies...</span>
-<span class="co">#&gt; Taking input= as a system command ('gunzip -c /var/folders/8t/4mzsfqzd5773rsc11w4q5fhw0000gp/T//Rtmpu5CMcy/file16545566b9207.targets.ld.gz') and a variable has been used in the expression passed to `input=`. Please use fread(cmd=...). There is a security concern if you are creating an app, and the app could have a malicious user, and the app is not running in a secure environment; e.g. the app is running as root. Please read item 5 in the NEWS file for v1.11.6 for more information and for the option to suppress this message.</span>
+<span class="co">#&gt; Taking input= as a system command ('gunzip -c /var/folders/8t/4mzsfqzd5773rsc11w4q5fhw0000gp/T//RtmpR0Ucs7/filed4cc4fbc482e.targets.ld.gz') and a variable has been used in the expression passed to `input=`. Please use fread(cmd=...). There is a security concern if you are creating an app, and the app could have a malicious user, and the app is not running in a secure environment; e.g. the app is running as root. Please read item 5 in the NEWS file for v1.11.6 for more information and for the option to suppress this message.</span>
 <span class="co">#&gt; Found 426 proxies</span>
 <span class="co">#&gt; Extrating proxies...</span>
 <span class="co">#&gt; Identified proxies for 1 of 1 rsids</span>
 <span class="co">#&gt; Aligning...</span>
-<span class="no">outd2</span> <span class="kw">&lt;-</span> <span class="kw pkg">gwasglue</span><span class="kw ns">::</span><span class="fu"><a href="../reference/gwasvcf_to_TwoSampleMR.html">gwasvcf_to_TwoSampleMR</a></span>(<span class="no">outd2</span>, <span class="st">"outcome"</span>)</pre></body></html></div>
+<span class="va">outd2</span> <span class="op">&lt;-</span> <span class="fu">gwasglue</span><span class="fu">::</span><span class="fu"><a href="../reference/gwasvcf_to_TwoSampleMR.html">gwasvcf_to_TwoSampleMR</a></span><span class="op">(</span><span class="va">outd2</span>, <span class="st">"outcome"</span><span class="op">)</span></pre></div>
 </div>
 </div>
 <div id="further-mr-methods" class="section level2">
@@ -279,6 +295,27 @@
 <li><a href="https://cran.r-project.org/web/packages/mr.raps/">MR-RAPS</a></li>
 </ul>
 </div>
+<div id="bluecrystal4-users" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bluecrystal4-users" class="anchor"></a>Bluecrystal4 users</h2>
+<p>All data in OpenGWAS is stored on bc4 in the form of GWAS VCF files. You can create harmonised datasets easily on bc4 with these files.</p>
+<p>Determine the locations of the GWAS VCF files and a number of other reference datasets and binaries:</p>
+<div class="sourceCode" id="cb14"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/pkg/gwasvcf/man/set_bcftools.html">set_bcftools</a></span><span class="op">(</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/gwasvcf/man/set_plink.html">set_plink</a></span><span class="op">(</span><span class="op">)</span>
+<span class="fu"><a href="../reference/set_bc4_files.html">set_bc4_files</a></span><span class="op">(</span><span class="op">)</span></pre></div>
+<p>Now simply run:</p>
+<div class="sourceCode" id="cb15"><pre class="downlit">
+<span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/make_TwoSampleMR_dat.html">make_TwoSampleMR_dat</a></span><span class="op">(</span><span class="st">"ieu-a-300"</span>, <span class="st">"ieu-a-7"</span><span class="op">)</span></pre></div>
+<p>This can be run in parallel for large combinations of exposures and outcomes, e.g.:</p>
+<div class="sourceCode" id="cb16"><pre class="downlit">
+<span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/make_TwoSampleMR_dat.html">make_TwoSampleMR_dat</a></span><span class="op">(</span>
+    id1<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ieu-a-300"</span>, <span class="st">"ieu-a-302"</span>, <span class="st">"ieu-a-299"</span><span class="op">)</span>, 
+    id2<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ieu-a-7"</span>, <span class="st">"ieu-a-2"</span><span class="op">)</span>,
+    nthreads<span class="op">=</span><span class="fl">6</span>
+<span class="op">)</span></pre></div>
+<p>This will lookup all instruments in the exposures (id1) in both exposures and outcomes, and harmonise all exposure-outcome pairs, parallelised across 6 threads.</p>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -296,7 +333,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

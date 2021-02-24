@@ -1,11 +1,12 @@
 pandoc: 2.7.3
-pkgdown: 1.5.1
+pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   cojo: cojo.html
   colocalisation: colocalisation.html
   finemapping: finemapping.html
   gwas2020: gwas2020.html
+  ld_ref: ld_ref.html
   mr: mr.html
-last_built: 2020-07-09T00:00Z
+last_built: 2021-02-24T00:57Z
 

@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -107,6 +107,9 @@
       <a href="../articles/gwas2020.html">Major changes to the IEU GWAS resources for 2020</a>
     </li>
     <li>
+      <a href="../articles/ld_ref.html">Generate LD matrices</a>
+    </li>
+    <li>
       <a href="../articles/mr.html">Mendelian randomization</a>
     </li>
   </ul>
@@ -118,7 +121,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/mrcieu/gwasglue/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -144,19 +147,19 @@
     <p>Assumes ref and alt alleles available for target and reference datasets, and uses chr:pos for alignment</p>
     </div>
 
-    <pre class="usage"><span class='fu'>harmonise</span>(
-  <span class='no'>chr1</span>,
-  <span class='no'>pos1</span>,
-  <span class='no'>ref1</span>,
-  <span class='no'>alt1</span>,
-  <span class='no'>chr2</span>,
-  <span class='no'>pos2</span>,
-  <span class='no'>ref2</span>,
-  <span class='no'>alt2</span>,
-  <span class='kw'>rsid2</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>indel_recode</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>strand_flip</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>harmonise</span><span class='op'>(</span>
+  <span class='va'>chr1</span>,
+  <span class='va'>pos1</span>,
+  <span class='va'>ref1</span>,
+  <span class='va'>alt1</span>,
+  <span class='va'>chr2</span>,
+  <span class='va'>pos2</span>,
+  <span class='va'>ref2</span>,
+  <span class='va'>alt2</span>,
+  rsid2 <span class='op'>=</span> <span class='cn'>NULL</span>,
+  indel_recode <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  strand_flip <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -236,7 +239,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
