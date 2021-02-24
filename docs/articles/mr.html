@@ -155,10 +155,10 @@
 <span class="co">#&gt; 5 LDL cholesterol || id:ieu-a-300             Weighted mode   78 0.5328338</span>
 <span class="co">#&gt;           se         pval</span>
 <span class="co">#&gt; 1 0.07837328 8.725962e-09</span>
-<span class="co">#&gt; 2 0.04408131 8.435541e-20</span>
+<span class="co">#&gt; 2 0.04287663 7.727079e-21</span>
 <span class="co">#&gt; 3 0.05096262 4.403664e-16</span>
-<span class="co">#&gt; 4 0.08245883 1.451758e-07</span>
-<span class="co">#&gt; 5 0.07012909 6.025868e-11</span></pre></div>
+<span class="co">#&gt; 4 0.08115000 9.847698e-08</span>
+<span class="co">#&gt; 5 0.07304508 2.290517e-10</span></pre></div>
 <p>Note that this extraction process can be simplified with:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
 <span class="va">dat1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/TwoSampleMR/man/make_dat.html">make_dat</a></span><span class="op">(</span><span class="st">"ieu-a-300"</span>, <span class="st">"ieu-a-7"</span><span class="op">)</span></pre></div>
@@ -187,23 +187,23 @@
 <p>Proceed with harmonising and performing MR</p>
 <div class="sourceCode" id="cb8"><pre class="downlit">
 <span class="va">dat2</span> <span class="op">&lt;-</span> <span class="fu">TwoSampleMR</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/TwoSampleMR/man/harmonise_data.html">harmonise_data</a></span><span class="op">(</span><span class="va">expd2</span>, <span class="va">outd2</span><span class="op">)</span>
-<span class="co">#&gt; Harmonising IEU-a-300 (jzZf94) and IEU-a-7 (4mIVjh)</span>
+<span class="co">#&gt; Harmonising IEU-a-300 (elEq4R) and IEU-a-7 (wfSXNb)</span>
 <span class="co">#&gt; Removing the following SNPs for being palindromic with intermediate allele frequencies:</span>
 <span class="co">#&gt; rs2954029, rs3184504, rs964184</span>
 <span class="fu">TwoSampleMR</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/TwoSampleMR/man/mr.html">mr</a></span><span class="op">(</span><span class="va">dat2</span><span class="op">)</span>
-<span class="co">#&gt; Analysing 'jzZf94' on '4mIVjh'</span>
+<span class="co">#&gt; Analysing 'elEq4R' on 'wfSXNb'</span>
 <span class="co">#&gt;   id.exposure id.outcome outcome  exposure                    method nsnp</span>
-<span class="co">#&gt; 1      jzZf94     4mIVjh IEU-a-7 IEU-a-300                  MR Egger   77</span>
-<span class="co">#&gt; 2      jzZf94     4mIVjh IEU-a-7 IEU-a-300           Weighted median   77</span>
-<span class="co">#&gt; 3      jzZf94     4mIVjh IEU-a-7 IEU-a-300 Inverse variance weighted   77</span>
-<span class="co">#&gt; 4      jzZf94     4mIVjh IEU-a-7 IEU-a-300               Simple mode   77</span>
-<span class="co">#&gt; 5      jzZf94     4mIVjh IEU-a-7 IEU-a-300             Weighted mode   77</span>
+<span class="co">#&gt; 1      elEq4R     wfSXNb IEU-a-7 IEU-a-300                  MR Egger   77</span>
+<span class="co">#&gt; 2      elEq4R     wfSXNb IEU-a-7 IEU-a-300           Weighted median   77</span>
+<span class="co">#&gt; 3      elEq4R     wfSXNb IEU-a-7 IEU-a-300 Inverse variance weighted   77</span>
+<span class="co">#&gt; 4      elEq4R     wfSXNb IEU-a-7 IEU-a-300               Simple mode   77</span>
+<span class="co">#&gt; 5      elEq4R     wfSXNb IEU-a-7 IEU-a-300             Weighted mode   77</span>
 <span class="co">#&gt;           b         se         pval</span>
 <span class="co">#&gt; 1 0.4731258 0.07572869 2.299636e-08</span>
-<span class="co">#&gt; 2 0.3976896 0.04553169 2.450674e-18</span>
+<span class="co">#&gt; 2 0.3976896 0.04767446 7.318419e-17</span>
 <span class="co">#&gt; 3 0.4142950 0.04880527 2.088973e-17</span>
-<span class="co">#&gt; 4 0.4476460 0.07993351 3.260123e-07</span>
-<span class="co">#&gt; 5 0.5299800 0.07260337 2.382535e-10</span></pre></div>
+<span class="co">#&gt; 4 0.4476460 0.08088536 4.263685e-07</span>
+<span class="co">#&gt; 5 0.5299800 0.07522516 7.215281e-10</span></pre></div>
 </div>
 <div id="other-options" class="section level2">
 <h2 class="hasAnchor">
@@ -252,7 +252,7 @@
 <span class="va">retain_snps</span> <span class="op">&lt;-</span> <span class="va">expd3</span> <span class="op">%&gt;%</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span>rsid<span class="op">=</span><span class="va">SNP</span>, pval<span class="op">=</span><span class="va">pval.exposure</span><span class="op">)</span> <span class="op">%&gt;%</span>
     <span class="fu">ieugwasr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ieugwasr/man/ld_clump.html">ld_clump</a></span><span class="op">(</span><span class="va">.</span>, plink_bin<span class="op">=</span><span class="fu">genetics.binaRies</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/genetics.binaRies/man/get_plink_binary.html">get_plink_binary</a></span><span class="op">(</span><span class="op">)</span>, bfile<span class="op">=</span><span class="st">"data_maf0.01_rs_ref"</span><span class="op">)</span> <span class="op">%&gt;%</span>
     <span class="op">{</span><span class="va">.</span><span class="op">$</span><span class="va">rsid</span><span class="op">}</span>
-<span class="co">#&gt; Clumping lg7xeC, 3051 variants, using EUR population reference</span>
+<span class="co">#&gt; Clumping vbZ6sJ, 3051 variants, using EUR population reference</span>
 <span class="co">#&gt; Removing 2973 of 3051 variants due to LD with other variants or absence from LD reference panel</span>
 <span class="va">expd3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/subset.data.table.html">subset</a></span><span class="op">(</span><span class="va">expd3</span>, <span class="va">SNP</span> <span class="op">%in%</span> <span class="va">retain_snps</span><span class="op">)</span></pre></div>
 </div>
@@ -270,7 +270,7 @@
 <span class="co">#&gt; Determining searchspace...</span>
 <span class="co">#&gt; Proxy lookup...</span>
 <span class="co">#&gt; Finding proxies...</span>
-<span class="co">#&gt; Taking input= as a system command ('gunzip -c /var/folders/8t/4mzsfqzd5773rsc11w4q5fhw0000gp/T//RtmpR0Ucs7/filed4cc4fbc482e.targets.ld.gz') and a variable has been used in the expression passed to `input=`. Please use fread(cmd=...). There is a security concern if you are creating an app, and the app could have a malicious user, and the app is not running in a secure environment; e.g. the app is running as root. Please read item 5 in the NEWS file for v1.11.6 for more information and for the option to suppress this message.</span>
+<span class="co">#&gt; Taking input= as a system command ('gunzip -c /var/folders/8t/4mzsfqzd5773rsc11w4q5fhw0000gp/T//RtmpmG4h9W/file172101101fa74.targets.ld.gz') and a variable has been used in the expression passed to `input=`. Please use fread(cmd=...). There is a security concern if you are creating an app, and the app could have a malicious user, and the app is not running in a secure environment; e.g. the app is running as root. Please read item 5 in the NEWS file for v1.11.6 for more information and for the option to suppress this message.</span>
 <span class="co">#&gt; Found 426 proxies</span>
 <span class="co">#&gt; Extrating proxies...</span>
 <span class="co">#&gt; Identified proxies for 1 of 1 rsids</span>
@@ -315,6 +315,7 @@
     nthreads<span class="op">=</span><span class="fl">6</span>
 <span class="op">)</span></pre></div>
 <p>This will lookup all instruments in the exposures (id1) in both exposures and outcomes, and harmonise all exposure-outcome pairs, parallelised across 6 threads.</p>
+<p>Note: please make sure to run these analyses in batch mode by submitting to the slurm scheduler, not interactively on the head nodes!</p>
 </div>
   </div>
 

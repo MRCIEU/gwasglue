@@ -187,3 +187,5 @@ dat <- make_TwoSampleMR_dat(
 ```
 
 This will lookup all instruments in the exposures (id1) in both exposures and outcomes, and harmonise all exposure-outcome pairs, parallelised across 6 threads.
+
+Note: please make sure to run these analyses in batch mode by submitting to the slurm scheduler, not interactively on the head nodes!
