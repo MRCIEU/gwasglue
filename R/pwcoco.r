@@ -139,8 +139,7 @@ ieugwasr_to_pwcoco <- function(id1, id2, chrompos, type1=NULL, type2=NULL, outfi
 #' @param id1 Path to vcffile or ID for trait1
 #' @param id2 Path to vcffile2 or ID for trait2
 #' @param bfile LD reference panel in Plink format (.bed, .bim, .fam)
-#' @param snplist List of rsids
-#' @param pop EUR, ASN or AFR
+#' @param chrompos Chromosome position (format: chr:pos1-pos2) region of interest
 #' @param pwcoco Path to pwcoco binary
 #' @param type1 How to treat vcffile1 for coloc, either "quant" or "cc"
 #' @param type2 How to treat vcffile2 for coloc, either "quant" or "cc"
@@ -148,7 +147,7 @@ ieugwasr_to_pwcoco <- function(id1, id2, chrompos, type1=NULL, type2=NULL, outfi
 #'
 #' @export
 #' @return List of colocalisation results
-pwcoco <- function(id1, id2, bfile, chrompos, pop, pwcoco, type1=NULL, type2=NULL, workdir=tempdir())
+pwcoco <- function(id1, id2, bfile, chrompos, pwcoco, type1=NULL, type2=NULL, workdir=tempdir())
 {
 	if (file.exists(id1) && file.exists(id2))
 	{
@@ -165,7 +164,7 @@ pwcoco <- function(id1, id2, bfile, chrompos, pop, pwcoco, type1=NULL, type2=NUL
 	
 	# PWCoCo itself is multi-threaded; is it a good idea to multi-thread this function call too?
 	chr <- as.integer(strsplit(chrompos, ":")[[1]][1])
-	cmd <- glue::glue("{pwcoco} --bfile {bfile} --sum_stats1 {file.path(workdir, 'sum_stats1.txt')} --sum_stats2 {file.path(workdir, 'sum_stats2.txt')} --out {file.path(workdir, 'out')} --chr {chr} --out_cond")
+	cmd <- glue::glue("{pwcoco} --bfile {bfile} --sum_stats1 {file.path(workdir, 'sum_stats1.txt')} --sum_stats2 {file.path(workdir, 'sum_stats2.txt')} --out {file.path(workdir, 'out')} --chr {chr}")
 	system(cmd)
 	res <- data.table::fread(file.path(workdir, 'out.coloc'))
 	
