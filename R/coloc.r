@@ -43,6 +43,9 @@ gwasvcf_to_coloc <- function(vcf1, vcf2, chrompos)
 		VariantAnnotation::meta() %>%
 		{.[["SAMPLE"]][["StudyType"]]} == "Continuous", "quant", "cc")
 
+	tab1$AF[is.na(tab1$AF)] <- 0.5
+	tab2$AF[is.na(tab2$AF)] <- 0.5
+
 	out1 <- tab1[index,] %>% {list(pvalues = 10^-.$LP, N = .$SS, MAF = .$AF, beta = .$ES, varbeta = .$SE^2, type = type1, snp = names(vcf2)[index], z = .$ES / .$SE, chr = .$seqnames, pos = .$start, id = VariantAnnotation::samples(VariantAnnotation::header(vcf1))[1])}
 	out2 <- tab2[index,] %>% {list(pvalues = 10^-.$LP, N = .$SS, MAF = .$AF, beta = .$ES, varbeta = .$SE^2, type = type2, snp = names(vcf2)[index], z = .$ES / .$SE, chr = .$seqnames, pos = .$start, id = VariantAnnotation::samples(VariantAnnotation::header(vcf2))[1])}
 
@@ -88,11 +91,17 @@ ieugwasr_to_coloc <- function(id1, id2, chrompos, type1=NULL, type2=NULL)
 	tab2$eaf <- as.numeric(tab2$eaf)
 	tab1$eaf[which(tab1$eaf > 0.5)] <- 1 - tab1$eaf[which(tab1$eaf > 0.5)]
 	tab2$eaf[which(tab2$eaf > 0.5)] <- 1 - tab2$eaf[which(tab2$eaf > 0.5)]
+	tab1$eaf[is.na(tab1$eaf)] <- 0.5
+	tab2$eaf[is.na(tab2$eaf)] <- 0.5
 
 	info1 <- ieugwasr::gwasinfo(id1)
 	type1 <- get_type(info1, type1)
 	info2 <- ieugwasr::gwasinfo(id2)
 	type2 <- get_type(info2, type2)
+
+
+	tab1$n[is.na(tab1$n)] <- info1$sample_size
+	tab2$n[is.na(tab2$n)] <- info2$sample_size
 
 	tab1 <- tab1[index,] %>% {list(pvalues = .$p, N = .$n, MAF = .$eaf, beta = .$beta, varbeta = .$se^2, type = type1, snp = .$rsid, z = .$beta / .$se, chr = .$chr, pos = .$position, id = id1)}
 	tab2 <- tab2[index,] %>% {list(pvalues = .$p, N = .$n, MAF = .$eaf, beta = .$beta, varbeta = .$se^2, type = type2, snp = .$rsid, z = .$beta / .$se, chr = .$chr, pos = .$position, id = id2)}
@@ -100,7 +109,7 @@ ieugwasr_to_coloc <- function(id1, id2, chrompos, type1=NULL, type2=NULL)
 	if(type1 == "cc")
 	{
 		tab1$s <- info1$ncase / info1$sample_size
-	} else 
+	}
 
 	if(type2 == "cc")
 	{
@@ -115,11 +124,17 @@ get_type <- function(info, typex)
 {
 	if(!is.null(typex))
 	{
-		stopifnot(! typex %in% c("cc", "quant"))
+		stopifnot(typex %in% c("cc", "quant"))
 		return(typex)
 	} else if(is.na(info$unit)) {
-		message("Type information not available for ", info$id, ". Assuming 'quant' but override using 'type' arguments.")
-		return("quant")
+		if(is.na(info$ncase))
+		{
+			message("Type information not available for ", info$id, ". Assuming 'quant' but override using 'type' arguments.")
+			return("quant")			
+		} else {
+			message("No units available but assuming cc due to number of cases being stated")
+			return("cc")
+		}
 	} else {
 		return(ifelse(info$unit %in% c("logOR", "log odds"), "cc", "quant"))
 	}

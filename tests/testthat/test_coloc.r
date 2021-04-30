@@ -21,3 +21,11 @@ test_that("colic ieugwasr", {
 	expect_true(is.list(b))
 })
 
+
+test_that("arth bbj", {
+	chrpos <- "1:38228579-38328579"
+	out <- ieugwasr_to_coloc(id1='bbj-a-73', id2='bbj-a-73', chrompos=chrpos, type1 = "cc", type2 = "cc")
+	res <- coloc::coloc.abf(out$dataset1, out$dataset2)
+	expect_true(res$summary[6] > 0.8)
+})
+
