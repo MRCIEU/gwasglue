@@ -91,8 +91,18 @@ ieugwasr_to_coloc <- function(id1, id2, chrompos, type1=NULL, type2=NULL)
 	tab2$eaf <- as.numeric(tab2$eaf)
 	tab1$eaf[which(tab1$eaf > 0.5)] <- 1 - tab1$eaf[which(tab1$eaf > 0.5)]
 	tab2$eaf[which(tab2$eaf > 0.5)] <- 1 - tab2$eaf[which(tab2$eaf > 0.5)]
-	tab1$eaf[is.na(tab1$eaf)] <- 0.5
-	tab2$eaf[is.na(tab2$eaf)] <- 0.5
+	s <- sum(is.na(tab1$eaf))
+	if(s > 0)
+	{
+		warning(s, " out of ", nrow(tab1), " variants have missing allele frequencies in ", id1, ". Setting to 0.5")
+		tab1$eaf[is.na(tab1$eaf)] <- 0.5
+	}
+	s <- sum(is.na(tab2$eaf))
+	if(s > 0)
+	{
+		warning(s, " out of ", nrow(tab2), " variants have missing allele frequencies in ", id2, ". Setting to 0.5")
+		tab2$eaf[is.na(tab2$eaf)] <- 0.5
+	}
 
 	info1 <- ieugwasr::gwasinfo(id1)
 	type1 <- get_type(info1, type1)
@@ -127,6 +137,10 @@ get_type <- function(info, typex)
 		stopifnot(typex %in% c("cc", "quant"))
 		return(typex)
 	} else if(is.na(info$unit)) {
+		if(! "ncase" %in% names(info))
+		{
+			info$ncase <- NA
+		}
 		if(is.na(info$ncase))
 		{
 			message("Type information not available for ", info$id, ". Assuming 'quant' but override using 'type' arguments.")
