@@ -54,6 +54,12 @@ You can install the development version of gwasglue with:
 devtools::install_github("mrcieu/gwasglue")
 ```
 
+## Docker
+
+```sh
+docker build -t gwasglue:latest .
+docker run -it gwasglue:latest R
+```
 
 ## Usage
 
