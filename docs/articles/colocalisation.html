@@ -39,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -66,6 +66,9 @@
       <a href="../articles/gwas2020.html">Major changes to the IEU GWAS resources for 2020</a>
     </li>
     <li>
+      <a href="../articles/ld_ref.html">Generate LD matrices</a>
+    </li>
+    <li>
       <a href="../articles/mr.html">Mendelian randomization</a>
     </li>
   </ul>
@@ -77,7 +80,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/mrcieu/gwasglue/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -91,7 +94,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="colocalisation_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Genetic colocalisation</h1>
@@ -111,25 +114,27 @@
 </ul>
 <p>We’ll use the example of LDL cholesterol <a href="https://gwas.mrcieu.ac.uk/datasets/ieu-a-300/">ieu-a-300</a> and coronary heart disease <a href="https://gwas.mrcieu.ac.uk/datasets/ieu-a-7/">ieu-a-7</a>.</p>
 <p>Load libraries:</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/message.html">suppressPackageStartupMessages</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/warning.html">suppressWarnings</a></span>({
-    <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">gwasglue</span>)
-    <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)
-    <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">gassocplot</span>)
-    <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">coloc</span>)
-}))</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/message.html">suppressPackageStartupMessages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/warning.html">suppressWarnings</a></span><span class="op">(</span><span class="op">{</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/mrcieu/gwasglue">gwasglue</a></span><span class="op">)</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">gassocplot</span><span class="op">)</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/chr1swallace/coloc">coloc</a></span><span class="op">)</span>
+<span class="op">}</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; API: public: http://gwas-api.mrcieu.ac.uk/</span></pre></div>
 <div id="ieugwasr" class="section level2">
 <h2 class="hasAnchor">
 <a href="#ieugwasr" class="anchor"></a>ieugwasr</h2>
 <p>First find a region that we know to be associated with LDL cholesterol.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">top</span> <span class="kw">&lt;-</span> <span class="kw pkg">ieugwasr</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/ieugwasr/man/tophits.html">tophits</a></span>(<span class="st">'ieu-a-300'</span>) <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span>(<span class="no">p</span>)
-<span class="co">#&gt; API: public: http://gwas-api.mrcieu.ac.uk/</span>
-<span class="no">top</span>
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="va">top</span> <span class="op">&lt;-</span> <span class="fu">ieugwasr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ieugwasr/man/tophits.html">tophits</a></span><span class="op">(</span><span class="st">'ieu-a-300'</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span>
+<span class="va">top</span>
 <span class="co">#&gt; # A tibble: 81 x 12</span>
 <span class="co">#&gt;       beta position     se         p chr        n id    rsid  ea    nea      eaf</span>
 <span class="co">#&gt;      &lt;dbl&gt;    &lt;int&gt;  &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;  &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 -0.221    1.12e7 0.0061 1.00e-200 19    170608 ieu-… rs65… T     G     0.0976</span>
-<span class="co">#&gt;  2 -0.485    4.54e7 0.0119 1.00e-200 19    139198 ieu-… rs72… A     G     0.0317</span>
-<span class="co">#&gt;  3 -0.150    1.10e8 0.0047 1.00e-200 1     172825 ieu-… rs49… T     C     0.187 </span>
+<span class="co">#&gt;  1 -0.150    1.10e8 0.0047 1.00e-200 1     172825 ieu-… rs49… T     C     0.187 </span>
+<span class="co">#&gt;  2 -0.221    1.12e7 0.0061 1.00e-200 19    170608 ieu-… rs65… T     G     0.0976</span>
+<span class="co">#&gt;  3 -0.485    4.54e7 0.0119 1.00e-200 19    139198 ieu-… rs72… A     G     0.0317</span>
 <span class="co">#&gt;  4  0.119    2.13e7 0.004  9.48e-183 2     173007 ieu-… rs13… A     G     0.288 </span>
 <span class="co">#&gt;  5 -0.497    5.55e7 0.018  8.57e-143 1      77417 ieu-… rs11… T     G     0.0172</span>
 <span class="co">#&gt;  6 -0.446    4.54e7 0.0183 2.99e-122 19     99409 ieu-… rs12… A     G     0.0172</span>
@@ -137,35 +142,38 @@
 <span class="co">#&gt;  8  0.0733   7.47e7 0.0038 7.79e- 78 5     168357 ieu-… rs12… C     T     0.431 </span>
 <span class="co">#&gt;  9 -0.189    4.52e7 0.0112 7.29e- 62 19    170260 ieu-… rs29… C     T     0.0211</span>
 <span class="co">#&gt; 10 -0.0564   1.26e8 0.0036 2.10e- 50 8     172963 ieu-… rs29… T     A     0.468 </span>
-<span class="co">#&gt; # … with 71 more rows, and 1 more variable: trait &lt;chr&gt;</span></pre></body></html></div>
+<span class="co">#&gt; # … with 71 more rows, and 1 more variable: trait &lt;chr&gt;</span></pre></div>
 <p>Choose the best signal and create a range</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">chrpos</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="no">top</span>$<span class="no">chr</span>[<span class="fl">1</span>], <span class="st">":"</span>, <span class="no">top</span>$<span class="no">position</span>[<span class="fl">1</span>] - <span class="fl">90000</span>, <span class="st">"-"</span>, <span class="no">top</span>$<span class="no">position</span>[<span class="fl">1</span>] + <span class="fl">90000</span>)
-<span class="no">chrpos</span>
-<span class="co">#&gt; [1] "19:11112306-11292306"</span></pre></body></html></div>
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="va">chrpos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">top</span><span class="op">$</span><span class="va">chr</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="st">":"</span>, <span class="va">top</span><span class="op">$</span><span class="va">position</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">-</span> <span class="fl">90000</span>, <span class="st">"-"</span>, <span class="va">top</span><span class="op">$</span><span class="va">position</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="fl">90000</span><span class="op">)</span>
+<span class="va">chrpos</span>
+<span class="co">#&gt; [1] "1:109724880-109904880"</span></pre></div>
 <p>Extract, harmonise and format the data</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">out</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/ieugwasr_to_coloc.html">ieugwasr_to_coloc</a></span>(<span class="kw">id1</span><span class="kw">=</span><span class="st">'ieu-a-300'</span>, <span class="kw">id2</span><span class="kw">=</span><span class="st">'ieu-a-7'</span>, <span class="kw">chrompos</span><span class="kw">=</span><span class="no">chrpos</span>)
-<span class="co">#&gt; Type information not available for ieu-a-300. Assuming 'quant' but override using 'type' arguments.</span>
-<span class="co">#&gt; Type information not available for ieu-a-7. Assuming 'quant' but override using 'type' arguments.</span></pre></body></html></div>
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ieugwasr_to_coloc.html">ieugwasr_to_coloc</a></span><span class="op">(</span>id1<span class="op">=</span><span class="st">'ieu-a-300'</span>, id2<span class="op">=</span><span class="st">'ieu-a-7'</span>, chrompos<span class="op">=</span><span class="va">chrpos</span><span class="op">)</span></pre></div>
 <p>Run colocalisation analysis</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">res</span> <span class="kw">&lt;-</span> <span class="kw pkg">coloc</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/coloc/man/coloc.abf.html">coloc.abf</a></span>(<span class="no">out</span><span class="kw">[[</span><span class="fl">1</span>]], <span class="no">out</span><span class="kw">[[</span><span class="fl">2</span>]])
-<span class="co">#&gt; Warning in sdY.est(d$varbeta, d$MAF, d$N): estimating sdY from maf and varbeta,</span>
-<span class="co">#&gt; please directly supply sdY if known</span>
-
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">coloc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/coloc/man/coloc.abf.html">coloc.abf</a></span><span class="op">(</span><span class="va">out</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, <span class="va">out</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
 <span class="co">#&gt; Warning in sdY.est(d$varbeta, d$MAF, d$N): estimating sdY from maf and varbeta,</span>
 <span class="co">#&gt; please directly supply sdY if known</span>
 <span class="co">#&gt; PP.H0.abf PP.H1.abf PP.H2.abf PP.H3.abf PP.H4.abf </span>
-<span class="co">#&gt; 3.85e-289  3.38e-10 7.35e-281  6.35e-02  9.36e-01 </span>
-<span class="co">#&gt; [1] "PP abf for shared variant: 93.6%"</span></pre></body></html></div>
+<span class="co">#&gt; 1.31e-304  1.29e-19 3.67e-288  2.61e-03  9.97e-01 </span>
+<span class="co">#&gt; [1] "PP abf for shared variant: 99.7%"</span></pre></div>
 <p>Plot</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">temp</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/coloc_to_gassocplot.html">coloc_to_gassocplot</a></span>(<span class="no">out</span>)
-<span class="co">#&gt; Extracting LD matrix for 148 variants</span>
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="va">temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/coloc_to_gassocplot.html">coloc_to_gassocplot</a></span><span class="op">(</span><span class="va">out</span><span class="op">)</span>
+<span class="co">#&gt; Extracting LD matrix for 253 variants</span>
 <span class="co">#&gt; Please look at vignettes for options on running this locally if you need to run many instances of this command.</span>
 <span class="co">#&gt; Warning in ieugwasr::ld_matrix(markers[["marker"]], with_alleles = FALSE, : The following variants are not present in the LD reference panel</span>
-<span class="co">#&gt; rs17001200</span>
-<span class="co">#&gt; rs2738459</span>
-<span class="co">#&gt; rs8110695</span>
-<span class="co">#&gt; Found 145 variants in LD reference panel</span>
-<span class="kw pkg">gassocplot</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/gassocplot/man/stack_assoc_plot.html">stack_assoc_plot</a></span>(<span class="no">temp</span>$<span class="no">markers</span>, <span class="no">temp</span>$<span class="no">z</span>, <span class="no">temp</span>$<span class="no">corr</span>, <span class="kw">traits</span><span class="kw">=</span><span class="no">temp</span>$<span class="no">traits</span>)</pre></body></html></div>
+<span class="co">#&gt; rs114570757</span>
+<span class="co">#&gt; rs115867281</span>
+<span class="co">#&gt; rs116711509</span>
+<span class="co">#&gt; rs3850615</span>
+<span class="co">#&gt; rs41279710</span>
+<span class="co">#&gt; rs41279722</span>
+<span class="co">#&gt; rs6683212</span>
+<span class="co">#&gt; Found 246 variants in LD reference panel</span>
+<span class="fu">gassocplot</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gassocplot/man/stack_assoc_plot.html">stack_assoc_plot</a></span><span class="op">(</span><span class="va">temp</span><span class="op">$</span><span class="va">markers</span>, <span class="va">temp</span><span class="op">$</span><span class="va">z</span>, <span class="va">temp</span><span class="op">$</span><span class="va">corr</span>, traits<span class="op">=</span><span class="va">temp</span><span class="op">$</span><span class="va">traits</span><span class="op">)</span></pre></div>
 <p><img src="colocalisation_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
 <pre><code>#&gt; TableGrob (2 x 1) "arrange": 2 grobs
 #&gt;   z     cells    name              grob
@@ -183,16 +191,16 @@
 <li><a href="https://gwas.mrcieu.ac.uk/files/ieu-a-7/ieu-a-7.vcf.gz.tbi">https://gwas.mrcieu.ac.uk/files/ieu-a-7/ieu-a-7.vcf.gz.tbi</a></li>
 </ul>
 <p>Set a region to plot:</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">chrpos</span> <span class="kw">&lt;-</span> <span class="st">"19:11112306-11292306"</span></pre></body></html></div>
+<div class="sourceCode" id="cb8"><pre class="downlit">
+<span class="va">chrpos</span> <span class="op">&lt;-</span> <span class="st">"19:11112306-11292306"</span></pre></div>
 <p>Extract region from vcf files and convert to coloc object</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">vout</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/gwasvcf_to_coloc.html">gwasvcf_to_coloc</a></span>(<span class="st">"ieu-a-300.vcf.gz"</span>, <span class="st">"ieu-a-7.vcf.gz"</span>, <span class="no">chrpos</span>)
-<span class="co">#&gt; Warning: multiple methods tables found for 'type'</span>
-<span class="co">#&gt; Warning: replacing previous import 'BiocGenerics::type' by 'DelayedArray::type'</span>
-<span class="co">#&gt; when loading 'SummarizedExperiment'</span>
+<div class="sourceCode" id="cb9"><pre class="downlit">
+<span class="va">vout</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gwasvcf_to_coloc.html">gwasvcf_to_coloc</a></span><span class="op">(</span><span class="st">"ieu-a-300.vcf.gz"</span>, <span class="st">"ieu-a-7.vcf.gz"</span>, <span class="va">chrpos</span><span class="op">)</span>
 <span class="co">#&gt; 'tools_bcftools' option is not set, using native read which may be substantially slower. See 'set_bcftools' for information.</span>
-<span class="co">#&gt; 'tools_bcftools' option is not set, using native read which may be substantially slower. See 'set_bcftools' for information.</span></pre></body></html></div>
+<span class="co">#&gt; 'tools_bcftools' option is not set, using native read which may be substantially slower. See 'set_bcftools' for information.</span></pre></div>
 <p>Run colocalisation analysis</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">vres</span> <span class="kw">&lt;-</span> <span class="kw pkg">coloc</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/coloc/man/coloc.abf.html">coloc.abf</a></span>(<span class="no">vout</span><span class="kw">[[</span><span class="fl">1</span>]], <span class="no">vout</span><span class="kw">[[</span><span class="fl">2</span>]])
+<div class="sourceCode" id="cb10"><pre class="downlit">
+<span class="va">vres</span> <span class="op">&lt;-</span> <span class="fu">coloc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/coloc/man/coloc.abf.html">coloc.abf</a></span><span class="op">(</span><span class="va">vout</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, <span class="va">vout</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
 <span class="co">#&gt; Warning in sdY.est(d$varbeta, d$MAF, d$N): estimating sdY from maf and varbeta,</span>
 <span class="co">#&gt; please directly supply sdY if known</span>
 
@@ -200,10 +208,11 @@
 <span class="co">#&gt; please directly supply sdY if known</span>
 <span class="co">#&gt; PP.H0.abf PP.H1.abf PP.H2.abf PP.H3.abf PP.H4.abf </span>
 <span class="co">#&gt; 3.85e-289  3.38e-10 7.35e-281  6.35e-02  9.36e-01 </span>
-<span class="co">#&gt; [1] "PP abf for shared variant: 93.6%"</span></pre></body></html></div>
+<span class="co">#&gt; [1] "PP abf for shared variant: 93.6%"</span></pre></div>
 <p>Plot</p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">gassocplot</span>)
-<span class="no">temp</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/coloc_to_gassocplot.html">coloc_to_gassocplot</a></span>(<span class="no">vout</span>)
+<div class="sourceCode" id="cb11"><pre class="downlit">
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">gassocplot</span><span class="op">)</span>
+<span class="va">temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/coloc_to_gassocplot.html">coloc_to_gassocplot</a></span><span class="op">(</span><span class="va">vout</span><span class="op">)</span>
 <span class="co">#&gt; Extracting LD matrix for 148 variants</span>
 <span class="co">#&gt; Please look at vignettes for options on running this locally if you need to run many instances of this command.</span>
 <span class="co">#&gt; Warning in ieugwasr::ld_matrix(markers[["marker"]], with_alleles = FALSE, : The following variants are not present in the LD reference panel</span>
@@ -211,7 +220,7 @@
 <span class="co">#&gt; rs2738459</span>
 <span class="co">#&gt; rs17001200</span>
 <span class="co">#&gt; Found 145 variants in LD reference panel</span>
-<span class="kw pkg">gassocplot</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/gassocplot/man/stack_assoc_plot.html">stack_assoc_plot</a></span>(<span class="no">temp</span>$<span class="no">markers</span>, <span class="no">temp</span>$<span class="no">z</span>, <span class="no">temp</span>$<span class="no">corr</span>, <span class="kw">traits</span><span class="kw">=</span><span class="no">temp</span>$<span class="no">traits</span>)</pre></body></html></div>
+<span class="fu">gassocplot</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gassocplot/man/stack_assoc_plot.html">stack_assoc_plot</a></span><span class="op">(</span><span class="va">temp</span><span class="op">$</span><span class="va">markers</span>, <span class="va">temp</span><span class="op">$</span><span class="va">z</span>, <span class="va">temp</span><span class="op">$</span><span class="va">corr</span>, traits<span class="op">=</span><span class="va">temp</span><span class="op">$</span><span class="va">traits</span><span class="op">)</span></pre></div>
 <p><img src="colocalisation_files/figure-html/unnamed-chunk-11-1.png" width="700"></p>
 <pre><code>#&gt; TableGrob (2 x 1) "arrange": 2 grobs
 #&gt;   z     cells    name              grob
@@ -235,7 +244,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

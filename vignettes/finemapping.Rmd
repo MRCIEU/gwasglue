@@ -170,3 +170,38 @@ susieR::susie_plot(fitted_rss, y="PIP")
 
 Output: A list of regions for the dataset which has 
 
+
+
+## Multi-population finemapping
+
+Need at least two datasets for the same trait but from different super-populations. Look up the region of interest in all traits, harmonise across traits to get the same set of variants, and then run [PAINTOR](https://github.com/gkichaev/PAINTOR_V3.0) or [MsCAVIAR](https://github.com/nlapier2/MsCAVIAR) (https://www.biorxiv.org/content/10.1101/2020.01.15.908517v1.full).
+
+Extract data:
+
+```{r}
+args <- list()
+args$radius <- 50000
+args$ids <- c("bbj-a-52", "ukb-b-20175")
+args$bfiles <- c("/Users/gh13047/data/ld_files/ldmat/EAS", "/Users/gh13047/data/ld_files/ldmat/EUR")
+args$plink <- "plink"
+args$pops <- NULL
+args$chr <- 4
+args$position <- 54801228
+
+regiondata <- do.call(organise_region, args=args)
+str(regiondata)
+```
+
+Run PAINTOR:
+
+```{r}
+pres <- run_paintor(regiondata)
+plot_paintor(pres)
+```
+
+Run MsCAVIAR:
+
+```{r}
+n <- gwasinfo(args$ids)$sample_size
+run_MsCAVIAR(regiondata, n)
+```

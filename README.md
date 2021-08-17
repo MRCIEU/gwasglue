@@ -2,8 +2,8 @@
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-[![Travis build status](https://travis-ci.org/MRCIEU/gwasglue.svg?branch=master)](https://travis-ci.org/MRCIEU/gwasglue)
 [![Codecov test coverage](https://codecov.io/gh/MRCIEU/gwasglue/branch/master/graph/badge.svg)](https://codecov.io/gh/MRCIEU/gwasglue?branch=master)
+[![R build status](https://github.com/MRCIEU/gwasglue/workflows/R-CMD-check/badge.svg)](https://github.com/MRCIEU/gwasglue/actions)
 <!-- badges: end -->
 
 **Under development**

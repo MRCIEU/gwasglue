@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -107,6 +107,9 @@
       <a href="../articles/gwas2020.html">Major changes to the IEU GWAS resources for 2020</a>
     </li>
     <li>
+      <a href="../articles/ld_ref.html">Generate LD matrices</a>
+    </li>
+    <li>
       <a href="../articles/mr.html">Mendelian randomization</a>
     </li>
   </ul>
@@ -118,7 +121,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/mrcieu/gwasglue/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -144,13 +147,13 @@
     <p>For a given region and VCF file, extracts the variants in the region along with LD matrix from a reference panel</p>
     </div>
 
-    <pre class="usage"><span class='fu'>gwasvcf_to_finemapr</span>(
-  <span class='no'>region</span>,
-  <span class='no'>vcf</span>,
-  <span class='no'>bfile</span>,
-  <span class='kw'>plink_bin</span> <span class='kw'>=</span> <span class='kw pkg'>genetics.binaRies</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/genetics.binaRies/man/get_plink_binary.html'>get_plink_binary</a></span>(),
-  <span class='kw'>threads</span> <span class='kw'>=</span> <span class='fl'>1</span>
-)</pre>
+    <pre class="usage"><span class='fu'>gwasvcf_to_finemapr</span><span class='op'>(</span>
+  <span class='va'>region</span>,
+  <span class='va'>vcf</span>,
+  <span class='va'>bfile</span>,
+  plink_bin <span class='op'>=</span> <span class='fu'>genetics.binaRies</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/genetics.binaRies/man/get_plink_binary.html'>get_plink_binary</a></span><span class='op'>(</span><span class='op'>)</span>,
+  threads <span class='op'>=</span> <span class='fl'>1</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -196,7 +199,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

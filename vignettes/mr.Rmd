@@ -50,6 +50,12 @@ dat1 <- TwoSampleMR::harmonise_data(expd1, outd1)
 TwoSampleMR::mr(dat1)
 ```
 
+Note that this extraction process can be simplified with:
+
+```{r, eval=FALSE}
+dat1 <- make_dat("ieu-a-300", "ieu-a-7")
+```
+
 ## Using GWAS VCF files
 
 Let's do the same with the vcf files (and the indexes). Download from here:
@@ -149,3 +155,37 @@ Examples of formats that you can convert to within TwoSampleMR:
 - [MRMix](https://github.com/gqi/MRMix/)
 - [MendelianRandomization](https://cran.r-project.org/web/packages/MendelianRandomization/index.html)
 - [MR-RAPS](https://cran.r-project.org/web/packages/mr.raps/)
+
+
+
+## Bluecrystal4 users
+
+All data in OpenGWAS is stored on bc4 in the form of GWAS VCF files. You can create harmonised datasets easily on bc4 with these files.
+
+Determine the locations of the GWAS VCF files and a number of other reference datasets and binaries:
+
+```{r, eval=FALSE}
+set_bcftools()
+set_plink()
+set_bc4_files()
+```
+
+Now simply run:
+
+```{r, eval=FALSE}
+dat <- make_TwoSampleMR_dat("ieu-a-300", "ieu-a-7")
+```
+
+This can be run in parallel for large combinations of exposures and outcomes, e.g.:
+
+```{r, eval=FALSE}
+dat <- make_TwoSampleMR_dat(
+	id1=c("ieu-a-300", "ieu-a-302", "ieu-a-299"), 
+	id2=c("ieu-a-7", "ieu-a-2"),
+	nthreads=6
+)
+```
+
+This will lookup all instruments in the exposures (id1) in both exposures and outcomes, and harmonise all exposure-outcome pairs, parallelised across 6 threads.
+
+Note: please make sure to run these analyses in batch mode by submitting to the slurm scheduler, not interactively on the head nodes!

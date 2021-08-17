@@ -39,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -66,6 +66,9 @@
       <a href="../articles/gwas2020.html">Major changes to the IEU GWAS resources for 2020</a>
     </li>
     <li>
+      <a href="../articles/ld_ref.html">Generate LD matrices</a>
+    </li>
+    <li>
       <a href="../articles/mr.html">Mendelian randomization</a>
     </li>
   </ul>
@@ -77,7 +80,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/mrcieu/gwasglue/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -91,7 +94,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="finemapping_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Clumping and finemapping</h1>
@@ -113,33 +116,41 @@
 <h3 class="hasAnchor">
 <a href="#data-from-opengwas" class="anchor"></a>Data from OpenGWAS</h3>
 <p>Extract top hits for LDL cholesterol (<code>ieu-a-300</code>)</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="no">dat</span> <span class="kw">&lt;-</span> <span class="kw pkg">ieugwasr</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/ieugwasr/man/tophits.html">tophits</a></span>(<span class="st">"ieu-a-300"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">ieugwasr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ieugwasr/man/tophits.html">tophits</a></span><span class="op">(</span><span class="st">"ieu-a-300"</span><span class="op">)</span></pre></div>
 <p>This is very quick because it extracts the pre-clumped top hits for this dataset. If you specify a different threshold from the default it will be a bit slower e.g.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">dat</span> <span class="kw">&lt;-</span> <span class="kw pkg">ieugwasr</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/ieugwasr/man/tophits.html">tophits</a></span>(<span class="st">"ieu-a-300"</span>, <span class="kw">pval</span><span class="kw">=</span><span class="fl">5e-7</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">ieugwasr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ieugwasr/man/tophits.html">tophits</a></span><span class="op">(</span><span class="st">"ieu-a-300"</span>, pval<span class="op">=</span><span class="fl">5e-7</span><span class="op">)</span></pre></div>
 <p>Performing clumping using local data is possible. For example, extract the data without clumping:</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">dat</span> <span class="kw">&lt;-</span> <span class="kw pkg">ieugwasr</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/ieugwasr/man/tophits.html">tophits</a></span>(<span class="st">"ieu-a-300"</span>, <span class="kw">clump</span><span class="kw">=</span><span class="fl">FALSE</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">ieugwasr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ieugwasr/man/tophits.html">tophits</a></span><span class="op">(</span><span class="st">"ieu-a-300"</span>, clump<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></pre></div>
 <p>Obtain the <code>plink</code> binary for your operating system. For convenience you can use the <a href="https://github.com/explodecomputer/genetics.binaRies/">genetics.binaRies</a> R package which has a few different widely used utilities bundled within it:</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">plink_bin</span> <span class="kw">&lt;-</span> <span class="kw pkg">genetics.binaRies</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/genetics.binaRies/man/get_plink_binary.html">get_plink_binary</a></span>()</pre></body></html></div>
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="va">plink_bin</span> <span class="op">&lt;-</span> <span class="fu">genetics.binaRies</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/genetics.binaRies/man/get_plink_binary.html">get_plink_binary</a></span><span class="op">(</span><span class="op">)</span></pre></div>
 <p>Obtain some LD reference data. See the homepage of this site for options for downloading LD reference data. Here we’ll be using the same LD reference data as that used by the API by default, which is Europeans from the 1000 genomes reference panel</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">ldref</span> <span class="kw">&lt;-</span> <span class="st">"/path/to/EUR"</span></pre></body></html></div>
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="va">ldref</span> <span class="op">&lt;-</span> <span class="st">"/path/to/EUR"</span></pre></div>
 <p>Perform clumping</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">clumped</span> <span class="kw">&lt;-</span> <span class="fu">ld_clump</span>(<span class="no">dat</span>, <span class="kw">bfile</span><span class="kw">=</span><span class="no">ldref</span>, <span class="kw">plink_bin</span><span class="kw">=</span><span class="no">plink_bin</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="va">clumped</span> <span class="op">&lt;-</span> <span class="fu">ld_clump</span><span class="op">(</span><span class="va">dat</span>, bfile<span class="op">=</span><span class="va">ldref</span>, plink_bin<span class="op">=</span><span class="va">plink_bin</span><span class="op">)</span></pre></div>
 </div>
 <div id="data-from-vcf" class="section level3">
 <h3 class="hasAnchor">
 <a href="#data-from-vcf" class="anchor"></a>Data from VCF</h3>
 <p>There is a single function that can be used to perform clumping on the VCF files. It will either run locally or run using the API, depending on the arguments you supply.</p>
 <p>Running locally:</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="co"># Set path to file</span>
-<span class="no">vcffile</span> <span class="kw">&lt;-</span> <span class="st">"/path/to/ieu-a-300.vcf.gz"</span>
+<div class="sourceCode" id="cb7"><pre class="downlit">
+<span class="co"># Set path to file</span>
+<span class="va">vcffile</span> <span class="op">&lt;-</span> <span class="st">"/path/to/ieu-a-300.vcf.gz"</span>
 
 <span class="co"># Set path to bcftools</span>
-<span class="kw pkg">gwasvcf</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/gwasvcf/man/set_bcftools.html">set_bcftools</a></span>()
+<span class="fu">gwasvcf</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gwasvcf/man/set_bcftools.html">set_bcftools</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="co"># Perform clumping</span>
-<span class="no">clumped</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/clump_gwasvcf.html">clump_gwasvcf</a></span>(<span class="no">vcffile</span>, <span class="kw">bfile</span><span class="kw">=</span><span class="no">ldref</span>, <span class="kw">plink_bin</span><span class="kw">=</span><span class="no">plink_bin</span>)</pre></body></html></div>
+<span class="va">clumped</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/clump_gwasvcf.html">clump_gwasvcf</a></span><span class="op">(</span><span class="va">vcffile</span>, bfile<span class="op">=</span><span class="va">ldref</span>, plink_bin<span class="op">=</span><span class="va">plink_bin</span><span class="op">)</span></pre></div>
 <p>Running remotely:</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">clumped</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/clump_gwasvcf.html">clump_gwasvcf</a></span>(<span class="no">vcffile</span>, <span class="kw">pop</span><span class="kw">=</span><span class="st">"EUR"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb8"><pre class="downlit">
+<span class="va">clumped</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/clump_gwasvcf.html">clump_gwasvcf</a></span><span class="op">(</span><span class="va">vcffile</span>, pop<span class="op">=</span><span class="st">"EUR"</span><span class="op">)</span></pre></div>
 <p>Here, the <code>pop</code> argument is passed to the API specifying which super-population to use for the LD reference.</p>
 </div>
 </div>
@@ -159,44 +170,49 @@
 <a href="#data-from-opengwas-1" class="anchor"></a>Data from OpenGWAS</h3>
 <p>One of the tophits for LDL cholesterol is <code>rs10903129</code>, which is located at <code>1:25768937</code> on hg19. Determining the region to finemap around this variant is simplified by knowing the natural LD break points in a the European population, which is where the LDL GWAS was performed (<code>ieu-a-300</code>). <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4731402/">Berisa and Pickrell 2016</a> provide a useful dataset of natural breakpoints, which has been incorporated into this package.</p>
 <p>Identify LD region to perform finemapping:</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">region</span> <span class="kw">&lt;-</span> <span class="fu">map_variants_to_regions</span>(<span class="kw">chrpos</span><span class="kw">=</span><span class="st">"1:25768937"</span>, <span class="kw">pop</span><span class="kw">=</span><span class="st">"EUR"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb9"><pre class="downlit">
+<span class="va">region</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/map_variants_to_regions.html">map_variants_to_regions</a></span><span class="op">(</span>chrpos<span class="op">=</span><span class="st">"1:25768937"</span>, pop<span class="op">=</span><span class="st">"EUR"</span><span class="op">)</span></pre></div>
 <p>Extract data from that region into a format for finemapping</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">dat</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/ieugwasr_to_finemapr.html">ieugwasr_to_finemapr</a></span>(<span class="no">region</span>$<span class="no">region</span>, <span class="st">"ieu-a-300"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb10"><pre class="downlit">
+<span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ieugwasr_to_finemapr.html">ieugwasr_to_finemapr</a></span><span class="op">(</span><span class="va">region</span><span class="op">$</span><span class="va">region</span>, <span class="st">"ieu-a-300"</span><span class="op">)</span></pre></div>
 <p>This returns a nested list. The top level of results is an item for every GWAS dataset requested. Each item contains a dataframe of rsids and their z-scores within the region, and an LD matrix for those variants, and the sample size for each of the variants.</p>
 <p>Perform finemapping e.g. using CAVIAR (see <a href="https://github.com/variani/finemapr">https://github.com/variani/finemapr</a> for more info:</p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span>(<span class="kw">finemapr_caviar</span> <span class="kw">=</span> <span class="st">"/path/to/caviar"</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)
-<span class="no">o</span> <span class="kw">&lt;-</span> <span class="kw pkg">finemapr</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/finemapr/man/run_caviar.html">run_caviar</a></span>(<span class="no">dat</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="no">z</span>, <span class="no">dat</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="no">ld</span>, <span class="kw">args</span> <span class="kw">=</span> <span class="st">"-c 3"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb11"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>finemapr_caviar <span class="op">=</span> <span class="st">"/path/to/caviar"</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
+<span class="va">o</span> <span class="op">&lt;-</span> <span class="fu">finemapr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/finemapr/man/run_caviar.html">run_caviar</a></span><span class="op">(</span><span class="va">dat</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">z</span>, <span class="va">dat</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">ld</span>, args <span class="op">=</span> <span class="st">"-c 3"</span><span class="op">)</span></pre></div>
 <p>Perform finemapping e.g using susieR (see <a href="https://stephenslab.github.io/susieR/">https://stephenslab.github.io/susieR/</a> for more info):</p>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">fitted_rss</span> <span class="kw">&lt;-</span> <span class="kw pkg">susieR</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/susieR/man/susie_rss.html">susie_rss</a></span>(
-    <span class="no">dat</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="no">z</span>$<span class="no">zscore</span>,
-    <span class="no">dat</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="no">ld</span>, <span class="kw">L</span><span class="kw">=</span><span class="fl">10</span>,
-    <span class="kw">estimate_residual_variance</span><span class="kw">=</span><span class="fl">TRUE</span>,
-    <span class="kw">estimate_prior_variance</span><span class="kw">=</span><span class="fl">TRUE</span>,
-    <span class="kw">check_R</span><span class="kw">=</span><span class="fl">FALSE</span>,
-    <span class="kw">z_ld_weight</span><span class="kw">=</span><span class="fl">1</span>/<span class="fl">500</span>
-)
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">fitted_rss</span>)
-<span class="kw pkg">susieR</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/susieR/man/susie_plot.html">susie_plot</a></span>(<span class="no">fitted_rss</span>, <span class="kw">y</span><span class="kw">=</span><span class="st">"PIP"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb12"><pre class="downlit">
+<span class="va">fitted_rss</span> <span class="op">&lt;-</span> <span class="fu">susieR</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/susieR/man/susie.html">susie_rss</a></span><span class="op">(</span>
+    <span class="va">dat</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">z</span><span class="op">$</span><span class="va">zscore</span>, 
+    <span class="va">dat</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">ld</span>, L<span class="op">=</span><span class="fl">10</span>, 
+    estimate_residual_variance<span class="op">=</span><span class="cn">TRUE</span>, 
+    estimate_prior_variance<span class="op">=</span><span class="cn">TRUE</span>, 
+    check_R<span class="op">=</span><span class="cn">FALSE</span>, 
+    z_ld_weight<span class="op">=</span><span class="fl">1</span><span class="op">/</span><span class="fl">500</span>
+<span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/coloc/man/eta.html">summary</a></span><span class="op">(</span><span class="va">fitted_rss</span><span class="op">)</span>
+<span class="fu">susieR</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/susieR/man/susie_plots.html">susie_plot</a></span><span class="op">(</span><span class="va">fitted_rss</span>, y<span class="op">=</span><span class="st">"PIP"</span><span class="op">)</span></pre></div>
 </div>
 <div id="data-from-vcf-1" class="section level3">
 <h3 class="hasAnchor">
 <a href="#data-from-vcf-1" class="anchor"></a>Data from VCF</h3>
 <p>Let’s perform a similar analysis for the VCF files</p>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="co"># extract data from vcf</span>
-<span class="no">dat</span> <span class="kw">&lt;-</span> <span class="fu">gwasvcf_to_finemapr</span>(<span class="kw">region</span> <span class="kw">=</span> <span class="no">region</span>$<span class="no">region</span>, <span class="kw">vcf</span><span class="kw">=</span><span class="no">vcffile</span>, <span class="kw">bfile</span><span class="kw">=</span><span class="no">ldref</span>, <span class="kw">plink_bin</span><span class="kw">=</span><span class="no">plink_bin</span>)
+<div class="sourceCode" id="cb13"><pre class="downlit">
+<span class="co"># extract data from vcf</span>
+<span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gwasvcf_to_finemapr.html">gwasvcf_to_finemapr</a></span><span class="op">(</span>region <span class="op">=</span> <span class="va">region</span><span class="op">$</span><span class="va">region</span>, vcf<span class="op">=</span><span class="va">vcffile</span>, bfile<span class="op">=</span><span class="va">ldref</span>, plink_bin<span class="op">=</span><span class="va">plink_bin</span><span class="op">)</span>
 
 <span class="co"># Perform finemapping</span>
-<span class="no">fitted_rss</span> <span class="kw">&lt;-</span> <span class="kw pkg">susieR</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/susieR/man/susie_rss.html">susie_rss</a></span>(
-    <span class="no">dat</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="no">z</span>$<span class="no">zscore</span>,
-    <span class="no">dat</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="no">ld</span>, <span class="kw">L</span><span class="kw">=</span><span class="fl">10</span>,
-    <span class="kw">estimate_residual_variance</span><span class="kw">=</span><span class="fl">TRUE</span>,
-    <span class="kw">estimate_prior_variance</span><span class="kw">=</span><span class="fl">TRUE</span>,
-    <span class="kw">check_R</span><span class="kw">=</span><span class="fl">FALSE</span>,
-    <span class="kw">z_ld_weight</span><span class="kw">=</span><span class="fl">1</span>/<span class="fl">500</span>
-)
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">fitted_rss</span>)
-<span class="kw pkg">susieR</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/susieR/man/susie_plot.html">susie_plot</a></span>(<span class="no">fitted_rss</span>, <span class="kw">y</span><span class="kw">=</span><span class="st">"PIP"</span>)</pre></body></html></div>
+<span class="va">fitted_rss</span> <span class="op">&lt;-</span> <span class="fu">susieR</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/susieR/man/susie.html">susie_rss</a></span><span class="op">(</span>
+    <span class="va">dat</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">z</span><span class="op">$</span><span class="va">zscore</span>, 
+    <span class="va">dat</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">ld</span>, L<span class="op">=</span><span class="fl">10</span>, 
+    estimate_residual_variance<span class="op">=</span><span class="cn">TRUE</span>, 
+    estimate_prior_variance<span class="op">=</span><span class="cn">TRUE</span>, 
+    check_R<span class="op">=</span><span class="cn">FALSE</span>, 
+    z_ld_weight<span class="op">=</span><span class="fl">1</span><span class="op">/</span><span class="fl">500</span>
+<span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/coloc/man/eta.html">summary</a></span><span class="op">(</span><span class="va">fitted_rss</span><span class="op">)</span>
+<span class="fu">susieR</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/susieR/man/susie_plots.html">susie_plot</a></span><span class="op">(</span><span class="va">fitted_rss</span>, y<span class="op">=</span><span class="st">"PIP"</span><span class="op">)</span></pre></div>
 </div>
 <div id="finemapping-across-the-whole-dataset" class="section level3">
 <h3 class="hasAnchor">
@@ -225,7 +241,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -1,0 +1,82 @@
+---
+title: "Finemapping experiments"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Finemapping experiments}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  eval=FALSE,
+  collapse = TRUE,
+  comment = "#>"
+)
+library(gwasglue)
+```
+
+Trying other methods e.g. PAINTOR and MsCAVIAR
+
+- Seem really slow
+- They give an overall posterior probability, not clear how to extract number of distinct causal variants
+
+
+```{r}
+library(tidyverse)
+library(ieugwasr)
+library(devtools)
+library(glue)
+load_all()
+
+args <- list()
+args$radius <- 50000
+args$ids <- c("bbj-a-52", "ukb-b-20175")
+args$bfiles <- c("/Users/gh13047/data/ld_files/ldmat/EAS", "/Users/gh13047/data/ld_files/ldmat/EUR")
+args$plink <- "plink"
+args$pops <- NULL
+args$chr <- 4
+args$position <- 54801228
+
+regiondata <- do.call(organise_region, args=args)
+
+pres <- run_paintor(regiondata)
+dev.new()
+plot_PAINTOR(pres)
+
+n <- gwasinfo(args$ids)$sample_size
+cres <- run_MsCAVIAR(regiondata, n)
+plot_MsCAVIAR(cres)
+
+
+
+alpha=0.05
+mt_method="fdr"
+ld_thresh=0.05
+prune_bfile=NULL
+prune_pop="EUR"
+
+
+inst <- readRDS("~/repo/mr.trans/data/sbp_eas_eur.rds")
+args <- list()
+args$radius <- 100000
+args$ids <- c("bbj-a-52", "ukb-b-20175")
+args$bfiles <- c("/Users/gh13047/data/ld_files/ldmat/EAS", "/Users/gh13047/data/ld_files/ldmat/EUR")
+args$plink <- "plink"
+
+
+args$pops <- NULL
+i <- 1
+
+paintor_res <- list()
+for(i in 1:nrow(inst$inst))
+{
+	args$chr <- inst$inst$chr.exposure[i]
+	args$position <- as.numeric(inst$inst$pos.exposure[i])
+	regiondata <- do.call(extract_regional_data, args=args)
+	paintor_res[[i]] <- run_PAINTOR(regiondata)
+}
+
+o <- run_susie(regiondata)
+plot_PAINTOR(paintor_res[[i]])
+```
