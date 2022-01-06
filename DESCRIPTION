@@ -2,46 +2,47 @@ Package: gwasglue
 Title: GWAS summary data sources connected to analytical tools
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "Gibran",
-           family = "Hemani",
-           role = c("aut", "cre"),
-           email = "g.hemani@bristol.ac.uk",
+    person("Gibran", "Hemani", , "g.hemani@bristol.ac.uk", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-0920-1055"))
-Description: Many tools exist that use GWAS summary data for colocalisation, fine mapping, Mendelian randomization, visualisation, etc. This package is a conduit that connects R packages that can retrieve GWAS summary data to various tools for analysing those data.
+Description: Many tools exist that use GWAS summary data for
+    colocalisation, fine mapping, Mendelian randomization, visualisation,
+    etc. This package is a conduit that connects R packages that can
+    retrieve GWAS summary data to various tools for analysing those data.
+License: MIT + file LICENSE
 URL: https://github.com/mrcieu/gwasglue
 BugReports: https://github.com/mrcieu/gwasglue/issues
 Depends: 
-    R (>= 3.6.0),
     gwasvcf,
-    ieugwasr
+    ieugwasr,
+    R (>= 3.6.0)
 Imports:
     dplyr,
-    testthat,
-    mr.raps,
+    magrittr,
     MendelianRandomization,
+    mr.raps,
+    MRMix,
     MRPRESSO,
     RadialMR,
-    MRMix,
-    TwoSampleMR,
-    magrittr,
-    susieR
+    susieR,
+    testthat,
+    TwoSampleMR
 Suggests: 
-    knitr,
-    rmarkdown,
+    covr,
     finemapr,
-    covr
+    knitr,
+    rmarkdown
+VignetteBuilder: 
+    knitr
 Remotes:
-    mrcieu/gwasvcf,
-    rondolab/MR-PRESSO,
-    mrcieu/ieugwasr,
-    mrcieu/TwoSampleMR,
-    mrcieu/MRInstruments,
-    WSpiller/RadialMR,
     gqi/MRMix,
+    mrcieu/gwasvcf,
+    mrcieu/ieugwasr,
+    mrcieu/MRInstruments,
+    mrcieu/TwoSampleMR,
+    rondolab/MR-PRESSO,
     stephenslab/susieR,
-    variani/finemapr
-License: MIT + file LICENSE
+    variani/finemapr,
+    WSpiller/RadialMR
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.1
-VignetteBuilder: knitr
