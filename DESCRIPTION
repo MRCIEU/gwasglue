@@ -29,12 +29,14 @@ Imports:
 Suggests: 
     covr,
     finemapr,
+    gassocplot,
     knitr,
     rmarkdown
 VignetteBuilder: 
     knitr
 Remotes:
     gqi/MRMix,
+    jrs95/gassocplot,
     mrcieu/gwasvcf,
     mrcieu/ieugwasr,
     mrcieu/MRInstruments,
