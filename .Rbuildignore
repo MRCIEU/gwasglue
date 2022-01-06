@@ -5,3 +5,5 @@
 ^Meta$
 ^codecov\.yml$
 ^\.github$
+^.*\.Rproj$
+^\.Rproj\.user$
