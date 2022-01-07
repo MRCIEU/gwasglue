@@ -8,6 +8,7 @@
 #' @param outfile Path to output files, without file ending
 #'
 #' @return 0 if success, 1 if there was a problem
+#' @importFrom utils write.table
 gwasvcf_to_pwcoco <- function(vcf1, vcf2, chrompos, type1=NULL, type2=NULL, outfile)
 {
 	overlap <- gwasvcf::vcflist_overlap(list(vcf1, vcf2), chrompos)
