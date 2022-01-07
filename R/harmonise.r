@@ -182,6 +182,7 @@ harmonise_against_ref <- function(gwas, reference)
 #'
 #' @export
 #' @return NULL
+#' @importFrom utils write.table
 write_out <- function(harmonised, path)
 {
 	j <- list(
