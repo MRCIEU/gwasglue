@@ -31,10 +31,12 @@ Suggests:
     finemapr,
     gassocplot,
     knitr,
-    rmarkdown
+    rmarkdown,
+    VariantAnnotation
 VignetteBuilder: 
     knitr
 Remotes:
+    bioc::release/VariantAnnotation,
     gqi/MRMix,
     jrs95/gassocplot,
     mrcieu/gwasvcf,
