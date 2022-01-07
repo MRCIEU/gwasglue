@@ -17,9 +17,10 @@ gwasvcf_to_pwcoco(vcf1, vcf2, chrompos, type1 = NULL, type2 = NULL, outfile)
 
 \item{type2}{How to treat vcffile2 for coloc, either "quant" or "cc"}
 
-\item{outfile}{Path to output files, without file ending
-
-return 0 if success, 1 if there was a problem}
+\item{outfile}{Path to output files, without file ending}
+}
+\value{
+0 if success, 1 if there was a problem
 }
 \description{
 Write files for PWCoCo where data are read from two VCF objects or files.
