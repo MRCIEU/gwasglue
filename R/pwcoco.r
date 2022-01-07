@@ -9,9 +9,10 @@
 #'
 #' @return 0 if success, 1 if there was a problem
 #' @importFrom utils write.table
+#' @importFrom gwasvcf vcflist_overlaps
 gwasvcf_to_pwcoco <- function(vcf1, vcf2, chrompos, type1=NULL, type2=NULL, outfile)
 {
-	overlap <- gwasvcf::vcflist_overlap(list(vcf1, vcf2), chrompos)
+	overlap <- gwasvcf::vcflist_overlaps(list(vcf1, vcf2), chrompos)
 	vcf1 <- overlap[[1]]
 	vcf2 <- overlap[[2]]
 	
