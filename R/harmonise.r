@@ -1,6 +1,4 @@
-
 #' Read in GWAS dataset
-#'
 #'
 #' @param filename <what param does>
 #' @param skip <what param does>
