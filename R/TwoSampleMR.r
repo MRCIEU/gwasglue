@@ -77,6 +77,8 @@ gwasvcf_to_TwoSampleMR <- function(vcf, type="exposure")
 #' @param proxydb Location of LD proxy database Default=options()$gwasglue.proxydb
 #' @param rsidx Location of rsidx index database Default=options()$gwasglue.rsidx
 #' @param bfile Location of LD reference panel Default=options()$gwasglue.bfile
+#' @param action action argument passed to [`TwoSampleMR::harmonise_data`]. The level of strictness in dealing with SNPs.
+#' @param plink_bin Path to plink. Default = [`genetics.binaRies::get_plink_binary`]
 #'
 #' @export
 #' @return harmonised dataset
