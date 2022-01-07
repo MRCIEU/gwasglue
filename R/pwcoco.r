@@ -80,6 +80,7 @@ gwasvcf_to_pwcoco <- function(vcf1, vcf2, chrompos, type1=NULL, type2=NULL, outf
 #' @param outfile Path to output files, without file ending
 #'
 #' @return 0 if success, 1 if there was a problem
+#' @importFrom utils write.table
 ieugwasr_to_pwcoco <- function(id1, id2, chrompos, type1=NULL, type2=NULL, outfile)
 {
 	tib1 <- ieugwasr::associations(id=id1, variants=chrompos) %>% subset(., !duplicated(rsid))
