@@ -12,11 +12,11 @@ License: MIT + file LICENSE
 URL: https://github.com/mrcieu/gwasglue
 BugReports: https://github.com/mrcieu/gwasglue/issues
 Depends: 
-    gwasvcf,
-    ieugwasr,
     R (>= 3.6.0)
 Imports:
     dplyr,
+    gwasvcf,
+    ieugwasr,
     magrittr,
     MendelianRandomization,
     mr.raps,
