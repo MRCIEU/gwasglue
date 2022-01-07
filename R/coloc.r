@@ -6,6 +6,7 @@
 #'
 #' @export
 #' @return List of datasets to feed into coloc
+#' @importFrom gwasvcf vcflist_overlaps
 gwasvcf_to_coloc <- function(vcf1, vcf2, chrompos)
 {
 	## TODO: binary or quantitative traits
