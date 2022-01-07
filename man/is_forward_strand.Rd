@@ -33,9 +33,9 @@ is_forward_strand(
 1 = Forward strand; 2 = Not on forward strand
 }
 \description{
-Assuming reference data is all on forward strand, check if 
+Assuming reference data is all on forward strand, check if
 the GWAS is also.
-Use some threshold e.g. if more than 90% of alleles don't 
+Use some threshold e.g. if more than 90\% of alleles don't
 need to be flipped then it's likely that the dataset is on
 the forward strand
 }

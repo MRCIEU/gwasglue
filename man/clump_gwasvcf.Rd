@@ -36,5 +36,5 @@ clump_gwasvcf(
 data frame of clumped results
 }
 \description{
-<full description>
+Perform LD clumping
 }

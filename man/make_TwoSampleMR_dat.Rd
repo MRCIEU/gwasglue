@@ -33,6 +33,10 @@ make_TwoSampleMR_dat(
 \item{rsidx}{Location of rsidx index database Default=options()$gwasglue.rsidx}
 
 \item{bfile}{Location of LD reference panel Default=options()$gwasglue.bfile}
+
+\item{action}{action argument passed to \code{\link[TwoSampleMR:harmonise_data]{TwoSampleMR::harmonise_data}}. The level of strictness in dealing with SNPs.}
+
+\item{plink_bin}{Path to plink. Default = \code{\link[genetics.binaRies:get_plink_binary]{genetics.binaRies::get_plink_binary}}}
 }
 \value{
 harmonised dataset

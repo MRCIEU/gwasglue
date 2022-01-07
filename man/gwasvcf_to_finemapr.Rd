@@ -19,7 +19,7 @@ gwasvcf_to_finemapr(
 
 \item{bfile}{LD reference panel}
 
-\item{plink_bin}{Path to plink. Default = genetics.binaRies::get_plink_binary()}
+\item{plink_bin}{Path to plink. Default = \code{\link[genetics.binaRies:get_plink_binary]{genetics.binaRies::get_plink_binary()}}}
 
 \item{threads}{Number of threads to run in parallel. Default=1}
 }
