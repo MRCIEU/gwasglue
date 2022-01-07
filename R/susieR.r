@@ -16,7 +16,7 @@
 susieR_pipeline <- function(vcffile, bfile, plink_bin, pop, threads=1, clump_kb=1000, clump_r2=0.001, clump_p=5e-8, ...)
 {
 	message("Performing clumping")
-	clumped <- clump_gwasvcf(vcffile, plink=plink_bin, bfile=bfile)
+	clumped <- clump_gwasvcf(vcffile, plink_bin=plink_bin, bfile=bfile)
 
 	message("Map clumps to regions")
 	regions <- map_variants_to_regions(clumped$chrpos, pop=pop)
