@@ -1,6 +1,9 @@
 context("coloc")
 library(gwasglue)
 
+skip_if_not_installed("VariantAnnotation")
+library(VariantAnnotation)
+
 fn <- system.file("extdata","data.vcf.gz", package="gwasvcf")
 vcf1 <- readVcf(fn)
 vcf2 <- readVcf(fn)
