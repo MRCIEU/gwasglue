@@ -1,7 +1,5 @@
 #' Perform LD clumping
 #'
-#' <full description>
-#'
 #' @param vcf VCF file or VCF object
 #' @param clump_kb Clumping kb window. Default is very strict, 10000
 #' @param clump_r2 Clumping r2 threshold. Default is very strict, 0.001
