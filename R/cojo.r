@@ -64,6 +64,7 @@ map_variants_to_regions <- function(chrpos, pop)
 #'
 #' @export
 #' @return List of independent summary stats
+#' @importFrom utils write.table
 cojo_cond <- function(vcffile, bfile, snplist, pop, gcta=genetics.binaRies::get_gcta_binary(), workdir=tempdir(), threads=1)
 {
 	message("Formatting sumstats")
