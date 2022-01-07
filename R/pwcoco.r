@@ -7,7 +7,7 @@
 #' @param type2 How to treat vcffile2 for coloc, either "quant" or "cc"
 #' @param outfile Path to output files, without file ending
 #'
-#' return 0 if success, 1 if there was a problem
+#' @return 0 if success, 1 if there was a problem
 gwasvcf_to_pwcoco <- function(vcf1, vcf2, chrompos, type1=NULL, type2=NULL, outfile)
 {
 	overlap <- gwasvcf::vcflist_overlap(list(vcf1, vcf2), chrompos)
@@ -78,7 +78,7 @@ gwasvcf_to_pwcoco <- function(vcf1, vcf2, chrompos, type1=NULL, type2=NULL, outf
 #' @param type2 How to treat vcffile2 for coloc, either "quant" or "cc"
 #' @param outfile Path to output files, without file ending
 #'
-#' return 0 if success, 1 if there was a problem
+#' @return 0 if success, 1 if there was a problem
 ieugwasr_to_pwcoco <- function(id1, id2, chrompos, type1=NULL, type2=NULL, outfile)
 {
 	tib1 <- ieugwasr::associations(id=id1, variants=chrompos) %>% subset(., !duplicated(rsid))
