@@ -5,6 +5,7 @@
 #'
 #' @export
 #' @return vcf object
+#' @importFrom utils write.table
 cojo_sumstat_file <- function(vcffile, outfile)
 {
 	vcf <- VariantAnnotation::readVcf(vcffile)
