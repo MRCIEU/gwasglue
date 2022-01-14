@@ -154,7 +154,12 @@ read_reference <- function(reference_file, rsid=NULL, chrompos=NULL,
 harmonise_against_ref <- function(gwas, reference)
 {
 	# Check strand
-	action <- is_forward_strand(gwas[["SNP"]], gwas[["effect_allele.outcome"]], gwas[["other_allele.outcome"]], reference[["SNP"]], reference[["other_allele.exposure"]], reference[["effect_allele.exposure"]], threshold=0.9)
+	action <- is_forward_strand(gwas[["SNP"]], gwas[["effect_allele.outcome"]], 
+	                            gwas[["other_allele.outcome"]], 
+	                            reference[["SNP"]], 
+	                            reference[["other_allele.exposure"]], 
+	                            reference[["effect_allele.exposure"]], 
+	                            threshold=0.9)
 
 	# Harmonise
 	dat <- suppressMessages(TwoSampleMR::harmonise_data(reference, gwas, action))
