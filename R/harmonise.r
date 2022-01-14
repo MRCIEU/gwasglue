@@ -244,8 +244,11 @@ write_out <- function(harmonised, path)
 #' the forward strand
 #'
 #' This function can be used to evaluate how strict harmonisation should be
-#' The trade off if you assume we are not on the forward strand then palindromic SNPs are dropped within a particular frequency range
-#' But you could instead have some small probability of error for whether palindromic SNPs are on the forward strand, and avoid dropping too many variants.
+#' The trade off if you assume we are not on the forward strand then 
+#' palindromic SNPs are dropped within a particular frequency range
+#' But you could instead have some small probability of error for whether 
+#' palindromic SNPs are on the forward strand, and avoid dropping too many 
+#' variants.
 #'
 #' @param gwas_snp Vector of SNP names for the dataset being checked
 #' @param gwas_a1 Vector of alleles
