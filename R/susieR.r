@@ -1,6 +1,7 @@
 #' Perform fine mapping pipeline using susieR
 #'
-#' Clumps data, then maps those to LD representative regions. Within each detected LD representative region, fine mapping is performed
+#' Clumps data, then maps those to LD representative regions. Within each 
+#' detected LD representative region, fine mapping is performed.
 #'
 #' @param vcffile Path to vcf file
 #' @param bfile Path to ld reference panel
