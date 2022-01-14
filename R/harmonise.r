@@ -146,8 +146,8 @@ read_reference <- function(reference_file, rsid=NULL, chrompos=NULL,
 
 #' Harmonise gwas alleles to be same as reference
 #'
-#' @param gwas <what param does>
-#' @param reference <what param does>
+#' @param gwas data.frame indicating GWAS
+#' @param reference data.frame indicating reference dataset
 #'
 #' @export
 #' @return data frame with attributes
