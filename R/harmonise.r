@@ -256,7 +256,8 @@ write_out <- function(harmonised, path)
 #' @param ref_snp Vector of SNP names for the reference dataset
 #' @param ref_a1 Vector of alleles
 #' @param ref_a2 Vector of alleles
-#' @param threshold =0.9 If the proportion of allele strands match is above this threshold, then declare the dataset to be on the forward strand
+#' @param threshold Default=`0.9` If the proportion of allele strands match is above 
+#' this threshold, then declare the dataset to be on the forward strand
 #'
 #' @export
 #' @return 1 = Forward strand; 2 = Not on forward strand
