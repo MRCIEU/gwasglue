@@ -167,7 +167,8 @@ ieugwasr_to_pwcoco <- function(id1, id2, chrompos, type1=NULL, type2=NULL,
 #'
 #' @export
 #' @return List of colocalisation results
-pwcoco <- function(id1, id2, bfile, chrompos, pwcoco, type1=NULL, type2=NULL, workdir=tempdir())
+pwcoco <- function(id1, id2, bfile, chrompos, pwcoco, type1=NULL, type2=NULL, 
+                   workdir=tempdir())
 {
 	if (file.exists(id1) && file.exists(id2))
 	{
