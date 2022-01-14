@@ -228,7 +228,8 @@ write_out <- function(harmonised, path)
 		                   quote = FALSE)
 		close(gz1)
 	} else {
-		utils::write.table(harmonised, path, row.names = FALSE, col.names = TRUE, quote = FALSE)
+		utils::write.table(harmonised, path, row.names = FALSE, col.names = TRUE, 
+		                   quote = FALSE)
 	}
 }
 
