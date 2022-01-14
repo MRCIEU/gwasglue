@@ -19,7 +19,11 @@ ieugwasr_to_TwoSampleMR <- function(x, type="exposure")
 	names(x)[nom == paste0("n.", type)] <- paste0("samplesize.", type)
 	names(x)[nom == paste0("trait.", type)]	<- type
 
-	x[[paste0("mr_keep.", type)]] <- !is.na(x[[paste0("beta.", type)]]) & !is.na(x[[paste0("se.", type)]]) & !is.na(x[[paste0("effect_allele.", type)]]) & !is.na(x[["SNP"]])
+	x[[paste0("mr_keep.", type)]] <- 
+	  !is.na(x[[paste0("beta.", type)]]) & 
+	  !is.na(x[[paste0("se.", type)]]) & 
+	  !is.na(x[[paste0("effect_allele.", type)]]) & 
+	  !is.na(x[["SNP"]])
 	return(x)
 }
 
