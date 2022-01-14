@@ -7,9 +7,11 @@
 #' @param bfile Path to ld reference panel
 #' @param plink_bin Path to plink
 #' @param pop EUR, ASN or AFR
-#' @param clump_kb <what param does>
-#' @param clump_r2 <what param does>
-#' @param clump_p <what param does>
+#' @param threads Numeric indicating number of threads. Default `1`
+#' @param clump_kb Numeric indicating kilobases used in clumping. 
+#' Default `1000`
+#' @param clump_r2 Numeric indicating R-squared used in clumping. Default `0.001`
+#' @param clump_p Numeric indicating clumping p-value. Default `5e-8`
 #' @param ... Optional arguments to be passed to susie_rss
 #'
 #' @export
