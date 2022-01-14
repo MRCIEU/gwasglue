@@ -19,7 +19,8 @@ gwasvcf_to_pwcoco <- function(vcf1, vcf2, chrompos, type1=NULL, type2=NULL,
 	
 	if (length(vcf1) == 0 || length(vcf2) == 0)
 	{
-		message("No overlaps for the given chrompos in ", ifelse(length(vcf1) == 0, "vcf1", "vcf2"), ".")
+		message("No overlaps for the given chrompos in ", 
+		        ifelse(length(vcf1) == 0, "vcf1", "vcf2"), ".")
 		return(1)
 	}
 	
