@@ -173,14 +173,17 @@ organise_ids <- function(id, vcfdir)
 	{
 		if(is.null(vcfdir))
 		{
-			stop("vcfdir is not set, and the following files do not exist\n", paste(id[!index], collapse="\n"))
+			stop("vcfdir is not set, and the following files do not exist\n", 
+			     paste(id[!index], collapse="\n"))
 		} else {
 			message("Constructing file names")
-			dat$filename[!index] <- file.path(vcfdir, id[!index], paste0(id[!index], ".vcf.gz"))
+			dat$filename[!index] <- file.path(vcfdir, id[!index], 
+			                                  paste0(id[!index], ".vcf.gz"))
 			index2 <- file.exists(dat$filename)
 			if(!all(index2))
 			{
-				stop("can't find the following files: \n", paste(id[!index], collapse="\n"))
+				stop("can't find the following files: \n", paste(id[!index], 
+				                                                 collapse="\n"))
 			}
 			index3 <- index2 & !index
 			for(i in which(index3))
