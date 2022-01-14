@@ -365,8 +365,10 @@ harmonise <- function(chr1, pos1, ref1, alt1, chr2, pos2, ref2, alt2,
 {
 	chrpos1 <- paste(chr1, pos1)
 	chrpos2 <- paste(chr2, pos2)
-	target <- dplyr::tibble(chr=chr1, pos=pos1, ref=toupper(ref1), alt=toupper(alt1))
-	reference <- dplyr::tibble(chr=chr2, pos=pos2, ref=toupper(ref2), alt=toupper(alt2))
+	target <- dplyr::tibble(chr=chr1, pos=pos1, ref=toupper(ref1), 
+	                        alt=toupper(alt1))
+	reference <- dplyr::tibble(chr=chr2, pos=pos2, ref=toupper(ref2), 
+	                           alt=toupper(alt2))
 	if(!is.null(rsid2))
 	{
 		reference$rsid <- rsid2
