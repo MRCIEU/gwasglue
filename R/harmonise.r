@@ -217,8 +217,9 @@ write_out <- function(harmonised, path)
 	)
 	if(!all(is.na(harmonised[["ZVALUE"]]))) j[["imp_z_col"]] <- 8
 	if(!all(is.na(harmonised[["INFO"]]))) j[["imp_z_col"]] <- 9
-	if(!all(is.na(harmonised[["NCASE"]]))) j[["ncase_col"]] <- which(names(harmonised) == "NCASE")
-
+	if(!all(is.na(harmonised[["NCASE"]]))) {
+	  j[["ncase_col"]] <- which(names(harmonised) == "NCASE")
+  }
 	jsonlite::write_json(j, paste0(path, ".json"), auto_unbox=TRUE)
 	if(grepl(".gz$", path))
 	{
