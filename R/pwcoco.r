@@ -93,8 +93,10 @@ gwasvcf_to_pwcoco <- function(vcf1, vcf2, chrompos, type1=NULL, type2=NULL,
 ieugwasr_to_pwcoco <- function(id1, id2, chrompos, type1=NULL, type2=NULL, 
                                outfile)
 {
-	tib1 <- ieugwasr::associations(id=id1, variants=chrompos) %>% subset(., !duplicated(rsid))
-	tib2 <- ieugwasr::associations(id=id2, variants=chrompos) %>% subset(., !duplicated(rsid))
+	tib1 <- ieugwasr::associations(id=id1, variants=chrompos) %>% 
+	  subset(., !duplicated(rsid))
+	tib2 <- ieugwasr::associations(id=id2, variants=chrompos) %>% 
+	  subset(., !duplicated(rsid))
 	
 	if (length(tib1) < 1 || length(tib2) < 1)
 	{
