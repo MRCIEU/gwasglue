@@ -303,7 +303,9 @@ is_forward_strand <- function(gwas_snp, gwas_a1, gwas_a2, ref_snp, ref_a1,
 	diff[["A1.x"]] <- toupper(diff[["A1.x"]])
 	diff[["A2.x"]] <- toupper(diff[["A2.x"]])
 
-	index2 <- (diff[["A1.x"]] == diff[["A1.y"]] & diff[["A2.x"]] == diff[["A2.y"]]) | (diff[["A1.x"]] == diff[["A2.y"]] & diff[["A2.x"]] == diff[["A1.y"]])
+	index2 <- (diff[["A1.x"]] == diff[["A1.y"]] & 
+	             diff[["A2.x"]] == diff[["A2.y"]]) | 
+	  (diff[["A1.x"]] == diff[["A2.y"]] & diff[["A2.x"]] == diff[["A1.y"]])
 
 	# Number that match initially
 	message("SNPs that match: ", sum(index, na.rm=TRUE))
