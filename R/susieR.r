@@ -27,7 +27,8 @@ susieR_pipeline <- function(vcffile, bfile, plink_bin, pop, threads=1,
 	regions$rsid <- clumped$rsid[match(regions$variant, clumped$chrpos)]
 
 	message("Obtain LD matrices for each region")
-	m <- gwasvcf_to_finemapr(region=regions$region, vcf=vcffile, bfile=ldref, plink_bin=plink, threads=threads)
+	m <- gwasvcf_to_finemapr(region=regions$region, vcf=vcffile, bfile=ldref, 
+	                         plink_bin=plink, threads=threads)
 
 	message("Perform susieR finemapping in each region")
 	m2 <- parallel::mclapply(1:length(m), function(i) {
