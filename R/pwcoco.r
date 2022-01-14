@@ -142,8 +142,10 @@ ieugwasr_to_pwcoco <- function(id1, id2, chrompos, type1=NULL, type2=NULL,
 		tib2$N_case <- info2$ncase
 	}
 	
-	write.table(tib1, file=paste0(outfile, "1.txt"), row.names = FALSE, col.names = TRUE, quote = FALSE)
-	write.table(tib2, file=paste0(outfile, "2.txt"), row.names = FALSE, col.names = TRUE, quote = FALSE)
+	write.table(tib1, file=paste0(outfile, "1.txt"), row.names = FALSE, 
+	            col.names = TRUE, quote = FALSE)
+	write.table(tib2, file=paste0(outfile, "2.txt"), row.names = FALSE, 
+	            col.names = TRUE, quote = FALSE)
 	return(0)
 }
 
