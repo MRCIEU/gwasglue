@@ -45,9 +45,11 @@ ieugwasr_to_gassocplot <- function(chrpos, id)
 
 #' Convert coloc dataset to gassocplot dataset
 #'
-#' @param coloclist Output from *_to_coloc
-#' @param bfile If number of SNPs > 500 then need to provide your own LD reference panel. Provide plink dataset here. 
-#' @param plink_bin If number of SNPs > 500 then need to provide your own LD reference panel. Provide plink executable here
+#' @param coloclist Output from [`gwasvcf_to_coloc`]/[`ieugwasr_to_coloc`]
+#' @param bfile If number of SNPs > 500 then need to provide your own LD 
+#' reference panel. Provide plink dataset here. 
+#' @param plink_bin If number of SNPs > 500 then need to provide your own LD 
+#' reference panel. Provide plink executable here
 #'
 #' @export
 #' @return List to feed into gassocplot
