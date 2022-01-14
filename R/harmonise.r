@@ -178,7 +178,11 @@ harmonise_against_ref <- function(gwas, reference)
 	names(ref)[names(ref) == "pos.exposure"] <- "POS"
 
 	dat <- dat %>%
-		dplyr::inner_join(subset(ref, select=c("SNP","other_allele.exposure","effect_allele.exposure","CHROM","POS")), by=c("ID"="SNP", "REF"="other_allele.exposure", "ALT"="effect_allele.exposure"))
+		dplyr::inner_join(subset(ref, select=c("SNP","other_allele.exposure",
+		                                       "effect_allele.exposure","CHROM",
+		                                       "POS")), 
+		                  by=c("ID"="SNP", "REF"="other_allele.exposure", 
+		                       "ALT"="effect_allele.exposure"))
 	return(dat)
 }
 
