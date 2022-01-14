@@ -13,7 +13,7 @@
 #' @param clump_r2 Numeric indicating R-squared used in clumping. 
 #' Default `0.001`
 #' @param clump_p Numeric indicating clumping p-value. Default `5e-8`
-#' @param ... Optional arguments to be passed to susie_rss
+#' @param ... Optional arguments to be passed to [`susieR::susie_rss`]
 #'
 #' @export
 #' @return List
