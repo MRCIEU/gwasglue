@@ -1,5 +1,5 @@
 Package: gwasglue
-Title: GWAS summary data sources connected to analytical tools
+Title: GWAS Summary Data Sources Connected to Analytical Tools
 Version: 0.0.0.9000
 Authors@R: 
     person("Gibran", "Hemani", , "g.hemani@bristol.ac.uk", role = c("aut", "cre"),
