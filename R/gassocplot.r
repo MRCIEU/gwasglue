@@ -70,4 +70,3 @@ coloc_to_gassocplot <- function(coloclist, bfile=NULL, plink_bin=NULL)
 
 	list(markers = markers, z = z, corr = ld, traits = traits) %>% return()
 }
-
