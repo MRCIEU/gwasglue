@@ -13,7 +13,9 @@ ieugwasr_to_gassocplot <- function(chrpos, id)
 	r1 <- ieugwasr::associations(chrpos, id, proxies=0)
 	r1 <- r1[!duplicated(paste(r1[["rsid"]], r1[["id"]])),]
 	r1[["z"]] <- r1[["beta"]] / r1[["se"]]
-	r1 <- tidyr::spread(subset(r1, select=c("rsid", "id", "z", "chr", "position")), key="id", value="z")
+	r1 <- tidyr::spread(subset(r1, 
+	                           select=c("rsid", "id", "z", "chr", "position")), 
+	                    key="id", value="z")
 	message("Found ", nrow(r1), " variants")
 	message("Extracting LD matrix for ", nrow(r1), " variants")
 	ld <- suppressWarnings(suppressMessages(
