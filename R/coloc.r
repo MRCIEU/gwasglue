@@ -154,4 +154,3 @@ get_type <- function(info, typex)
 		return(ifelse(info$unit %in% c("logOR", "log odds"), "cc", "quant"))
 	}
 }
-
