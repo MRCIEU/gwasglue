@@ -261,7 +261,7 @@ write_out <- function(harmonised, path)
 #' above this threshold, then declare the dataset to be on the forward strand
 #'
 #' @export
-#' @return 1 = Forward strand; 2 = Not on forward strand
+#' @return `1` = Forward strand; `2` = Not on forward strand
 is_forward_strand <- function(gwas_snp, gwas_a1, gwas_a2, ref_snp, ref_a1, 
                               ref_a2, threshold=0.9)
 {
