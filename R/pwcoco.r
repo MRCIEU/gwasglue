@@ -151,16 +151,19 @@ ieugwasr_to_pwcoco <- function(id1, id2, chrompos, type1=NULL, type2=NULL,
 
 #' Perform pair-wise conditional and colocalisation analysis using PWCoCo
 #'
-#' For a list of fine-mapped rsids, will assign to regions and generate colocalisation results for conditionally independent summary stats for each rsid
+#' For a list of fine-mapped rsids, will assign to regions and generate 
+#' colocalisation results for conditionally independent summary stats for each 
+#' rsid
 #'
 #' @param id1 Path to vcffile or ID for trait1
 #' @param id2 Path to vcffile2 or ID for trait2
 #' @param bfile LD reference panel in Plink format (.bed, .bim, .fam)
-#' @param chrompos Chromosome position (format: chr:pos1-pos2) region of interest
+#' @param chrompos Chromosome position (format: chr:pos1-pos2) region of 
+#' interest
 #' @param pwcoco Path to pwcoco binary
-#' @param type1 How to treat vcffile1 for coloc, either "quant" or "cc"
-#' @param type2 How to treat vcffile2 for coloc, either "quant" or "cc"
-#' @param workdir Location to store files, default=tempdir()
+#' @param type1 How to treat vcffile1 for coloc, either `"quant"` or `"cc"`
+#' @param type2 How to treat vcffile2 for coloc, either `"quant"` or `"cc"`
+#' @param workdir Location to store files, default=`tempdir()`
 #'
 #' @export
 #' @return List of colocalisation results
