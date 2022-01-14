@@ -356,8 +356,8 @@ check_null <- function(x, n)
 #' @param alt2 Vector
 #' @param rsid2 Optional vector
 #' @param indel_recode default=`FALSE`. If `TRUE` then attempts to recode D/I
-#' @param strand_flip default=`FALSE`. If `TRUE` then attempts to flip strand when 
-#' alignment is not otherwise possible
+#' @param strand_flip default=`FALSE`. If `TRUE` then attempts to flip strand 
+#' when alignment is not otherwise possible
 #'
 #' @export
 #' @return Dataframe of outcomes
