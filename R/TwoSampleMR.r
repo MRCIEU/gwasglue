@@ -76,16 +76,25 @@ gwasvcf_to_TwoSampleMR <- function(vcf, type="exposure")
 #' The supporting reference datasets can be accessed by UoB users on BC4 
 #' using [`set_bc4_files()`]
 #'
-#' @param id1 Exposure datasets. Either an array of vcf files, or array of IDs if vcfdir is set
-#' @param id2 Outcome datasets. Either an array of vcf files, or array of IDs if vcfdir is set
-#' @param proxies Lookup proxies? default=TRUE but requires either bfile or proxydb to be set
-#' @param nthreads Parellelise default=1
-#' @param vcfdir Location of vcf files if id1 and id2 are just IDs. Defaults to options()$gwasglue.vcfdir
-#' @param proxydb Location of LD proxy database Default=options()$gwasglue.proxydb
-#' @param rsidx Location of rsidx index database Default=options()$gwasglue.rsidx
-#' @param bfile Location of LD reference panel Default=options()$gwasglue.bfile
-#' @param action action argument passed to [`TwoSampleMR::harmonise_data`]. The level of strictness in dealing with SNPs.
-#' @param plink_bin Path to plink. Default = [`genetics.binaRies::get_plink_binary`]
+#' @param id1 Exposure datasets. Either an array of vcf files, 
+#' or array of IDs if vcfdir is set
+#' @param id2 Outcome datasets. Either an array of vcf files, 
+#' or array of IDs if vcfdir is set
+#' @param proxies Lookup proxies? default=`TRUE` but requires either bfile or 
+#' proxydb to be set
+#' @param nthreads Parellelise default=`1`
+#' @param vcfdir Location of vcf files if id1 and id2 are just IDs. 
+#' Defaults to `options()$gwasglue.vcfdir`
+#' @param proxydb Location of LD proxy database. 
+#' Default=`options()$gwasglue.proxydb`
+#' @param rsidx Location of rsidx index database. 
+#' Default=`options()$gwasglue.rsidx`
+#' @param bfile Location of LD reference panel. 
+#' Default=`options()$gwasglue.bfile`
+#' @param action action argument passed to [`TwoSampleMR::harmonise_data`]. 
+#' The level of strictness in dealing with SNPs.
+#' @param plink_bin Path to plink. 
+#' Default = [`genetics.binaRies::get_plink_binary`]
 #'
 #' @export
 #' @return harmonised dataset
