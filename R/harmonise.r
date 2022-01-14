@@ -224,7 +224,8 @@ write_out <- function(harmonised, path)
 	if(grepl(".gz$", path))
 	{
 		gz1 <- gzfile(path, "w")
-		utils::write.table(harmonised, gz1, row.names = FALSE, col.names = TRUE, quote = FALSE)
+		utils::write.table(harmonised, gz1, row.names = FALSE, col.names = TRUE, 
+		                   quote = FALSE)
 		close(gz1)
 	} else {
 		utils::write.table(harmonised, path, row.names = FALSE, col.names = TRUE, quote = FALSE)
