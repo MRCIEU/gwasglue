@@ -23,7 +23,8 @@ read_gwas <- function(filename, skip, delimiter, gzipped, snp, nea, ea, ea_af,
 {
 	if(gzipped)
 	{
-		# dat <- data.table::fread(paste0("gunzip -c ", filename), header=FALSE, skip=skip, sep=delimiter)
+		# dat <- data.table::fread(paste0("gunzip -c ", filename), header=FALSE, 
+	  # skip=skip, sep=delimiter)
 		dat <- data.table::fread(filename, header=FALSE, skip=skip, sep=delimiter)
 	} else {
 		dat <- data.table::fread(filename, header=FALSE, skip=skip, sep=delimiter)
