@@ -392,8 +392,10 @@ harmonise <- function(chr1, pos1, ref1, alt1, chr2, pos2, ref2, alt2,
 		dat$nref.y <- nchar(dat$ref.y)
 		dat$nalt.y <- nchar(dat$alt.y)
 		dat$inref <- dat$nref.y > dat$nalt.y
-		a2 <- dat$ref.x == "I" & dat$alt.x == "D" & dat$inref | dat$ref.x == "D" & dat$alt.x == "I" & ! dat$inref
-		a3 <- dat$ref.x == "I" & dat$alt.x == "D" & ! dat$inref | dat$ref.x == "D" & dat$alt.x == "I" & dat$inref		
+		a2 <- dat$ref.x == "I" & dat$alt.x == "D" & 
+		  dat$inref | dat$ref.x == "D" & dat$alt.x == "I" & ! dat$inref
+		a3 <- dat$ref.x == "I" & dat$alt.x == "D" & 
+		  ! dat$inref | dat$ref.x == "D" & dat$alt.x == "I" & dat$inref		
 		dat$decision[a2] <- 2
 		dat$decision[a3] <- 3
 	}
