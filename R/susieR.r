@@ -10,7 +10,8 @@
 #' @param threads Numeric indicating number of threads. Default `1`
 #' @param clump_kb Numeric indicating kilobases used in clumping. 
 #' Default `1000`
-#' @param clump_r2 Numeric indicating R-squared used in clumping. Default `0.001`
+#' @param clump_r2 Numeric indicating R-squared used in clumping. 
+#' Default `0.001`
 #' @param clump_p Numeric indicating clumping p-value. Default `5e-8`
 #' @param ... Optional arguments to be passed to susie_rss
 #'
