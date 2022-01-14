@@ -41,7 +41,9 @@ gwasvcf_to_pwcoco <- function(vcf1, vcf2, chrompos, type1=NULL, type2=NULL,
 	tib1$p <- 10^(-tib1$p)
 	
 	# Coloc type -- if study type is continuous then do not need the case column
-	if (type1 == "quant" || VariantAnnotation::header(vcf1) %>% VariantAnnotation::meta() %>% {.[["SAMPLE"]][["StudyType"]]} == "Continuous")
+	if (type1 == "quant" || VariantAnnotation::header(vcf1) %>% 
+	    VariantAnnotation::meta() %>% 
+	    {.[["SAMPLE"]][["StudyType"]]} == "Continuous")
 	{
 		tib1 <- tib1[c("SNP", "A1", "A2", "freq", "b", "se", "p", "N")]
 	}
