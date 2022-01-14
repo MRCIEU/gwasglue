@@ -126,7 +126,8 @@ read_gwas <- function(filename, skip, delimiter, gzipped, snp, nea, ea, ea_af,
 #'
 #' @export
 #' @return data frame
-read_reference <- function(reference_file, rsid=NULL, chrompos=NULL, remove_dup_rsids=TRUE)
+read_reference <- function(reference_file, rsid=NULL, chrompos=NULL, 
+                           remove_dup_rsids=TRUE)
 {
 	if(!is.null(rsid))
 	{
