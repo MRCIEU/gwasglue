@@ -3,11 +3,11 @@
 #' @param vcf1 VCF object or path to VCF file
 #' @param vcf2 VCF object or path to VCF file
 #' @param chrompos Character of the format chr:pos1-pos2
-#' @param type1 How to treat vcffile1 for coloc, either "quant" or "cc"
-#' @param type2 How to treat vcffile2 for coloc, either "quant" or "cc"
+#' @param type1 How to treat vcffile1 for coloc, either `"quant"` or `"cc"`
+#' @param type2 How to treat vcffile2 for coloc, either `"quant"` or `"cc"`
 #' @param outfile Path to output files, without file ending
 #'
-#' @return 0 if success, 1 if there was a problem
+#' @return `0` if success, `1` if there was a problem
 #' @importFrom utils write.table
 #' @importFrom gwasvcf vcflist_overlaps
 gwasvcf_to_pwcoco <- function(vcf1, vcf2, chrompos, type1=NULL, type2=NULL, outfile)
