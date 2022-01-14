@@ -206,8 +206,8 @@ organise_ids <- function(id, vcfdir)
 #' Determine locations of useful reference datasets on bluecrystal4
 #'
 #' This is a convenience function for members at the University of Bristol
-#' to automatically set file locations for various reference datasets. It relates
-#' only to paths on bc4
+#' to automatically set file locations for various reference datasets. 
+#' It relates only to paths on bc4.
 #' 
 #' @export
 #' @return NULL
