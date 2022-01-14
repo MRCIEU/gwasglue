@@ -163,7 +163,11 @@ harmonise_against_ref <- function(gwas, reference)
 
 	# Harmonise
 	dat <- suppressMessages(TwoSampleMR::harmonise_data(reference, gwas, action))
-	cols <- c("SNP"="ID", "effect_allele.exposure"="ALT", "other_allele.exposure"="REF", "beta.outcome"="BETA", "se.outcome"="SE", "pval.outcome"="PVALUE", "eaf.outcome"="AF", "samplesize.outcome"="N", "z.outcome"="ZVALUE", "info.outcome"="INFO")
+	cols <- c("SNP" = "ID", "effect_allele.exposure" = "ALT", 
+	          "other_allele.exposure"="REF", "beta.outcome" = "BETA", 
+	          "se.outcome"="SE", "pval.outcome"="PVALUE", "eaf.outcome"="AF", 
+	          "samplesize.outcome"="N", "z.outcome"="ZVALUE", 
+	          "info.outcome"="INFO")
 	if(! "z.outcome" %in% names(dat)) dat[["z.outcome"]] <- NA
 	if(! "info.outcome" %in% names(dat)) dat[["info.outcome"]] <- NA
 
