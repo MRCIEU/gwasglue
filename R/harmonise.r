@@ -1,19 +1,20 @@
 #' Read in GWAS dataset
 #'
-#' @param filename <what param does>
-#' @param skip <what param does>
-#' @param delimiter <what param does>
-#' @param gzipped <what param does>
-#' @param snp <what param does>
-#' @param nea <what param does>
-#' @param ea <what param does>
-#' @param ea_af <what param does>
-#' @param effect <what param does>
-#' @param se <what param does>
-#' @param pval <what param does>
-#' @param n <what param does>
-#' @param info <what param does>
-#' @param z <what param does>
+#' @param filename Filename
+#' @param skip Option passed to [`data.table::fread`]
+#' @param delimiter The separator between columns in the file
+#' @param gzipped Logical indicating whether the file is compressed in gz format
+#' @param snp Numeric indicating column number with SNP name
+#' @param nea Numeric indicating column number with NEA
+#' @param ea Numeric indicating column number with effect allele
+#' @param ea_af Numeric indicating column number with effect allele 
+#' allele frequency
+#' @param effect Numeric indicating column number with effect
+#' @param se Numeric indicating column number with standard error of effect
+#' @param pval Numeric indicating column number with p-value of effect
+#' @param n Numeric indicating column number with sample size
+#' @param info Numeric indicating column number with info
+#' @param z Numeric indicating column number with z statistic of effect
 #'
 #' @export
 #' @return data frame with log attributes
