@@ -31,7 +31,7 @@ ieugwasr_to_TwoSampleMR <- function(x, type="exposure")
 #' Create exposure or outcome data format for TwoSampleMR from vcf
 #'
 #' @param vcf VCF object
-#' @param type ="exposure" or "outcome"
+#' @param type =`"exposure"` or `"outcome"`
 #'
 #' @export
 #' @return data frame
