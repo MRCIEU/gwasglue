@@ -98,7 +98,14 @@ gwasvcf_to_TwoSampleMR <- function(vcf, type="exposure")
 #'
 #' @export
 #' @return harmonised dataset
-make_TwoSampleMR_dat <- function(id1, id2, proxies=TRUE, nthreads=1, vcfdir=options()$gwasglue.vcfdir, proxydb=options()$gwasglue.proxydb, rsidx=options()$gwasglue.rsidx, bfile=options()$gwasglue.bfile, action=1, plink_bin=genetics.binaRies::get_plink_binary())
+make_TwoSampleMR_dat <- function(id1, id2, proxies=TRUE, nthreads=1, 
+                                 vcfdir=options()$gwasglue.vcfdir, 
+                                 proxydb=options()$gwasglue.proxydb, 
+                                 rsidx=options()$gwasglue.rsidx, 
+                                 bfile=options()$gwasglue.bfile, 
+                                 action=1, 
+                                 plink_bin=genetics.binaRies::get_plink_binary()
+                                 )
 {
 
 	id1 <- organise_ids(id1, vcfdir)
