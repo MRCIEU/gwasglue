@@ -1,7 +1,7 @@
 #' Convert output from query to TwoSampleMR format
 #'
 #' @param x Output from ieugwasr query e.g. associations, tophits, phewas
-#' @param type "exposure" (default) or "outcome"
+#' @param type `"exposure"` (default) or `"outcome"`
 #'
 #' @export
 #' @return data frame
