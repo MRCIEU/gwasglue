@@ -18,7 +18,8 @@
 #'
 #' @export
 #' @return data frame with log attributes
-read_gwas <- function(filename, skip, delimiter, gzipped, snp, nea, ea, ea_af, effect, se, pval, n, info, z)
+read_gwas <- function(filename, skip, delimiter, gzipped, snp, nea, ea, ea_af, 
+                      effect, se, pval, n, info, z)
 {
 	if(gzipped)
 	{
