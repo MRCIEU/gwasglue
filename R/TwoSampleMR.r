@@ -113,7 +113,8 @@ make_TwoSampleMR_dat <- function(id1, id2, proxies=TRUE, nthreads=1, vcfdir=opti
 			tophits <- scan(file.path(d, "clump.txt"), character())
 			if(length(tophits) > 0)
 			{
-				out <- gwasvcf::query_gwas(id1$filename[i], rsidx=rsidx, rsid=tophits) %>%
+				out <- gwasvcf::query_gwas(id1$filename[i], 
+				                           rsidx=rsidx, rsid=tophits) %>%
 					gwasvcf_to_TwoSampleMR("exposure") %>%
 					dplyr::mutate(exposure=id1$trait[i], id.exposure=id1$id[i])
 			} else {
