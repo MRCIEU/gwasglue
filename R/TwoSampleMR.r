@@ -70,8 +70,11 @@ gwasvcf_to_TwoSampleMR <- function(vcf, type="exposure")
 
 #' Create a harmonised dataset from lists of vcf files
 #'
-#' This mimics the TwoSampleMR::make_dat function, which automatically looks up exposure and outcome datasets and harmonises them, except this function uses GWAS-VCF datasets instead.
-#' The supporting reference datasets can be accessed by UoB users on BC4 using set_bc4_files()
+#' This mimics the TwoSampleMR::make_dat function, which automatically looks 
+#' up exposure and outcome datasets and harmonises them, 
+#' except this function uses GWAS-VCF datasets instead.
+#' The supporting reference datasets can be accessed by UoB users on BC4 
+#' using [`set_bc4_files()`]
 #'
 #' @param id1 Exposure datasets. Either an array of vcf files, or array of IDs if vcfdir is set
 #' @param id2 Outcome datasets. Either an array of vcf files, or array of IDs if vcfdir is set
