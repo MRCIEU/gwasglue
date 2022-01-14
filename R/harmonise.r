@@ -288,7 +288,9 @@ is_forward_strand <- function(gwas_snp, gwas_a1, gwas_a2, ref_snp, ref_a1,
 	r <- dplyr::data_frame(SNP=ref_snp, A1=toupper(ref_a1), A2=toupper(ref_a2))
 
 	gr <- dplyr::inner_join(g,r,by="SNP")
-	index <- (gr[["A1.x"]] == gr[["A1.y"]] & gr[["A2.x"]] == gr[["A2.y"]]) | (gr[["A1.x"]] == gr[["A2.y"]] & gr[["A2.x"]] == gr[["A1.y"]])
+	index <- (gr[["A1.x"]] == gr[["A1.y"]] & 
+	            gr[["A2.x"]] == gr[["A2.y"]]) | 
+	  (gr[["A1.x"]] == gr[["A2.y"]] & gr[["A2.x"]] == gr[["A1.y"]])
 	diff <- gr[!index,]
 	diff[["A1.x"]][diff[["A1.x"]] == "C"] <- "g"
 	diff[["A1.x"]][diff[["A1.x"]] == "G"] <- "c"
