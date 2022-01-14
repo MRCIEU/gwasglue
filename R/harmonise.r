@@ -122,7 +122,7 @@ read_gwas <- function(filename, skip, delimiter, gzipped, snp, nea, ea, ea_af,
 #' @param reference_file Reference vcf
 #' @param rsid List of variants to read
 #' @param chrompos List of chrompos to read
-#' @param remove_dup_rsids =TRUE Remove duplicates from output
+#' @param remove_dup_rsids =`TRUE` Remove duplicates from output
 #'
 #' @export
 #' @return data frame
