@@ -180,7 +180,8 @@ pwcoco <- function(id1, id2, bfile, chrompos, pwcoco, type1=NULL, type2=NULL,
 	{
 		message("Reading two IDs from OpenGWAS.")
 		
-		stopifnot(ieugwasr_to_pwcoco(id1, id2, chrompos, type1, type2, outfile=file.path(workdir, "sum_stats")) == 0)
+		stopifnot(ieugwasr_to_pwcoco(id1, id2, chrompos, type1, type2, 
+		                             outfile=file.path(workdir, "sum_stats")) == 0)
 	}
 	# else; mixed
 	
