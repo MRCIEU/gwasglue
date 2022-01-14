@@ -33,7 +33,8 @@ ieugwasr_to_gassocplot <- function(chrpos, id)
 		) %>% return()
 	} else {
 		list(
-			markers = dplyr::tibble(marker=r1[["rsid"]], chr=r1[["chr"]], pos=r1[["position"]]),
+			markers = dplyr::tibble(marker=r1[["rsid"]], chr=r1[["chr"]], 
+			                        pos=r1[["position"]]),
 			z = subset(r1, select=id),
 			corr = ld,
 			traits = id
