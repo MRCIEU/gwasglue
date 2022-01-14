@@ -185,7 +185,8 @@ pwcoco <- function(id1, id2, bfile, chrompos, pwcoco, type1=NULL, type2=NULL,
 	}
 	# else; mixed
 	
-	# PWCoCo itself is multi-threaded; is it a good idea to multi-thread this function call too?
+	# PWCoCo itself is multi-threaded; is it a good idea to multi-thread this 
+  # function call too?
 	chr <- as.integer(strsplit(chrompos, ":")[[1]][1])
 	cmd <- glue::glue("{pwcoco} --bfile {bfile} --sum_stats1 {file.path(workdir, 'sum_stats1.txt')} --sum_stats2 {file.path(workdir, 'sum_stats2.txt')} --out {file.path(workdir, 'out')} --chr {chr}")
 	system(cmd)
