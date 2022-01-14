@@ -84,11 +84,11 @@ gwasvcf_to_pwcoco <- function(vcf1, vcf2, chrompos, type1=NULL, type2=NULL,
 #' @param id1 ID for trait 1
 #' @param id2 ID for trait 2
 #' @param chrompos Character of the format chr:pos1-pos2
-#' @param type1 How to treat vcffile1 for coloc, either "quant" or "cc"
-#' @param type2 How to treat vcffile2 for coloc, either "quant" or "cc"
+#' @param type1 How to treat vcffile1 for coloc, either `"quant"` or `"cc"`
+#' @param type2 How to treat vcffile2 for coloc, either `"quant"` or `"cc"`
 #' @param outfile Path to output files, without file ending
 #'
-#' @return 0 if success, 1 if there was a problem
+#' @return `0` if success, `1` if there was a problem
 #' @importFrom utils write.table
 ieugwasr_to_pwcoco <- function(id1, id2, chrompos, type1=NULL, type2=NULL, outfile)
 {
