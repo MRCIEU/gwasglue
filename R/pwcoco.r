@@ -100,7 +100,8 @@ ieugwasr_to_pwcoco <- function(id1, id2, chrompos, type1=NULL, type2=NULL,
 	
 	if (length(tib1) < 1 || length(tib2) < 1)
 	{
-		message("Data could not be read using the ieugwasr package for id1 = ", id1, " and id2 = ", id2, ".")
+		message("Data could not be read using the ieugwasr package for id1 = ", 
+		        id1, " and id2 = ", id2, ".")
 		return(1)
 	}
 	
