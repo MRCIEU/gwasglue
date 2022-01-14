@@ -434,4 +434,3 @@ flip_strand <- function(x)
 		gsub("C", "g", .) %>%
 		toupper()
 }
-
