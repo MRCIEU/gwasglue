@@ -155,10 +155,13 @@ make_TwoSampleMR_dat <- function(id1, id2, proxies=TRUE, nthreads=1, vcfdir=opti
 }
 
 
-#' Figure out specific files and IDs depending on what files exist and whethet vcfdir is set
+#' Figure out specific files and IDs depending on what files exist and whether 
+#' vcfdir is set
 #'
-#' @param id List of IDs within the vcfdir structure, or a list of GWAS VCF files, or a mixture
-#' @param vcfdir Location of GWAS VCF files, or NULL if id is a list of actual files
+#' @param id List of IDs within the vcfdir structure, 
+#' or a list of GWAS VCF files, or a mixture
+#' @param vcfdir Location of GWAS VCF files, 
+#' or `NULL` if id is a list of actual files
 #'
 #' @return File paths to all datasets
 organise_ids <- function(id, vcfdir)
