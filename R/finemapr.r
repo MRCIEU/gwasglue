@@ -62,7 +62,8 @@ print.FinemaprList <- function(x)
 #' For a given region and VCF file, extracts the variants in the region along 
 #' with LD matrix from a reference panel
 #'
-#' @param region Region of the genome to extract eg 1:109317192-110317192". Can be array
+#' @param region Region of the genome to extract eg `1:109317192-110317192`  
+#' Can be array
 #' @param vcf Path to VCF file or VCF object
 #' @param bfile LD reference panel
 #' @param plink_bin Path to plink. Default = [`genetics.binaRies::get_plink_binary()`]
