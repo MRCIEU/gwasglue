@@ -3,9 +3,12 @@
 #' Uses the finemapr package \url{https://github.com/variani/finemapr}.
 #'
 #' @param region Region of the genome to extract eg 1:109317192-110317192"
-#' @param id Array of GWAS studies to query. See \code{gwasinfo} for available studies
-#' @param bfile If this is provided then will use the API. Default = NULL
-#' @param plink_bin If null and bfile is not null then will detect packaged plink binary for specific OS. Otherwise specify path to plink binary. Default = NULL
+#' @param id Array of GWAS studies to query. See [`ieugwasr::gwasinfo`] 
+#' for available studies
+#' @param bfile If this is provided then will use the API. Default = `NULL`
+#' @param plink_bin If `NULL` and bfile is not `NULL` then will detect packaged 
+#' plink binary for specific OS. Otherwise specify path to plink binary. 
+#' Default = `NULL`
 #'
 #' @export
 #' @return Each id will be a list of z score data, ld matrix, and sample size
