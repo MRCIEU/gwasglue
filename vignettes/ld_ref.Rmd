@@ -46,24 +46,20 @@ for(i in 1:nrow(regions))
 
 
 
-bin/emeraLD -i /mnt/storage/private/mrcieu/research/mr-eve/vcf-reference-datasets/1000g/ALL.chr6.phase3_shapeit2_mvncall_integrated_v5a.20130502.genotypes.vcf.gz --region 6:2458936-3573593 --out ~/mr-eve/temp.ld --no-phase
+<!-- bin/emeraLD -i /mnt/storage/private/mrcieu/research/mr-eve/vcf-reference-datasets/1000g/ALL.chr6.phase3_shapeit2_mvncall_integrated_v5a.20130502.genotypes.vcf.gz --region 6:2458936-3573593 --out ~/mr-eve/temp.ld --no-phase -->
 
-bin/emeraLD -i /mnt/storage/private/mrcieu/research/mr-eve/vcf-reference-datasets/1000g/1kg_v3_nomult.vcf.gz --region 1:30923-100923 --out ~/mr-eve/temp.ld --no-phase
-
-
-bin/emeraLD -i /mnt/storage/private/mrcieu/research/mr-eve/vcf-reference-datasets/1000g/temp.vcf.gz --region 6:2458936-3573593 --out ~/mr-eve/temp.ld --no-phase
+<!-- bin/emeraLD -i /mnt/storage/private/mrcieu/research/mr-eve/vcf-reference-datasets/1000g/1kg_v3_nomult.vcf.gz --region 1:30923-100923 --out ~/mr-eve/temp.ld --no-phase -->
 
 
-
-betas <- hyprcoloc::test.betas
-ses <- hyprcoloc::test.ses
-trait.cor <- hyprcoloc::test.corr
-ld.matrix <- hyprcoloc::test.ld
-traits <- paste0("T", 1:dim(betas)[2])
-rsid <- rownames(betas)
-res <- hyprcoloc(betas, ses, trait.names=traits, snp.id=rsid)
-res
+<!-- bin/emeraLD -i /mnt/storage/private/mrcieu/research/mr-eve/vcf-reference-datasets/1000g/temp.vcf.gz --region 6:2458936-3573593 --out ~/mr-eve/temp.ld --no-phase -->
 
 
 
-
+<!-- betas <- hyprcoloc::test.betas -->
+<!-- ses <- hyprcoloc::test.ses -->
+<!-- trait.cor <- hyprcoloc::test.corr -->
+<!-- ld.matrix <- hyprcoloc::test.ld -->
+<!-- traits <- paste0("T", 1:dim(betas)[2]) -->
+<!-- rsid <- rownames(betas) -->
+<!-- res <- hyprcoloc(betas, ses, trait.names=traits, snp.id=rsid) -->
+<!-- res -->
