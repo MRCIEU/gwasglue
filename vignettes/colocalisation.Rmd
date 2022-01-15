@@ -112,19 +112,19 @@ chrpos <- "19:11112306-11292306"
 
 Extract region from vcf files and convert to coloc object
 
-```{r}
+```{r, eval = FALSE}
 vout <- gwasvcf_to_coloc("ieu-a-300.vcf.gz", "ieu-a-7.vcf.gz", chrpos)
 ```
 
 Run colocalisation analysis
 
-```{r}
+```{r, eval = FALSE}
 vres <- coloc::coloc.abf(vout[[1]], vout[[2]])
 ```
 
 Plot
 
-```{r}
+```{r, eval = FALSE}
 library(gassocplot)
 temp <- coloc_to_gassocplot(vout)
 gassocplot::stack_assoc_plot(temp$markers, temp$z, temp$corr, traits=temp$traits)
