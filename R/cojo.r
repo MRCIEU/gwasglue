@@ -124,7 +124,8 @@ cojo_cond <- function(vcffile, bfile, snplist, pop,
 		j <- x$variant
 		y <- gwasvcf::query_gwas(vcf, chrompos=i) %>% gwasvcf::vcf_to_tibble() %>%
 			dplyr::mutate(pval=10^{-LP})
-		l[[i]][[j]] <- dplyr::select(y, rsid=rsid, chr=seqnames, pos=start, alt=ALT, ES=ES, SE=SE, pval=pval, n=SS)
+		l[[i]][[j]] <- dplyr::select(y, rsid=rsid, chr=seqnames, pos=start, 
+		                             alt=ALT, ES=ES, SE=SE, pval=pval, n=SS)
 	}
 
 	return(l)
