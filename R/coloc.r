@@ -132,8 +132,14 @@ ieugwasr_to_coloc <- function(id1, id2, chrompos, type1=NULL, type2=NULL)
 	tab1$n[is.na(tab1$n)] <- info1$sample_size
 	tab2$n[is.na(tab2$n)] <- info2$sample_size
 
-	tab1 <- tab1[index,] %>% {list(pvalues = .$p, N = .$n, MAF = .$eaf, beta = .$beta, varbeta = .$se^2, type = type1, snp = .$rsid, z = .$beta / .$se, chr = .$chr, pos = .$position, id = id1)}
-	tab2 <- tab2[index,] %>% {list(pvalues = .$p, N = .$n, MAF = .$eaf, beta = .$beta, varbeta = .$se^2, type = type2, snp = .$rsid, z = .$beta / .$se, chr = .$chr, pos = .$position, id = id2)}
+	tab1 <- tab1[index,] %>% 
+	  {list(pvalues = .$p, N = .$n, MAF = .$eaf, beta = .$beta, 
+	        varbeta = .$se^2, type = type1, snp = .$rsid, z = .$beta / .$se, 
+	        chr = .$chr, pos = .$position, id = id1)}
+	tab2 <- tab2[index,] %>% 
+	  {list(pvalues = .$p, N = .$n, MAF = .$eaf, beta = .$beta, 
+	        varbeta = .$se^2, type = type2, snp = .$rsid, z = .$beta / .$se, 
+	        chr = .$chr, pos = .$position, id = id2)}
 
 	if(type1 == "cc")
 	{
