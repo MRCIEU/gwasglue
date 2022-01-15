@@ -123,9 +123,19 @@ TwoSampleMR::mr(dat2)
 
 If we want to extract top hits based on a threshold and clump locally. First download the LD reference dataset:
 
-```bash
-wget http://fileserve.mrcieu.ac.uk/ld/data_maf0.01_rs_ref.tgz
-tar xzvf data_maf0.01_rs_ref.tgz
+```{r}
+if (!file.exists(c("data_maf0.01_rs_ref.bed", 
+                   "data_maf0.01_rs_ref.bim",
+                   "data_maf0.01_rs_ref.fam"))) {
+  if (!file.exists("data_maf0.01_rs_ref.tgz")) {
+    download.file(
+      url = "http://fileserve.mrcieu.ac.uk/ld/data_maf0.01_rs_ref.tgz",
+      destfile = "data_maf0.01_rs_ref.tgz"
+    )
+  }
+
+  untar(tarfile = "data_maf0.01_rs_ref.tgz")
+}
 ```
 
 Now extract the top hits based on a p-value threshold
