@@ -13,7 +13,8 @@ cojo_sumstat_file <- function(vcffile, outfile)
 	tib$LP <- 10^(-tib$LP)
 	tib <- tib %>% dplyr::select(rsid, ALT, REF, AF, ES, SE, LP, SS)
 	names(tib) <- c("SNP", "A1", "A2", "freq", "b", "se", "p", "N")
-	write.table(tib, file=outfile, row.names = FALSE, col.names = TRUE, quote = FALSE)
+	write.table(tib, file=outfile, row.names = FALSE, col.names = TRUE, 
+	            quote = FALSE)
 	return(vcf)
 }
 
