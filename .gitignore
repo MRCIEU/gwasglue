@@ -8,3 +8,7 @@ vignettes/ieu-a-300.vcf.gz
 vignettes/ieu-a-300.vcf.gz.tbi
 vignettes/ieu-a-7.vcf.gz
 vignettes/ieu-a-7.vcf.gz.tbi
+vignettes/data_maf0.01_rs_ref.tgz
+vignettes/data_maf0.01_rs_ref.bed
+vignettes/data_maf0.01_rs_ref.bim
+vignettes/data_maf0.01_rs_ref.fam
