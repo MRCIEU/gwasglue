@@ -193,7 +193,7 @@ harmonise_against_ref <- function(gwas, reference)
 #' Takes raw files and aligns them to reference. Important if files don't have 
 #' chr:pos already
 #'
-#' @param harmonised Output from /code{harmonise_against_ref}
+#' @param harmonised Output from [`harmonise_against_ref`]
 #' @param path Path to write out json file and txt file
 #'
 #' @export
