@@ -30,7 +30,8 @@ cojo_sumstat_file <- function(vcffile, outfile)
 #' @return
 map_variants_to_regions <- function(chrpos, pop)
 {
-	regionfile <- system.file("extdata", "ldetect", paste0(pop, ".bed"), package="gwasglue")
+	regionfile <- system.file("extdata", "ldetect", paste0(pop, ".bed"), 
+	                          package="gwasglue")
 	regions <- data.table::fread(regionfile, header=TRUE) %>%
 		dplyr::mutate(
 			chr=as.numeric(gsub("chr", "", chr)),
