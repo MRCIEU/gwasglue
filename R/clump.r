@@ -27,7 +27,10 @@ clump_gwasvcf <- function(vcf, clump_kb=1000, clump_r2=0.001, clump_p=5e-8,
 
 	if(is.null(bfile))
 	{
-		message("Using API. Note that this could be slow, and to reduce server disruption it is recommended to use local LD reference files")
+		message("Using API. ",
+		        "Note that this could be slow. ", 
+            "To reduce server disruption it is recommended to use local LD ",
+            "reference files")
 		message("See gwasglue vignette on how to do this")
 
 		fn <- function(dat)
