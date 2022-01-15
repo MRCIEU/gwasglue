@@ -55,6 +55,8 @@ clump_gwasvcf <- function(vcf, clump_kb=1000, clump_r2=0.001, clump_p=5e-8,
 		{.$rsid} %>%
 		{sig[names(sig) %in% .]} %>%
 		SummarizedExperiment::rowRanges() %>%
-		{dplyr::tibble(rsid = names(.), chrpos=paste0(SummarizedExperiment::seqnames(.), ":", SummarizedExperiment::ranges(.)@start))}
+	  {dplyr::tibble(rsid = names(.), 
+		               chrpos=paste0(SummarizedExperiment::seqnames(.), ":", 
+		                             SummarizedExperiment::ranges(.)@start))}
 	return(clumped)
 }
