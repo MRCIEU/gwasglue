@@ -125,7 +125,9 @@ Get a list of SNPs to retain after clumping and subset the data
 
 ```{r}
 retain_snps <- expd3 %>% dplyr::select(rsid=SNP, pval=pval.exposure) %>%
-	ieugwasr::ld_clump(., plink_bin=genetics.binaRies::get_plink_binary(), bfile="data_maf0.01_rs_ref") %>%
+	ieugwasr::ld_clump(., 
+	                   plink_bin=genetics.binaRies::get_plink_binary(),
+	                   bfile="data_maf0.01_rs_ref") %>%
 	{.$rsid}
 expd3 <- subset(expd3, SNP %in% retain_snps)
 ```
