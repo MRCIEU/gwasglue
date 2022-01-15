@@ -87,7 +87,8 @@ cojo_cond <- function(vcffile, bfile, snplist, pop,
 	regions$rsid <- names(ext)[match(regions$variant, chrpos)]
 	dup_reg <- unique(regions$region[duplicated(regions$region)])
 
-	message(length(dup_reg), " out of ", nrow(regions), " regions have multiple variants")
+	message(length(dup_reg), " out of ", nrow(regions), 
+	        " regions have multiple variants")
 
 	l <- parallel::mclapply(dup_reg, function(i)
 	{
