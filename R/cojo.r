@@ -20,7 +20,8 @@ cojo_sumstat_file <- function(vcffile, outfile)
 
 #' For a set of variants map to LD regions
 #'
-#' LD regions defined here https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4731402/
+#' LD regions defined here 
+#' \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4731402/}
 #'
 #' @param chrpos Array of chr:pos
 #' @param pop EUR, AFR or ASN
