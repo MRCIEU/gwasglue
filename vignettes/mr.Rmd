@@ -138,7 +138,9 @@ This only works if you extract on rsids at the moment, and is quite slow. But he
 
 ```{r}
 gwasvcf::set_plink()
-outd2 <- gwasvcf::query_gwas("ieu-a-7.vcf.gz", rsid = expd3$SNP, proxies="yes", bfile="data_maf0.01_rs_ref")
+outd2 <- gwasvcf::query_gwas("ieu-a-7.vcf.gz", 
+                             rsid = expd3$SNP, proxies="yes",
+                             bfile="data_maf0.01_rs_ref")
 outd2 <- gwasglue::gwasvcf_to_TwoSampleMR(outd2, "outcome")
 ```
 
