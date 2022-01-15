@@ -9,8 +9,8 @@ Description: Many tools exist that use GWAS summary data for
     etc. This package is a conduit that connects R packages that can
     retrieve GWAS summary data to various tools for analysing those data.
 License: MIT + file LICENSE
-URL: https://github.com/mrcieu/gwasglue
-BugReports: https://github.com/mrcieu/gwasglue/issues
+URL: https://github.com/MRCIEU/gwasglue
+BugReports: https://github.com/MRCIEU/gwasglue/issues
 Depends: 
     R (>= 3.6.0)
 Imports:
