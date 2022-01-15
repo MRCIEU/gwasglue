@@ -21,7 +21,9 @@ ieugwasr_to_finemapr <- function(region, id, bfile=NULL, plink_bin=NULL)
 	as <- ieugwasr::associations(rsid, id, proxies=0)
 	rsid_avail <- unique(as$rsid)
 	message("Calculating LD for ", length(rsid_avail), " variants")
-	ld <- suppressWarnings(ieugwasr::ld_matrix(rsid_avail, bfile, plink_bin, with_alleles=FALSE)) %>% greedy_remove()
+	ld <- suppressWarnings(ieugwasr::ld_matrix(rsid_avail, bfile, plink_bin, 
+	                                           with_alleles=FALSE)) %>% 
+	  greedy_remove()
 	rsid_avail <- rownames(ld)
 	message("Data available for ", length(rsid_avail), " variants")
 	as <- subset(as, rsid %in% rsid_avail)
