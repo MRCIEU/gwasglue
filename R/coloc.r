@@ -168,7 +168,8 @@ get_type <- function(info, typex)
 		}
 		if(is.na(info$ncase))
 		{
-			message("Type information not available for ", info$id, ". Assuming 'quant' but override using 'type' arguments.")
+			message("Type information not available for ", info$id, 
+			        ". Assuming 'quant' but override using 'type' arguments.")
 			return("quant")			
 		} else {
 			message("No units available but assuming cc due to number of cases being stated")
