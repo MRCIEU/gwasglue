@@ -32,7 +32,8 @@ ieugwasr_to_finemapr <- function(region, id, bfile=NULL, plink_bin=NULL)
 	{
 		dat <- list()
 		x <- as[as[["rsid"]] %in% rsid_avail & as[["id"]] == id[i],]
-		dat[["z"]] <- dplyr::tibble(snp = x[["rsid"]], zscore = x[["beta"]] / x[["se"]])
+		dat[["z"]] <- dplyr::tibble(snp = x[["rsid"]], 
+		                            zscore = x[["beta"]] / x[["se"]])
 		index <- match(x[["rsid"]], rsid_avail)
 		dat[["ld"]] <- ld[index, index]
 		stopifnot(all(x[["rsid"]] == rownames(dat[["ld"]])))
