@@ -72,7 +72,9 @@ print.FinemaprList <- function(x)
 #'
 #' @export
 #' @return List of datasets for finemapping
-gwasvcf_to_finemapr <- function(region, vcf, bfile, plink_bin=genetics.binaRies::get_plink_binary(), threads=1)
+gwasvcf_to_finemapr <- function(region, vcf, bfile, 
+                                plink_bin=genetics.binaRies::get_plink_binary(), 
+                                threads=1)
 {
 	message("Extracting data from vcf")
 	ext <- gwasvcf::query_gwas(vcf=vcf, chrompos=region)
