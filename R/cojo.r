@@ -55,15 +55,17 @@ map_variants_to_regions <- function(chrpos, pop)
 
 #' Perform conditional analysis using GCTA COJO
 #'
-#' For a list of fine-mapped rsids, will assign to regions and generate conditionally independent summary stats for each rsid
+#' For a list of fine-mapped rsids, will assign to regions and generate 
+#' conditionally independent summary stats for each rsid.
 #'
 #' @param vcffile Path to vcffile
 #' @param bfile LD reference panel
 #' @param snplist List of rsids
 #' @param pop EUR, ASN or AFR
-#' @param gcta Path to gcta binary. For convenience can use default=genetics.binaRies::get_gcta_binary()
-#' @param workdir Location to store temporary files. Default=tempdir()
-#' @param threads Number of parallel threads. Default=1
+#' @param gcta Path to gcta binary. \cr
+#' For convenience can use default=`genetics.binaRies::get_gcta_binary()`
+#' @param workdir Location to store temporary files. Default=`tempdir()`
+#' @param threads Number of parallel threads. Default=`1`
 #'
 #' @export
 #' @return List of independent summary stats
