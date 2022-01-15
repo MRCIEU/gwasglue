@@ -3,7 +3,7 @@
 #' Uses James Staley's gassocplot package 
 #' \url{https://github.com/jrs95/gassocplot}
 #'
-#' @param chrpos A window range to plot e.g. 16:3349655-3849655
+#' @param chrpos A window range to plot e.g. `16:3349655-3849655`
 #' @param id Vector of one or more IEU GWAS db study IDs
 #'
 #' @export
