@@ -79,8 +79,10 @@ gwasvcf_to_coloc <- function(vcf1, vcf2, chrompos)
 #' @param id1 ID for trait 1
 #' @param id2 ID for trait 2
 #' @param chrompos Character of chr:pos1-pos2
-#' @param type1 Provide "cc" or "quant" to override automatic lookup of trait type for trait 1
-#' @param type2 Provide "cc" or "quant" to override automatic lookup of trait type for trait 2
+#' @param type1 Provide `"cc"` or `"quant"` to override automatic lookup of 
+#' trait type for trait 1
+#' @param type2 Provide `"cc"` or `"quant"` to override automatic lookup of 
+#' trait type for trait 2
 #'
 #' @export
 #' @return List of datasets to feed into coloc
