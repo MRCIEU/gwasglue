@@ -103,7 +103,8 @@ cojo_cond <- function(vcffile, bfile, snplist, pop,
 		{
 			message(j)
 			condsnps <- subset(x, variant != j)$rsid
-			write.table(condsnps, file=file.path(workdir, "cond.txt"), row.names = FALSE, col.names = FALSE, quote = FALSE)
+			write.table(condsnps, file=file.path(workdir, "cond.txt"), 
+			            row.names = FALSE, col.names = FALSE, quote = FALSE)
 			cmd <- glue::glue("{gcta} --bfile {bfile} --extract {file.path(workdir, 'extract.txt')} --cojo-file {file.path(workdir, 'sum.txt')} --cojo-cond {file.path(workdir, 'cond.txt')} --out {file.path(workdir, 'out')}")
 			system(cmd)
 			res <- data.table::fread(file.path(workdir, 'out.cma.cojo'))
