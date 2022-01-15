@@ -79,7 +79,8 @@ cojo_cond <- function(vcffile, bfile, snplist, pop,
 
 	ext <- vcf[names(vcf) %in% snplist] %>%
 		SummarizedExperiment::rowRanges() 
-	chrpos <- paste0(SummarizedExperiment::seqnames(ext), ":", SummarizedExperiment::ranges(ext)@start)
+	chrpos <- paste0(SummarizedExperiment::seqnames(ext), ":", 
+	                 SummarizedExperiment::ranges(ext)@start)
 
 	message("Organising regions")
 	regions <- map_variants_to_regions(chrpos, pop)
