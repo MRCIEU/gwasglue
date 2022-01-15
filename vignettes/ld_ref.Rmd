@@ -42,9 +42,6 @@ for(i in 1:nrow(regions))
 	y <- ieugwasr::ld_matrix(x, pop=pop, bfile=ldref, plink_bin=genetics.binaRies::get_plink_binary(), with_alleles=FALSE)
 	save(y, file="temp.rdata")
 }
-
-
-
 ```
 
 
