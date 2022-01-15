@@ -78,6 +78,31 @@ Let's do the same with the vcf files (and the indexes). Download from here:
 - [https://gwas.mrcieu.ac.uk/files/ieu-a-7/ieu-a-7.vcf.gz](https://gwas.mrcieu.ac.uk/files/ieu-a-7/ieu-a-7.vcf.gz)
 - [https://gwas.mrcieu.ac.uk/files/ieu-a-7/ieu-a-7.vcf.gz.tbi](https://gwas.mrcieu.ac.uk/files/ieu-a-7/ieu-a-7.vcf.gz.tbi)
 
+```{r}
+if (!file.exists("ieu-a-300.vcf.gz")) {
+  download.file(
+    url = "https://gwas.mrcieu.ac.uk/files/ieu-a-300/ieu-a-300.vcf.gz",
+    destfile = "ieu-a-300.vcf.gz")
+} 
+
+if (!file.exists("ieu-a-300.vcf.gz.tbi")) {
+  download.file(
+    url = "https://gwas.mrcieu.ac.uk/files/ieu-a-300/ieu-a-300.vcf.gz.tbi",
+    destfile = "ieu-a-300.vcf.gz.tbi")
+}
+
+if (!file.exists("ieu-a-7.vcf.gz")) {
+  download.file(
+    url = "https://gwas.mrcieu.ac.uk/files/ieu-a-7/ieu-a-7.vcf.gz",
+    destfile = "ieu-a-7.vcf.gz")
+}
+
+if (!file.exists("ieu-a-7.vcf.gz.tbi")) {
+  download.file(
+    url = "https://gwas.mrcieu.ac.uk/files/ieu-a-7/ieu-a-7.vcf.gz.tbi",
+    destfile = "ieu-a-7.vcf.gz.tbi")
+}
+```
 
 Set a region to plot:
 
