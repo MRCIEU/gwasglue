@@ -60,11 +60,30 @@ dat1 <- make_dat("ieu-a-300", "ieu-a-7")
 
 Let's do the same with the vcf files (and the indexes). Download from here:
 
-```bash
-wget https://gwas.mrcieu.ac.uk/files/ieu-a-300/ieu-a-300.vcf.gz
-wget https://gwas.mrcieu.ac.uk/files/ieu-a-300/ieu-a-300.vcf.gz.tbi
-wget https://gwas.mrcieu.ac.uk/files/ieu-a-7/ieu-a-7.vcf.gz
-wget https://gwas.mrcieu.ac.uk/files/ieu-a-7/ieu-a-7.vcf.gz.tbi
+```{r}
+if (!file.exists("ieu-a-300.vcf.gz")) {
+  download.file(
+    url = "https://gwas.mrcieu.ac.uk/files/ieu-a-300/ieu-a-300.vcf.gz",
+    destfile = "ieu-a-300.vcf.gz")
+} 
+
+if (!file.exists("ieu-a-300.vcf.gz.tbi")) {
+  download.file(
+    url = "https://gwas.mrcieu.ac.uk/files/ieu-a-300/ieu-a-300.vcf.gz.tbi",
+    destfile = "ieu-a-300.vcf.gz.tbi")
+}
+
+if (!file.exists("ieu-a-7.vcf.gz")) {
+  download.file(
+    url = "https://gwas.mrcieu.ac.uk/files/ieu-a-7/ieu-a-7.vcf.gz",
+    destfile = "ieu-a-7.vcf.gz")
+}
+
+if (!file.exists("ieu-a-7.vcf.gz.tbi")) {
+  download.file(
+    url = "https://gwas.mrcieu.ac.uk/files/ieu-a-7/ieu-a-7.vcf.gz.tbi",
+    destfile = "ieu-a-7.vcf.gz.tbi")
+}
 ```
 
 First get the tophits for LDL cholesterol
