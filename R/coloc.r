@@ -172,7 +172,8 @@ get_type <- function(info, typex)
 			        ". Assuming 'quant' but override using 'type' arguments.")
 			return("quant")			
 		} else {
-			message("No units available but assuming cc due to number of cases being stated")
+			message("No units available but assuming cc due to number of cases ",
+			"being stated")
 			return("cc")
 		}
 	} else {
