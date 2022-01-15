@@ -7,3 +7,7 @@
 ^\.github$
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^vignettes/ieu-a-300\.vcf\.gz$
+^vignettes/ieu-a-300\.vcf\.gz\.tbi$
+^vignettes/ieu-a-7\.vcf\.gz$
+^vignettes/ieu-a-7\.vcf\.gz\.tbi$
