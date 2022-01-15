@@ -59,7 +59,8 @@ print.FinemaprList <- function(x)
 
 #' Generate data for fine mapping analysis
 #'
-#' For a given region and VCF file, extracts the variants in the region along with LD matrix from a reference panel
+#' For a given region and VCF file, extracts the variants in the region along 
+#' with LD matrix from a reference panel
 #'
 #' @param region Region of the genome to extract eg 1:109317192-110317192". Can be array
 #' @param vcf Path to VCF file or VCF object
