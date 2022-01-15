@@ -47,8 +47,18 @@ gwasvcf_to_coloc <- function(vcf1, vcf2, chrompos)
 	tab1$AF[is.na(tab1$AF)] <- 0.5
 	tab2$AF[is.na(tab2$AF)] <- 0.5
 
-	out1 <- tab1[index,] %>% {list(pvalues = 10^-.$LP, N = .$SS, MAF = .$AF, beta = .$ES, varbeta = .$SE^2, type = type1, snp = names(vcf2)[index], z = .$ES / .$SE, chr = .$seqnames, pos = .$start, id = VariantAnnotation::samples(VariantAnnotation::header(vcf1))[1])}
-	out2 <- tab2[index,] %>% {list(pvalues = 10^-.$LP, N = .$SS, MAF = .$AF, beta = .$ES, varbeta = .$SE^2, type = type2, snp = names(vcf2)[index], z = .$ES / .$SE, chr = .$seqnames, pos = .$start, id = VariantAnnotation::samples(VariantAnnotation::header(vcf2))[1])}
+	out1 <- tab1[index,] %>% 
+	  {list(pvalues = 10^-.$LP, N = .$SS, MAF = .$AF, 
+          beta = .$ES, varbeta = .$SE^2, type = type1, 
+          snp = names(vcf2)[index], z = .$ES / .$SE, 
+          chr = .$seqnames, pos = .$start, 
+          id = VariantAnnotation::samples(VariantAnnotation::header(vcf1))[1])}
+	out2 <- tab2[index,] %>% 
+	  {list(pvalues = 10^-.$LP, N = .$SS, MAF = .$AF, 
+	        beta = .$ES, varbeta = .$SE^2, type = type2, 
+	        snp = names(vcf2)[index], z = .$ES / .$SE, chr = .$seqnames, 
+	        pos = .$start, 
+	        id = VariantAnnotation::samples(VariantAnnotation::header(vcf2))[1])}
 
 	if(type1 == "cc")
 	{
