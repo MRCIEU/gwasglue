@@ -66,8 +66,9 @@ print.FinemaprList <- function(x)
 #' Can be array
 #' @param vcf Path to VCF file or VCF object
 #' @param bfile LD reference panel
-#' @param plink_bin Path to plink. Default = [`genetics.binaRies::get_plink_binary()`]
-#' @param threads Number of threads to run in parallel. Default=1
+#' @param plink_bin Path to plink. 
+#' Default = [`genetics.binaRies::get_plink_binary()`]
+#' @param threads Number of threads to run in parallel. Default=`1`
 #'
 #' @export
 #' @return List of datasets for finemapping
