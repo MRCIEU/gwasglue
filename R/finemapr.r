@@ -82,8 +82,9 @@ gwasvcf_to_finemapr <- function(region, vcf, bfile,
 		message(i)
 		m <- list()
 		temp <- gwasvcf::query_gwas(vcf=ext, chrompos=i)
-		m[["ld"]] <- ieugwasr::ld_matrix(names(temp), bfile=bfile, plink_bin=plink_bin, with_alleles=FALSE) %>%
-			greedy_remove()
+		m[["ld"]] <- ieugwasr::ld_matrix(names(temp), bfile=bfile, 
+		                                 plink_bin=plink_bin, 
+		                                 with_alleles=FALSE) %>% greedy_remove()
 		tib <- gwasvcf::vcf_to_tibble(temp)
 		m[["z"]] <- tib %>%
 		subset(rsid %in% rownames(m[["ld"]])) %>%
