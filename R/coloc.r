@@ -88,8 +88,10 @@ gwasvcf_to_coloc <- function(vcf1, vcf2, chrompos)
 #' @return List of datasets to feed into coloc
 ieugwasr_to_coloc <- function(id1, id2, chrompos, type1=NULL, type2=NULL)
 {
-	tab1 <- ieugwasr::associations(id=id1, variants=chrompos) %>% subset(., !duplicated(rsid))
-	tab2 <- ieugwasr::associations(id=id2, variants=chrompos) %>% subset(., !duplicated(rsid))
+	tab1 <- ieugwasr::associations(id=id1, variants=chrompos) %>% 
+	  subset(., !duplicated(rsid))
+	tab2 <- ieugwasr::associations(id=id2, variants=chrompos) %>% 
+	  subset(., !duplicated(rsid))
 	commonsnps <- tab1$rsid[tab1$rsid %in% tab2$rsid]
 	tab1 <- tab1[tab1$rsid %in% commonsnps, ] %>% dplyr::arrange(rsid)
 	tab2 <- tab2[tab2$rsid %in% commonsnps, ] %>% dplyr::arrange(rsid)
