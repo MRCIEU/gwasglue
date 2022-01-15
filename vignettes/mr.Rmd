@@ -102,7 +102,9 @@ expd2 <- gwasglue::gwasvcf_to_TwoSampleMR(expd2, type="exposure")
 Extract those SNPs from the outcome vcf file and convert to TwoSampleMR format
 
 ```{r}
-outd2 <- gwasvcf::query_gwas("ieu-a-7.vcf.gz", chrompos = paste0(expd1$chr.exposure, ":", expd1$pos.exposure))
+outd2 <- gwasvcf::query_gwas("ieu-a-7.vcf.gz", 
+                             chrompos = paste0(expd1$chr.exposure, 
+                                               ":", expd1$pos.exposure))
 outd2 <- gwasglue::gwasvcf_to_TwoSampleMR(outd2, "outcome")
 ```
 
