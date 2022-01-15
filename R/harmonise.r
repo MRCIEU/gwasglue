@@ -334,7 +334,7 @@ check_null <- function(x, n)
 #' Generic harmonisation function
 #'
 #' Assumes ref and alt alleles available for target and reference datasets, 
-#' and uses chr:pos for alignment
+#' and uses chr:pos for alignment.
 #'
 #' 0: stick
 #' 1: swap
