@@ -41,7 +41,8 @@ clump_gwasvcf <- function(vcf, clump_kb=1000, clump_r2=0.001, clump_p=5e-8,
 	} else {
 		fn <- function(dat)
 		{
-			ieugwasr::ld_clump(dat, clump_kb=clump_kb, clump_r2=clump_r2, clump_p=clump_p, bfile=bfile, plink_bin=plink_bin)
+			ieugwasr::ld_clump(dat, clump_kb=clump_kb, clump_r2=clump_r2, 
+			                   clump_p=clump_p, bfile=bfile, plink_bin=plink_bin)
 		}
 	}
 
