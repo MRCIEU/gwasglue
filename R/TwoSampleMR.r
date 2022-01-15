@@ -83,7 +83,7 @@ gwasvcf_to_TwoSampleMR <- function(vcf, type="exposure")
 #' @param proxies Lookup proxies? default=`TRUE` but requires either bfile or 
 #' proxydb to be set
 #' @param nthreads Parellelise default=`1`
-#' @param vcfdir Location of vcf files if id1 and id2 are just IDs. 
+#' @param vcfdir Location of vcf files if id1 and id2 are just IDs. \cr
 #' Defaults to `options()$gwasglue.vcfdir`
 #' @param proxydb Location of LD proxy database. 
 #' Default=`options()$gwasglue.proxydb`
