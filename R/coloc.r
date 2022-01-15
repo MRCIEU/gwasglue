@@ -117,7 +117,9 @@ ieugwasr_to_coloc <- function(id1, id2, chrompos, type1=NULL, type2=NULL)
 	s <- sum(is.na(tab2$eaf))
 	if(s > 0)
 	{
-		warning(s, " out of ", nrow(tab2), " variants have missing allele frequencies in ", id2, ". Setting to 0.5")
+		warning(s, " out of ", nrow(tab2), 
+		        " variants have missing allele frequencies in ", id2, 
+		        ". Setting to 0.5")
 		tab2$eaf[is.na(tab2$eaf)] <- 0.5
 	}
 
