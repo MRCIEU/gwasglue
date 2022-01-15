@@ -18,30 +18,42 @@ make_TwoSampleMR_dat(
 )
 }
 \arguments{
-\item{id1}{Exposure datasets. Either an array of vcf files, or array of IDs if vcfdir is set}
+\item{id1}{Exposure datasets. Either an array of vcf files,
+or array of IDs if vcfdir is set}
 
-\item{id2}{Outcome datasets. Either an array of vcf files, or array of IDs if vcfdir is set}
+\item{id2}{Outcome datasets. Either an array of vcf files,
+or array of IDs if vcfdir is set}
 
-\item{proxies}{Lookup proxies? default=TRUE but requires either bfile or proxydb to be set}
+\item{proxies}{Lookup proxies? default=\code{TRUE} but requires either bfile or
+proxydb to be set}
 
-\item{nthreads}{Parellelise default=1}
+\item{nthreads}{Parellelise default=\code{1}}
 
-\item{vcfdir}{Location of vcf files if id1 and id2 are just IDs. Defaults to options()$gwasglue.vcfdir}
+\item{vcfdir}{Location of vcf files if id1 and id2 are just IDs. \cr
+Defaults to \code{options()$gwasglue.vcfdir}}
 
-\item{proxydb}{Location of LD proxy database Default=options()$gwasglue.proxydb}
+\item{proxydb}{Location of LD proxy database.
+Default=\code{options()$gwasglue.proxydb}}
 
-\item{rsidx}{Location of rsidx index database Default=options()$gwasglue.rsidx}
+\item{rsidx}{Location of rsidx index database.
+Default=\code{options()$gwasglue.rsidx}}
 
-\item{bfile}{Location of LD reference panel Default=options()$gwasglue.bfile}
+\item{bfile}{Location of LD reference panel.
+Default=\code{options()$gwasglue.bfile}}
 
-\item{action}{action argument passed to \code{\link[TwoSampleMR:harmonise_data]{TwoSampleMR::harmonise_data}}. The level of strictness in dealing with SNPs.}
+\item{action}{action argument passed to \code{\link[TwoSampleMR:harmonise_data]{TwoSampleMR::harmonise_data}}.
+The level of strictness in dealing with SNPs.}
 
-\item{plink_bin}{Path to plink. Default = \code{\link[genetics.binaRies:get_plink_binary]{genetics.binaRies::get_plink_binary}}}
+\item{plink_bin}{Path to plink.
+Default = \code{\link[genetics.binaRies:get_plink_binary]{genetics.binaRies::get_plink_binary}}}
 }
 \value{
 harmonised dataset
 }
 \description{
-This mimics the TwoSampleMR::make_dat function, which automatically looks up exposure and outcome datasets and harmonises them, except this function uses GWAS-VCF datasets instead.
-The supporting reference datasets can be accessed by UoB users on BC4 using set_bc4_files()
+This mimics the \code{\link[TwoSampleMR:make_dat]{TwoSampleMR::make_dat}} function, which automatically looks
+up exposure and outcome datasets and harmonises them,
+except this function uses GWAS-VCF datasets instead.
+The supporting reference datasets can be accessed by UoB users on BC4
+using \code{\link[=set_bc4_files]{set_bc4_files()}}
 }

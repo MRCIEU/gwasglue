@@ -27,10 +27,11 @@ is_forward_strand(
 
 \item{ref_a2}{Vector of alleles}
 
-\item{threshold}{=0.9 If the proportion of allele strands match is above this threshold, then declare the dataset to be on the forward strand}
+\item{threshold}{Default=\code{0.9} If the proportion of allele strands match is
+above this threshold, then declare the dataset to be on the forward strand}
 }
 \value{
-1 = Forward strand; 2 = Not on forward strand
+\code{1} = Forward strand; \code{2} = Not on forward strand
 }
 \description{
 Assuming reference data is all on forward strand, check if
@@ -41,6 +42,9 @@ the forward strand
 }
 \details{
 This function can be used to evaluate how strict harmonisation should be
-The trade off if you assume we are not on the forward strand then palindromic SNPs are dropped within a particular frequency range
-But you could instead have some small probability of error for whether palindromic SNPs are on the forward strand, and avoid dropping too many variants.
+The trade off if you assume we are not on the forward strand then
+palindromic SNPs are dropped within a particular frequency range
+But you could instead have some small probability of error for whether
+palindromic SNPs are on the forward strand, and avoid dropping too many
+variants.
 }

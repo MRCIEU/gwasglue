@@ -22,33 +22,34 @@ read_gwas(
 )
 }
 \arguments{
-\item{filename}{<what param does>}
+\item{filename}{Filename}
 
-\item{skip}{<what param does>}
+\item{skip}{Option passed to \code{\link[data.table:fread]{data.table::fread}}}
 
-\item{delimiter}{<what param does>}
+\item{delimiter}{The separator between columns in the file}
 
-\item{gzipped}{<what param does>}
+\item{gzipped}{Logical indicating whether the file is compressed in gz format}
 
-\item{snp}{<what param does>}
+\item{snp}{Numeric indicating column number with SNP name}
 
-\item{nea}{<what param does>}
+\item{nea}{Numeric indicating column number with NEA}
 
-\item{ea}{<what param does>}
+\item{ea}{Numeric indicating column number with effect allele}
 
-\item{ea_af}{<what param does>}
+\item{ea_af}{Numeric indicating column number with effect allele
+allele frequency}
 
-\item{effect}{<what param does>}
+\item{effect}{Numeric indicating column number with effect}
 
-\item{se}{<what param does>}
+\item{se}{Numeric indicating column number with standard error of effect}
 
-\item{pval}{<what param does>}
+\item{pval}{Numeric indicating column number with p-value of effect}
 
-\item{n}{<what param does>}
+\item{n}{Numeric indicating column number with sample size}
 
-\item{info}{<what param does>}
+\item{info}{Numeric indicating column number with info}
 
-\item{z}{<what param does>}
+\item{z}{Numeric indicating column number with z statistic of effect}
 }
 \value{
 data frame with log attributes

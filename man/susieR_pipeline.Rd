@@ -25,17 +25,22 @@ susieR_pipeline(
 
 \item{pop}{EUR, ASN or AFR}
 
-\item{clump_kb}{<what param does>}
+\item{threads}{Numeric indicating number of threads. Default \code{1}}
 
-\item{clump_r2}{<what param does>}
+\item{clump_kb}{Numeric indicating kilobases used in clumping.
+Default \code{1000}}
 
-\item{clump_p}{<what param does>}
+\item{clump_r2}{Numeric indicating R-squared used in clumping.
+Default \code{0.001}}
 
-\item{...}{Optional arguments to be passed to susie_rss}
+\item{clump_p}{Numeric indicating clumping p-value. Default \code{5e-8}}
+
+\item{...}{Optional arguments to be passed to \code{\link[susieR:susie_rss]{susieR::susie_rss}}}
 }
 \value{
 List
 }
 \description{
-Clumps data, then maps those to LD representative regions. Within each detected LD representative region, fine mapping is performed
+Clumps data, then maps those to LD representative regions. Within each
+detected LD representative region, fine mapping is performed.
 }

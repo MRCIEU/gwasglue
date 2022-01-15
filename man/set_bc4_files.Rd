@@ -8,6 +8,6 @@ set_bc4_files()
 }
 \description{
 This is a convenience function for members at the University of Bristol
-to automatically set file locations for various reference datasets. It relates
-only to paths on bc4
+to automatically set file locations for various reference datasets.
+It relates only to paths on bc4.
 }

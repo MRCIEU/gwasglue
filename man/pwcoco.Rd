@@ -22,19 +22,22 @@ pwcoco(
 
 \item{bfile}{LD reference panel in Plink format (.bed, .bim, .fam)}
 
-\item{chrompos}{Chromosome position (format: chr:pos1-pos2) region of interest}
+\item{chrompos}{Chromosome position (format: chr:pos1-pos2) region of
+interest}
 
 \item{pwcoco}{Path to pwcoco binary}
 
-\item{type1}{How to treat vcffile1 for coloc, either "quant" or "cc"}
+\item{type1}{How to treat vcffile1 for coloc, either \code{"quant"} or \code{"cc"}}
 
-\item{type2}{How to treat vcffile2 for coloc, either "quant" or "cc"}
+\item{type2}{How to treat vcffile2 for coloc, either \code{"quant"} or \code{"cc"}}
 
-\item{workdir}{Location to store files, default=tempdir()}
+\item{workdir}{Location to store files, default=\code{tempdir()}}
 }
 \value{
 List of colocalisation results
 }
 \description{
-For a list of fine-mapped rsids, will assign to regions and generate colocalisation results for conditionally independent summary stats for each rsid
+For a list of fine-mapped rsids, will assign to regions and generate
+colocalisation results for conditionally independent summary stats for each
+rsid
 }

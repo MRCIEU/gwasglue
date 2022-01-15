@@ -13,9 +13,11 @@ ieugwasr_to_coloc(id1, id2, chrompos, type1 = NULL, type2 = NULL)
 
 \item{chrompos}{Character of chr:pos1-pos2}
 
-\item{type1}{Provide "cc" or "quant" to override automatic lookup of trait type for trait 1}
+\item{type1}{Provide \code{"cc"} or \code{"quant"} to override automatic lookup of
+trait type for trait 1}
 
-\item{type2}{Provide "cc" or "quant" to override automatic lookup of trait type for trait 2}
+\item{type2}{Provide \code{"cc"} or \code{"quant"} to override automatic lookup of
+trait type for trait 2}
 }
 \value{
 List of datasets to feed into coloc

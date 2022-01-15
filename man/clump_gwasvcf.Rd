@@ -18,19 +18,26 @@ clump_gwasvcf(
 \arguments{
 \item{vcf}{VCF file or VCF object}
 
-\item{clump_kb}{Clumping kb window. Default is very strict, 10000}
+\item{clump_kb}{Clumping kb window. Default is very strict, \code{10000}}
 
-\item{clump_r2}{Clumping r2 threshold. Default is very strict, 0.001}
+\item{clump_r2}{Clumping r2 threshold. Default is very strict, \code{0.001}}
 
-\item{clump_p}{Clumping sig level for index variants. Default = 1 (i.e. no threshold)}
+\item{clump_p}{Clumping sig level for index variants. Default = \code{1}
+(i.e. no threshold)}
 
-\item{pop}{Super-population to use as reference panel. Default = "EUR". Options are EUR, SAS, EAS, AFR, AMR. 'legacy' also available - which is a previously used verison of the EUR panel with a slightly different set of markers}
+\item{pop}{Super-population to use as reference panel. Default = \code{"EUR"}.
+Options are \code{"EUR"}, \code{"SAS"}, \code{"EAS"}, \code{"AFR"}, \code{"AMR"}.
+\code{'legacy'} also available - which is a previously used verison of the EUR
+panel with a slightly different set of markers}
 
-\item{bfile}{If this is provided then will use the API. Default = NULL}
+\item{bfile}{If this is provided then will use the API. Default = \code{NULL}}
 
-\item{plink_bin}{If null and bfile is not null then will detect packaged plink binary for specific OS. Otherwise specify path to plink binary. Default = NULL}
+\item{plink_bin}{If \code{NULL} and bfile is not \code{NULL} then will detect packaged
+plink binary for specific OS. Otherwise specify path to plink binary.
+Default = \code{NULL}}
 
-\item{access_token}{Google OAuth2 access token. Used to authenticate level of access to data}
+\item{access_token}{Google OAuth2 access token. Used to authenticate level
+of access to data}
 }
 \value{
 data frame of clumped results

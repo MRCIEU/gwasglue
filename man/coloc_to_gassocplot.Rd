@@ -7,11 +7,13 @@
 coloc_to_gassocplot(coloclist, bfile = NULL, plink_bin = NULL)
 }
 \arguments{
-\item{coloclist}{Output from *_to_coloc}
+\item{coloclist}{Output from \code{\link{gwasvcf_to_coloc}}/\code{\link{ieugwasr_to_coloc}}}
 
-\item{bfile}{If number of SNPs > 500 then need to provide your own LD reference panel. Provide plink dataset here.}
+\item{bfile}{If number of SNPs > 500 then need to provide your own LD
+reference panel. Provide plink dataset here.}
 
-\item{plink_bin}{If number of SNPs > 500 then need to provide your own LD reference panel. Provide plink executable here}
+\item{plink_bin}{If number of SNPs > 500 then need to provide your own LD
+reference panel. Provide plink executable here}
 }
 \value{
 List to feed into gassocplot

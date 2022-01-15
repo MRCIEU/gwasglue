@@ -15,5 +15,6 @@ map_variants_to_regions(chrpos, pop)
 
 }
 \description{
-LD regions defined here https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4731402/
+LD regions defined here
+\url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4731402/}
 }

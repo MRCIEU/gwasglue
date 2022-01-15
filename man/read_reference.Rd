@@ -18,7 +18,7 @@ read_reference(
 
 \item{chrompos}{List of chrompos to read}
 
-\item{remove_dup_rsids}{=TRUE Remove duplicates from output}
+\item{remove_dup_rsids}{=\code{TRUE} Remove duplicates from output}
 }
 \value{
 data frame

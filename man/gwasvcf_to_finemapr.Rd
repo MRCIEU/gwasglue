@@ -13,19 +13,22 @@ gwasvcf_to_finemapr(
 )
 }
 \arguments{
-\item{region}{Region of the genome to extract eg 1:109317192-110317192". Can be array}
+\item{region}{Region of the genome to extract eg \code{1:109317192-110317192}
+Can be array}
 
 \item{vcf}{Path to VCF file or VCF object}
 
 \item{bfile}{LD reference panel}
 
-\item{plink_bin}{Path to plink. Default = \code{\link[genetics.binaRies:get_plink_binary]{genetics.binaRies::get_plink_binary()}}}
+\item{plink_bin}{Path to plink.
+Default = \code{\link[genetics.binaRies:get_plink_binary]{genetics.binaRies::get_plink_binary()}}}
 
-\item{threads}{Number of threads to run in parallel. Default=1}
+\item{threads}{Number of threads to run in parallel. Default=\code{1}}
 }
 \value{
 List of datasets for finemapping
 }
 \description{
-For a given region and VCF file, extracts the variants in the region along with LD matrix from a reference panel
+For a given region and VCF file, extracts the variants in the region along
+with LD matrix from a reference panel
 }

@@ -7,9 +7,9 @@
 harmonise_against_ref(gwas, reference)
 }
 \arguments{
-\item{gwas}{<what param does>}
+\item{gwas}{data.frame indicating GWAS}
 
-\item{reference}{<what param does>}
+\item{reference}{data.frame indicating reference dataset}
 }
 \value{
 data frame with attributes

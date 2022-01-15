@@ -9,15 +9,18 @@ ieugwasr_to_finemapr(region, id, bfile = NULL, plink_bin = NULL)
 \arguments{
 \item{region}{Region of the genome to extract eg 1:109317192-110317192"}
 
-\item{id}{Array of GWAS studies to query. See \code{gwasinfo} for available studies}
+\item{id}{Array of GWAS studies to query. See \code{\link[ieugwasr:gwasinfo]{ieugwasr::gwasinfo}}
+for available studies}
 
-\item{bfile}{If this is provided then will use the API. Default = NULL}
+\item{bfile}{If this is provided then will use the API. Default = \code{NULL}}
 
-\item{plink_bin}{If null and bfile is not null then will detect packaged plink binary for specific OS. Otherwise specify path to plink binary. Default = NULL}
+\item{plink_bin}{If \code{NULL} and bfile is not \code{NULL} then will detect packaged
+plink binary for specific OS. Otherwise specify path to plink binary.
+Default = \code{NULL}}
 }
 \value{
 Each id will be a list of z score data, ld matrix, and sample size
 }
 \description{
-Uses the finemapr package https://github.com/variani/finemapr
+Uses the finemapr package \url{https://github.com/variani/finemapr}.
 }

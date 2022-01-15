@@ -7,10 +7,11 @@
 write_out(harmonised, path)
 }
 \arguments{
-\item{harmonised}{Output from /code{harmonise_against_ref}}
+\item{harmonised}{Output from \code{\link{harmonise_against_ref}}}
 
 \item{path}{Path to write out json file and txt file}
 }
 \description{
-Takes raw files and aligns them to reference. Important if files don't have chr:pos already
+Takes raw files and aligns them to reference. Important if files don't have
+chr:pos already
 }

@@ -2,18 +2,22 @@
 % Please edit documentation in R/TwoSampleMR.r
 \name{organise_ids}
 \alias{organise_ids}
-\title{Figure out specific files and IDs depending on what files exist and whethet vcfdir is set}
+\title{Figure out specific files and IDs depending on what files exist and whether
+vcfdir is set}
 \usage{
 organise_ids(id, vcfdir)
 }
 \arguments{
-\item{id}{List of IDs within the vcfdir structure, or a list of GWAS VCF files, or a mixture}
+\item{id}{List of IDs within the vcfdir structure,
+or a list of GWAS VCF files, or a mixture}
 
-\item{vcfdir}{Location of GWAS VCF files, or NULL if id is a list of actual files}
+\item{vcfdir}{Location of GWAS VCF files,
+or \code{NULL} if id is a list of actual files}
 }
 \value{
 File paths to all datasets
 }
 \description{
-Figure out specific files and IDs depending on what files exist and whethet vcfdir is set
+Figure out specific files and IDs depending on what files exist and whether
+vcfdir is set
 }

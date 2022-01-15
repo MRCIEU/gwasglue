@@ -23,15 +23,17 @@ cojo_cond(
 
 \item{pop}{EUR, ASN or AFR}
 
-\item{gcta}{Path to gcta binary. For convenience can use default=genetics.binaRies::get_gcta_binary()}
+\item{gcta}{Path to gcta binary. \cr
+For convenience can use default=\code{genetics.binaRies::get_gcta_binary()}}
 
-\item{workdir}{Location to store temporary files. Default=tempdir()}
+\item{workdir}{Location to store temporary files. Default=\code{tempdir()}}
 
-\item{threads}{Number of parallel threads. Default=1}
+\item{threads}{Number of parallel threads. Default=\code{1}}
 }
 \value{
 List of independent summary stats
 }
 \description{
-For a list of fine-mapped rsids, will assign to regions and generate conditionally independent summary stats for each rsid
+For a list of fine-mapped rsids, will assign to regions and generate
+conditionally independent summary stats for each rsid.
 }

@@ -9,7 +9,7 @@ gwasvcf_to_TwoSampleMR(vcf, type = "exposure")
 \arguments{
 \item{vcf}{VCF object}
 
-\item{type}{="exposure" or "outcome"}
+\item{type}{=\code{"exposure"} or \code{"outcome"}}
 }
 \value{
 data frame

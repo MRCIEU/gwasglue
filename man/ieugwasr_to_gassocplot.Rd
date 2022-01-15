@@ -7,7 +7,7 @@
 ieugwasr_to_gassocplot(chrpos, id)
 }
 \arguments{
-\item{chrpos}{A window range to plot e.g. 16:3349655-3849655}
+\item{chrpos}{A window range to plot e.g. \code{16:3349655-3849655}}
 
 \item{id}{Vector of one or more IEU GWAS db study IDs}
 }
@@ -15,5 +15,6 @@ ieugwasr_to_gassocplot(chrpos, id)
 assoc_plot or stack_assoc_plot if multiple markers given
 }
 \description{
-Uses James Staley's gassocplot package https://github.com/jrs95/gassocplot
+Uses James Staley's gassocplot package
+\url{https://github.com/jrs95/gassocplot}
 }

@@ -9,7 +9,7 @@ ieugwasr_to_TwoSampleMR(x, type = "exposure")
 \arguments{
 \item{x}{Output from ieugwasr query e.g. associations, tophits, phewas}
 
-\item{type}{"exposure" (default) or "outcome"}
+\item{type}{\code{"exposure"} (default) or \code{"outcome"}}
 }
 \value{
 data frame

@@ -13,14 +13,14 @@ gwasvcf_to_pwcoco(vcf1, vcf2, chrompos, type1 = NULL, type2 = NULL, outfile)
 
 \item{chrompos}{Character of the format chr:pos1-pos2}
 
-\item{type1}{How to treat vcffile1 for coloc, either "quant" or "cc"}
+\item{type1}{How to treat vcffile1 for coloc, either \code{"quant"} or \code{"cc"}}
 
-\item{type2}{How to treat vcffile2 for coloc, either "quant" or "cc"}
+\item{type2}{How to treat vcffile2 for coloc, either \code{"quant"} or \code{"cc"}}
 
 \item{outfile}{Path to output files, without file ending}
 }
 \value{
-0 if success, 1 if there was a problem
+\code{0} if success, \code{1} if there was a problem
 }
 \description{
 Write files for PWCoCo where data are read from two VCF objects or files.

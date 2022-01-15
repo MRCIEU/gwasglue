@@ -37,15 +37,17 @@ harmonise(
 
 \item{rsid2}{Optional vector}
 
-\item{indel_recode}{=FALSE. If TRUE then attempts to recode D/I}
+\item{indel_recode}{default=\code{FALSE}. If \code{TRUE} then attempts to recode D/I}
 
-\item{strand_flip}{=FALSE. If TRUE then attempts to flip strand when alignment is not otherwise possible}
+\item{strand_flip}{default=\code{FALSE}. If \code{TRUE} then attempts to flip strand
+when alignment is not otherwise possible}
 }
 \value{
 Dataframe of outcomes
 }
 \description{
-Assumes ref and alt alleles available for target and reference datasets, and uses chr:pos for alignment
+Assumes ref and alt alleles available for target and reference datasets,
+and uses chr:pos for alignment.
 }
 \details{
 0: stick
