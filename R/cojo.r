@@ -97,7 +97,8 @@ cojo_cond <- function(vcffile, bfile, snplist, pop,
 		m <- list()
 		y <- gwasvcf::query_gwas(vcf, chrompos=i)
 		extract_list <- names(y)
-		write.table(extract_list, file=file.path(workdir, "extract.txt"), row.names = FALSE, col.names = FALSE, quote = FALSE)
+		write.table(extract_list, file=file.path(workdir, "extract.txt"), 
+		            row.names = FALSE, col.names = FALSE, quote = FALSE)
 		for(j in x$variant)
 		{
 			message(j)
