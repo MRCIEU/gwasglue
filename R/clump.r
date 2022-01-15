@@ -18,7 +18,9 @@
 #'
 #' @export
 #' @return data frame of clumped results
-clump_gwasvcf <- function(vcf, clump_kb=1000, clump_r2=0.001, clump_p=5e-8, pop=NULL, bfile=NULL, plink_bin=NULL, access_token=NULL)
+clump_gwasvcf <- function(vcf, clump_kb=1000, clump_r2=0.001, clump_p=5e-8, 
+                          pop=NULL, bfile=NULL, plink_bin=NULL, 
+                          access_token=NULL)
 {
 	message("Applying threshold to vcf")
 	sig <- gwasvcf::query_gwas(vcf, pval=clump_p)
