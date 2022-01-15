@@ -108,7 +108,8 @@ cojo_cond <- function(vcffile, bfile, snplist, pop,
 			cmd <- glue::glue("{gcta} --bfile {bfile} --extract {file.path(workdir, 'extract.txt')} --cojo-file {file.path(workdir, 'sum.txt')} --cojo-cond {file.path(workdir, 'cond.txt')} --out {file.path(workdir, 'out')}")
 			system(cmd)
 			res <- data.table::fread(file.path(workdir, 'out.cma.cojo'))
-			m[[j]] <- dplyr::select(res, rsid=SNP, chr=Chr, pos=bp, alt=refA, ES=bC, SE=bC_se, pval=pC, n=n)
+			m[[j]] <- dplyr::select(res, rsid=SNP, chr=Chr, pos=bp, alt=refA, ES=bC, 
+			                        SE=bC_se, pval=pC, n=n)
 		}
 		return(m)
 	}, mc.cores=threads)
