@@ -1,6 +1,6 @@
 #' Generate data for analysis in various finemapping methods
 #'
-#' Uses the finemapr package https://github.com/variani/finemapr
+#' Uses the finemapr package \url{https://github.com/variani/finemapr}.
 #'
 #' @param region Region of the genome to extract eg 1:109317192-110317192"
 #' @param id Array of GWAS studies to query. See \code{gwasinfo} for available studies
