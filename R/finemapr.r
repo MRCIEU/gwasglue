@@ -107,7 +107,9 @@ greedy_remove <- function(ld)
 	{
 		return(ld)
 	}
-	tab <- table(ind) %>% sort(decreasing=TRUE) %>% as.data.frame(stringsAsFactors=FALSE)
+	tab <- table(ind) %>% 
+	  sort(decreasing=TRUE) %>% 
+	  as.data.frame(stringsAsFactors=FALSE)
 	rem <- c()
 	for(i in 1:nrow(tab))
 	{
