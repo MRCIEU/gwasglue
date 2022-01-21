@@ -35,7 +35,7 @@ The figure above depicts a set of packages that we plan to connect to. Here is a
 
 #### Mendelian randomization
 - [TwoSampleMR](https://github.com/mrcieu/TwoSampleMR)
-- [MendelianRandomization](https://cran.r-project.org/web/packages/MendelianRandomization/index.html) - port from TwoSampleMR
+- [MendelianRandomization](https://cran.r-project.org/package=MendelianRandomization) - port from TwoSampleMR
 - [RadialMR](https://github.com/WSpiller/RadialMR) - port from TwoSampleMR
 - [MRPRESSO](https://github.com/rondolab/MR-PRESSO) - port from TwoSampleMR
 - [GSMR](http://cnsgenomics.com/software/gsmr/) - TODO
