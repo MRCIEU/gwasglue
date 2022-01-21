@@ -1,5 +1,4 @@
 context("coloc")
-library(gwasglue)
 
 skip_if_not_installed("VariantAnnotation")
 library(VariantAnnotation)
