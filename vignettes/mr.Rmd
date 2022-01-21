@@ -188,8 +188,8 @@ Examples of formats that you can convert to within TwoSampleMR:
 - [MR-PRESSO](https://github.com/rondolab/MR-PRESSO)
 - [RadialMR](https://github.com/WSpiller/RadialMR)
 - [MRMix](https://github.com/gqi/MRMix/)
-- [MendelianRandomization](https://cran.r-project.org/web/packages/MendelianRandomization/index.html)
 - [MR-RAPS](https://cran.r-project.org/web/packages/mr.raps/)
+- [MendelianRandomization](https://cran.r-project.org/package=MendelianRandomization)
 
 
 
