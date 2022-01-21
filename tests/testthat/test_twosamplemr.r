@@ -1,6 +1,5 @@
 context("TwoSampleMR")
 
-
 test_that("gwasvcf_to_TwoSampleMR", {
   skip_if_not_installed("S4Vectors")
 	fn <- system.file("extdata","data.vcf.gz", package="gwasvcf")
@@ -8,7 +7,6 @@ test_that("gwasvcf_to_TwoSampleMR", {
 	exposure_dat <- gwasvcf_to_TwoSampleMR(vcf1)
 	expect_true(nrow(exposure_dat) == nrow(vcf1))
 })
-
 
 test_that("ieugwasr_to_TwoSampleMR", {
 	a <- ieugwasr::tophits("ieu-a-2")
@@ -20,4 +18,3 @@ test_that("ieugwasr_to_TwoSampleMR", {
 	expect_true(nrow(exposure_dat) == nrow(dat))
 	expect_true(nrow(out) > 3)
 })
-
