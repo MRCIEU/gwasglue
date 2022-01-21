@@ -11,6 +11,8 @@ Description: Many tools exist that use GWAS summary data for
     colocalisation, fine mapping, Mendelian randomization, visualisation,
     etc. This package is a conduit that connects R packages that can
     retrieve GWAS summary data to various tools for analysing those data.
+    This package is part of the MRC Integrative Epidemiology Unit OpenGWAS
+    system.
 License: MIT + file LICENSE
 URL: https://github.com/MRCIEU/gwasglue
 BugReports: https://github.com/MRCIEU/gwasglue/issues
