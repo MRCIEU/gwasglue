@@ -2,6 +2,7 @@ context("TwoSampleMR")
 
 
 test_that("gwasvcf_to_TwoSampleMR", {
+  skip_if_not_installed("S4Vectors")
 	fn <- system.file("extdata","data.vcf.gz", package="gwasvcf")
 	vcf1 <- VariantAnnotation::readVcf(fn)
 	exposure_dat <- gwasvcf_to_TwoSampleMR(vcf1)
