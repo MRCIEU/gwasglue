@@ -27,6 +27,7 @@ Imports:
     testthat,
     TwoSampleMR
 Suggests: 
+    coloc,
     covr,
     finemapr,
     gassocplot,
