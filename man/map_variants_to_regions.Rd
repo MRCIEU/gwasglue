@@ -12,7 +12,7 @@ map_variants_to_regions(chrpos, pop)
 \item{pop}{EUR, AFR or ASN}
 }
 \value{
-
+data.frame with columns \code{variant} and \code{region}
 }
 \description{
 LD regions defined here
