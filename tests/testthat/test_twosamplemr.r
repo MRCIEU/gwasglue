@@ -1,5 +1,4 @@
 context("TwoSampleMR")
-library(gwasglue)
 
 
 test_that("gwasvcf_to_TwoSampleMR", {
