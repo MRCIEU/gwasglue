@@ -42,6 +42,3 @@ test_that("coloc ieugwasr 2", {
 	out <- expect_warning(ieugwasr_to_coloc("ieu-a-2", "eqtl-a-ENSG00000162366", chrpos))
 	res <- expect_warning(coloc::coloc.abf(out$dataset1, out$dataset2))
 })
-
-
-
