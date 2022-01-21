@@ -29,6 +29,7 @@ Imports:
     RadialMR,
     susieR,
     testthat,
+    tidyr,
     TwoSampleMR
 Suggests: 
     coloc,
