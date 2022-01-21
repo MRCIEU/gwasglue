@@ -17,8 +17,6 @@ test_that("ieugwasr1", {
 	expect_true("gtable" %in% class(b))
 })
 
-
-
 test_that("ieugwasr2", {
 
 	a <- ieugwasr_to_gassocplot(chrpos, c("ieu-a-2", "ieu-a-7"))
@@ -31,4 +29,3 @@ test_that("ieugwasr2", {
 	expect_true("gtable" %in% class(b))
 
 })
-
