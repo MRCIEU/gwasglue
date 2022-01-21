@@ -1,7 +1,6 @@
 context("finemapr")
 library(ieugwasr)
 
-
 test_that("ieugwasr_to_finemapr", {
 	v <- ieugwasr::variants_rsid("rs7528419")
 	r <- paste0(v[["chr"]], ":", v[["pos"]]-100000, "-", v[["pos"]]+100000)
@@ -13,4 +12,3 @@ test_that("ieugwasr_to_finemapr", {
 	# library(dplyr)
 	# finemapr::run_caviar(a[["IEU-a-7"]]$z, a[["IEU-a-7"]]$ld, args = "-c 3")
 })
-
