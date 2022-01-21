@@ -16,6 +16,7 @@ Depends:
 Imports:
     dplyr,
     gwasvcf,
+    genetics.binaRies,
     ieugwasr,
     magrittr,
     MendelianRandomization,
@@ -38,6 +39,7 @@ VignetteBuilder:
     knitr
 Remotes:
     bioc::release/VariantAnnotation,
+    explodecomputer/genetics.binaRies,
     gqi/MRMix,
     jrs95/gassocplot,
     mrcieu/gwasvcf,
