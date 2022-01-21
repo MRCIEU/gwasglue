@@ -18,6 +18,7 @@ Imports:
     dplyr,
     gwasvcf,
     genetics.binaRies,
+    glue,
     ieugwasr,
     magrittr,
     MendelianRandomization,
