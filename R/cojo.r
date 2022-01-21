@@ -27,7 +27,7 @@ cojo_sumstat_file <- function(vcffile, outfile)
 #' @param pop EUR, AFR or ASN
 #'
 #' @export
-#' @return
+#' @return data.frame with columns `variant` and `region`
 map_variants_to_regions <- function(chrpos, pop)
 {
 	regionfile <- system.file("extdata", "ldetect", paste0(pop, ".bed"), 
