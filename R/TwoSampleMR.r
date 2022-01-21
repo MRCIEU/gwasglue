@@ -38,7 +38,7 @@ ieugwasr_to_TwoSampleMR <- function(x, type="exposure")
 gwasvcf_to_TwoSampleMR <- function(vcf, type="exposure")
 {
 	a <- vcf %>% gwasvcf::vcf_to_granges()
-	if (requireNamespace("S4Vectors", quietly = TRUE)) {
+	if (!requireNamespace("S4Vectors", quietly = TRUE)) {
 	  stop("Package \"S4Vectors\" must be installed to use this function.",
 	       call. = FALSE)
 	}
