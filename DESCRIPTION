@@ -14,6 +14,7 @@ BugReports: https://github.com/MRCIEU/gwasglue/issues
 Depends: 
     R (>= 3.6.0)
 Imports:
+    data.table,
     dplyr,
     gwasvcf,
     genetics.binaRies,
