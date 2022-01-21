@@ -34,6 +34,7 @@ Suggests:
     gassocplot,
     knitr,
     rmarkdown,
+    S4Vectors,
     VariantAnnotation
 VignetteBuilder: 
     knitr

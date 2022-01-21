@@ -38,6 +38,10 @@ ieugwasr_to_TwoSampleMR <- function(x, type="exposure")
 gwasvcf_to_TwoSampleMR <- function(vcf, type="exposure")
 {
 	a <- vcf %>% gwasvcf::vcf_to_granges()
+	if (requireNamespace("S4Vectors", quietly = TRUE)) {
+	  stop("Package \"S4Vectors\" must be installed to use this function.",
+	       call. = FALSE)
+	}
 	S4Vectors::mcols(a)[["SNP"]] <- names(a)
 	a <- dplyr::as_tibble(a)
 	if(!"ES" %in% names(a)) a[["ES"]] <- NA
