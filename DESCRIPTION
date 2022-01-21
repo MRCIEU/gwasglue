@@ -20,6 +20,7 @@ Imports:
     genetics.binaRies,
     glue,
     ieugwasr,
+    jsonlite,
     magrittr,
     MendelianRandomization,
     mr.raps,
