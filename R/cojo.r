@@ -77,6 +77,12 @@ cojo_cond <- function(vcffile, bfile, snplist, pop,
 	message("Formatting sumstats")
 	vcf <- cojo_sumstat_file(vcffile, file.path(workdir, "sum.txt"))
 
+	if (!requireNamespace("SummarizedExperiment", quietly = TRUE)) {
+	  stop(
+	    "Package \"SummarizedExperiment\" must be installed to use this function.",
+	    call. = FALSE
+	  )
+	}
 	ext <- vcf[names(vcf) %in% snplist] %>%
 		SummarizedExperiment::rowRanges() 
 	chrpos <- paste0(SummarizedExperiment::seqnames(ext), ":", 
