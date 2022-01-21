@@ -28,7 +28,7 @@ The figure above depicts a set of packages that we plan to connect to. Here is a
 - [JAM](https://github.com/pjnewcombe/R2BGLiMS) - TODO
 
 #### Colocalisation
-- [coloc](https://cloud.r-project.org/web/packages/coloc/index.html)
+- [coloc](https://cran.r-project.org/package=coloc)
 - [HEIDI](http://cnsgenomics.com/software/gsmr/) - TODO
 - [eCAVIAR](https://github.com/fhormoz/caviar) - TODO
 - [S-Predixcan](https://github.com/hakyimlab/MetaXcan) - TODO
