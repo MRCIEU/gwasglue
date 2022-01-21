@@ -42,7 +42,6 @@ Suggests:
 VignetteBuilder: 
     knitr
 Remotes:
-    bioc::release/VariantAnnotation,
     explodecomputer/genetics.binaRies,
     gqi/MRMix,
     jrs95/gassocplot,
