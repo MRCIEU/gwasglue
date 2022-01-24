@@ -9,7 +9,7 @@ cojo_cond(
   bfile,
   snplist,
   pop,
-  gcta = genetics.binaRies::get_gcta_binary(),
+  gcta = NULL,
   workdir = tempdir(),
   threads = 1
 )
@@ -24,7 +24,7 @@ cojo_cond(
 \item{pop}{EUR, ASN or AFR}
 
 \item{gcta}{Path to gcta binary. \cr
-For convenience can use default=\code{genetics.binaRies::get_gcta_binary()}}
+If \code{NULL} uses \code{\link[genetics.binaRies:get_gcta_binary]{genetics.binaRies::get_gcta_binary()}}}
 
 \item{workdir}{Location to store temporary files. Default=\code{tempdir()}}
 

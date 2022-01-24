@@ -4,13 +4,7 @@
 \alias{gwasvcf_to_finemapr}
 \title{Generate data for fine mapping analysis}
 \usage{
-gwasvcf_to_finemapr(
-  region,
-  vcf,
-  bfile,
-  plink_bin = genetics.binaRies::get_plink_binary(),
-  threads = 1
-)
+gwasvcf_to_finemapr(region, vcf, bfile, plink_bin = NULL, threads = 1)
 }
 \arguments{
 \item{region}{Region of the genome to extract eg \code{1:109317192-110317192}
@@ -21,7 +15,7 @@ Can be array}
 \item{bfile}{LD reference panel}
 
 \item{plink_bin}{Path to plink.
-Default = \code{\link[genetics.binaRies:get_plink_binary]{genetics.binaRies::get_plink_binary()}}}
+If \code{NULL} uses \code{\link[genetics.binaRies:get_plink_binary]{genetics.binaRies::get_plink_binary()}}}
 
 \item{threads}{Number of threads to run in parallel. Default=\code{1}}
 }
