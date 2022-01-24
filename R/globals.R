@@ -1,1 +1,2 @@
-utils::globalVariables(c("."))
+#' @importFrom utils globalVariables
+utils::globalVariables(c(".", "i"))
