@@ -79,7 +79,7 @@ cojo_cond <- function(vcffile, bfile, snplist, pop,
 
 	if (!requireNamespace("SummarizedExperiment", quietly = TRUE)) {
 	  stop(
-	    "Package \"SummarizedExperiment\" must be installed to use this function.",
+	 "Package \"SummarizedExperiment\" must be installed to use this function.",
 	    call. = FALSE
 	  )
 	}
