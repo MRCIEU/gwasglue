@@ -66,7 +66,8 @@ coloc_to_gassocplot <- function(coloclist, bfile=NULL, plink_bin=NULL)
 		id2 = coloclist$dataset2$z
 	)
 	message("Extracting LD matrix for ", nrow(markers), " variants")
-	ld <- ieugwasr::ld_matrix(markers[["marker"]], with_alleles=FALSE, bfile=bfile, plink_bin=plink_bin)
+	ld <- ieugwasr::ld_matrix(markers[["marker"]], with_alleles=FALSE, 
+	                          bfile=bfile, plink_bin=plink_bin)
 	message("Found ", nrow(ld), " variants in LD reference panel")
 	index <- match(rownames(ld), markers[["marker"]])
 	markers <- markers[index, ]
