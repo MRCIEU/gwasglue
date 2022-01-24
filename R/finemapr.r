@@ -68,16 +68,17 @@ print.FinemaprList <- function(x)
 #' @param vcf Path to VCF file or VCF object
 #' @param bfile LD reference panel
 #' @param plink_bin Path to plink. 
-#' Default = [`genetics.binaRies::get_plink_binary()`]
+#' If `NULL` uses [`genetics.binaRies::get_plink_binary()`]
 #' @param threads Number of threads to run in parallel. Default=`1`
 #'
 #' @export
 #' @return List of datasets for finemapping
 gwasvcf_to_finemapr <- function(region, vcf, bfile, 
-                                plink_bin=genetics.binaRies::get_plink_binary(), 
+                                plink_bin=NULL, 
                                 threads=1)
 {
-  rsid <- ES <- SE <- z <- NULL # Fix for R CMD check note
+	if (is.null(plink_bin)) plink_bin <- genetics.binaRies::get_plink_binary()  
+	rsid <- ES <- SE <- z <- NULL # Fix for R CMD check note
   message("Extracting data from vcf")
 	ext <- gwasvcf::query_gwas(vcf=vcf, chrompos=region)
 	out <- parallel::mclapply(unique(region), function(i){
