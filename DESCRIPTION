@@ -29,7 +29,6 @@ Imports:
     magrittr,
     MendelianRandomization,
     mr.raps,
-    MRPRESSO,
     tidyr,
     TwoSampleMR
 Suggests: 
@@ -53,7 +52,6 @@ Remotes:
     mrcieu/ieugwasr,
     mrcieu/MRInstruments,
     mrcieu/TwoSampleMR,
-    rondolab/MR-PRESSO,
     variani/finemapr,
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
