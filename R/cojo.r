@@ -8,7 +8,8 @@
 #' @importFrom utils write.table
 cojo_sumstat_file <- function(vcffile, outfile)
 {
-	vcf <- VariantAnnotation::readVcf(vcffile)
+  rsid <- ALT <- REF <- AF <- ES <- SE <- LP <- SS <- NULL # Fix for check note
+  vcf <- VariantAnnotation::readVcf(vcffile)
 	tib <- gwasvcf::vcf_to_tibble(vcf)
 	tib$LP <- 10^(-tib$LP)
 	tib <- tib %>% dplyr::select(rsid, ALT, REF, AF, ES, SE, LP, SS)
