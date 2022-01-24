@@ -92,6 +92,7 @@ gwasvcf_to_pwcoco <- function(vcf1, vcf2, chrompos, type1=NULL, type2=NULL,
 #'
 #' @return `0` if success, `1` if there was a problem
 #' @importFrom utils write.table
+#' @importFrom magrittr %<>%
 ieugwasr_to_pwcoco <- function(id1, id2, chrompos, type1=NULL, type2=NULL, 
                                outfile)
 {
