@@ -21,6 +21,7 @@
 read_gwas <- function(filename, skip, delimiter, gzipped, snp, nea, ea, ea_af, 
                       effect, se, pval, n, info, z)
 {
+	info.outcome <- z.outcome <- pval.outcome <- NULL # Fix for R CMD check note
 	if(gzipped)
 	{
 		# dat <- data.table::fread(paste0("gunzip -c ", filename), header=FALSE, 
