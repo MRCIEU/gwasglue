@@ -98,7 +98,7 @@ gwasvcf_to_TwoSampleMR <- function(vcf, type="exposure")
 #' @param action action argument passed to [`TwoSampleMR::harmonise_data`]. 
 #' The level of strictness in dealing with SNPs.
 #' @param plink_bin Path to plink. 
-#' Default = [`genetics.binaRies::get_plink_binary`]
+#' If `NULL` uses [`genetics.binaRies::get_plink_binary`]
 #' @param pval Numeric. *P*-value threshold passed to [`gwasvcf::query_gwas`].
 #'
 #' @export
@@ -109,11 +109,12 @@ make_TwoSampleMR_dat <- function(id1, id2, proxies=TRUE, nthreads=1,
                                  rsidx=options()$gwasglue.rsidx, 
                                  bfile=options()$gwasglue.bfile, 
                                  action=1, 
-                                 plink_bin=genetics.binaRies::get_plink_binary(),
+                                 plink_bin=NULL,
 																 pval = NULL
                                  )
 {
 
+	if (is.null(plink_bin)) plink_bin <- genetics.binaRies::get_plink_binary()
 	id1 <- organise_ids(id1, vcfdir)
 	id2 <- organise_ids(id2, vcfdir)
 
