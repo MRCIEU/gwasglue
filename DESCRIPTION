@@ -27,7 +27,6 @@ Imports:
     ieugwasr,
     jsonlite,
     magrittr,
-    mr.raps,
     tidyr,
     TwoSampleMR
 Suggests: 
