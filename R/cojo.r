@@ -75,6 +75,8 @@ cojo_cond <- function(vcffile, bfile, snplist, pop,
                       gcta=genetics.binaRies::get_gcta_binary(), 
                       workdir=tempdir(), threads=1)
 {
+  region <- variant <- SNP <- Chr <- 
+    bp <- refA <- bC <- bC_se <- pC <- n <- NULL # Fix for R CMD check note
 	message("Formatting sumstats")
 	vcf <- cojo_sumstat_file(vcffile, file.path(workdir, "sum.txt"))
 
