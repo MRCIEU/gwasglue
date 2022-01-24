@@ -50,7 +50,7 @@ Remotes:
     mrcieu/ieugwasr,
     mrcieu/MRInstruments,
     mrcieu/TwoSampleMR,
-    variani/finemapr,
+    variani/finemapr
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
