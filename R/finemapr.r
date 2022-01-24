@@ -2,7 +2,7 @@
 #'
 #' Uses the finemapr package \url{https://github.com/variani/finemapr}.
 #'
-#' @param region Region of the genome to extract eg 1:109317192-110317192"
+#' @param region Region of the genome to extract e.g. `1:109317192-110317192`
 #' @param id Array of GWAS studies to query. See [`ieugwasr::gwasinfo`] 
 #' for available studies
 #' @param bfile If this is provided then will use the API. Default = `NULL`
