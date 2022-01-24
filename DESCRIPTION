@@ -27,7 +27,6 @@ Imports:
     ieugwasr,
     jsonlite,
     magrittr,
-    MendelianRandomization,
     mr.raps,
     tidyr,
     TwoSampleMR
