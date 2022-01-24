@@ -364,6 +364,7 @@ check_null <- function(x, n)
 harmonise <- function(chr1, pos1, ref1, alt1, chr2, pos2, ref2, alt2, 
                       rsid2 = NULL, indel_recode=FALSE, strand_flip=FALSE)
 {
+	chr <- pos <- ref <- alt <- decision <- NULL # Fix for R CMD check note
 	chrpos1 <- paste(chr1, pos1)
 	chrpos2 <- paste(chr2, pos2)
 	target <- dplyr::tibble(chr=chr1, pos=pos1, ref=toupper(ref1), 
