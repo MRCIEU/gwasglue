@@ -14,7 +14,8 @@
 #' @return Each id will be a list of z score data, ld matrix, and sample size
 ieugwasr_to_finemapr <- function(region, id, bfile=NULL, plink_bin=NULL)
 {
-	id <- unique(id)
+	rsid <- ES <- SE <- z <- NULL # Fix for R CMD check note
+  id <- unique(id)
 	message("Getting rsids in region")
 	rsid <- ieugwasr::variants_to_rsid(region)
 	message("Extracting rsids from data")
