@@ -88,6 +88,7 @@ gwasvcf_to_coloc <- function(vcf1, vcf2, chrompos)
 #' @return List of datasets to feed into coloc
 ieugwasr_to_coloc <- function(id1, id2, chrompos, type1=NULL, type2=NULL)
 {
+  rsid <- NULL # Fix for R CMD check note
 	tab1 <- ieugwasr::associations(id=id1, variants=chrompos) %>% 
 	  subset(., !duplicated(rsid))
 	tab2 <- ieugwasr::associations(id=id2, variants=chrompos) %>% 
