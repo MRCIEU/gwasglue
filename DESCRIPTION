@@ -31,7 +31,6 @@ Imports:
     mr.raps,
     MRMix,
     MRPRESSO,
-    testthat,
     tidyr,
     TwoSampleMR
 Suggests: 
@@ -44,6 +43,7 @@ Suggests:
     S4Vectors,
     SummarizedExperiment,
     susieR,
+    testthat,
     VariantAnnotation
 VignetteBuilder: 
     knitr
