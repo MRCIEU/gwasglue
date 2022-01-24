@@ -31,6 +31,7 @@ cojo_sumstat_file <- function(vcffile, outfile)
 #' @return data.frame with columns `variant` and `region`
 map_variants_to_regions <- function(chrpos, pop)
 {
+	chr <- start <- variant <- region <- NULL # Fix for R CMD check note
 	regionfile <- system.file("extdata", "ldetect", paste0(pop, ".bed"), 
 	                          package="gwasglue")
 	regions <- data.table::fread(regionfile, header=TRUE) %>%
