@@ -31,7 +31,6 @@ Imports:
     mr.raps,
     MRMix,
     MRPRESSO,
-    susieR,
     testthat,
     tidyr,
     TwoSampleMR
@@ -44,6 +43,7 @@ Suggests:
     rmarkdown,
     S4Vectors,
     SummarizedExperiment,
+    susieR,
     VariantAnnotation
 VignetteBuilder: 
     knitr
@@ -56,7 +56,6 @@ Remotes:
     mrcieu/MRInstruments,
     mrcieu/TwoSampleMR,
     rondolab/MR-PRESSO,
-    stephenslab/susieR,
     variani/finemapr,
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
