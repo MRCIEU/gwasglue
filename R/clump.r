@@ -50,7 +50,7 @@ clump_gwasvcf <- function(vcf, clump_kb=1000, clump_r2=0.001, clump_p=5e-8,
 	# Clump
 	if (!requireNamespace("SummarizedExperiment", quietly = TRUE)) {
 	  stop(
-	    "Package \"SummarizedExperiment\" must be installed to use this function.",
+	 "Package \"SummarizedExperiment\" must be installed to use this function.",
 	    call. = FALSE
 	  )
 	}
