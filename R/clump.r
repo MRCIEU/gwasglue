@@ -36,7 +36,8 @@ clump_gwasvcf <- function(vcf, clump_kb=1000, clump_r2=0.001, clump_p=5e-8,
 		fn <- function(dat)
 		{
 			ieugwasr::ld_clump(dat, pop=pop, clump_kb=clump_kb, clump_r2=clump_r2, 
-			                   clump_p=clump_p, access_token=check_access_token())
+			                   clump_p=clump_p, 
+			                   access_token=ieugwasr::check_access_token())
 		}
 	} else {
 		fn <- function(dat)
