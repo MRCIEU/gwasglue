@@ -29,7 +29,6 @@ Imports:
     magrittr,
     MendelianRandomization,
     mr.raps,
-    MRMix,
     MRPRESSO,
     tidyr,
     TwoSampleMR
@@ -49,7 +48,6 @@ VignetteBuilder:
     knitr
 Remotes:
     explodecomputer/genetics.binaRies,
-    gqi/MRMix,
     jrs95/gassocplot,
     mrcieu/gwasvcf,
     mrcieu/ieugwasr,
