@@ -87,4 +87,3 @@ For any `<analysis>` package we create a new file called `R/<analysis>.r` which 
 - `ieugwasr_to_<analysis>`
 
 For an example, see the `R/TwoSampleMR.r` file, which contains the functions `gwasvcf_to_TwoSampleMR` and `ieugwasr_to_TwoSampleMR`.
-
