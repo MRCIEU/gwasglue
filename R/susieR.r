@@ -20,6 +20,13 @@
 susieR_pipeline <- function(vcffile, bfile, plink_bin, pop, threads=1, 
                             clump_kb=1000, clump_r2=0.001, clump_p=5e-8, ...)
 {
+	if (!requireNamespace("susieR", quietly = TRUE)) {
+		stop(
+			"Package \"susieR\" must be installed to use this function.",
+			call. = FALSE
+		)
+	}
+	
 	message("Performing clumping")
 	clumped <- clump_gwasvcf(vcffile, plink_bin=plink_bin, bfile=bfile)
 
