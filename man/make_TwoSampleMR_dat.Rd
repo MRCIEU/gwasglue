@@ -14,7 +14,8 @@ make_TwoSampleMR_dat(
   rsidx = options()$gwasglue.rsidx,
   bfile = options()$gwasglue.bfile,
   action = 1,
-  plink_bin = genetics.binaRies::get_plink_binary()
+  plink_bin = genetics.binaRies::get_plink_binary(),
+  pval = NULL
 )
 }
 \arguments{
@@ -46,6 +47,8 @@ The level of strictness in dealing with SNPs.}
 
 \item{plink_bin}{Path to plink.
 Default = \code{\link[genetics.binaRies:get_plink_binary]{genetics.binaRies::get_plink_binary}}}
+
+\item{pval}{Numeric. \emph{P}-value threshold passed to \code{\link[gwasvcf:query_gwas]{gwasvcf::query_gwas}}.}
 }
 \value{
 harmonised dataset
