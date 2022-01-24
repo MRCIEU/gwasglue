@@ -77,7 +77,8 @@ gwasvcf_to_finemapr <- function(region, vcf, bfile,
                                 plink_bin=genetics.binaRies::get_plink_binary(), 
                                 threads=1)
 {
-	message("Extracting data from vcf")
+  rsid <- ES <- SE <- z <- NULL # Fix for R CMD check note
+  message("Extracting data from vcf")
 	ext <- gwasvcf::query_gwas(vcf=vcf, chrompos=region)
 	out <- parallel::mclapply(unique(region), function(i){
 		message(i)
