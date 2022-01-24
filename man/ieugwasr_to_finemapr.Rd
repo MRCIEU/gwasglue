@@ -7,7 +7,7 @@
 ieugwasr_to_finemapr(region, id, bfile = NULL, plink_bin = NULL)
 }
 \arguments{
-\item{region}{Region of the genome to extract eg 1:109317192-110317192"}
+\item{region}{Region of the genome to extract e.g. \code{1:109317192-110317192}}
 
 \item{id}{Array of GWAS studies to query. See \code{\link[ieugwasr:gwasinfo]{ieugwasr::gwasinfo}}
 for available studies}
