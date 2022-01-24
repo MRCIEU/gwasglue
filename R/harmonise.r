@@ -265,7 +265,6 @@ write_out <- function(harmonised, path)
 is_forward_strand <- function(gwas_snp, gwas_a1, gwas_a2, ref_snp, ref_a1, 
                               ref_a2, threshold=0.9)
 {
-	requireNamespace("dplyr", quietly=TRUE)
 	if(is.null(gwas_a1) | is.null(gwas_a2))
 	{
 		message("No info for both GWAS alleles")
