@@ -143,7 +143,7 @@ read_reference <- function(reference_file, rsid=NULL, chrompos=NULL,
 	{
 		a <- a[!duplicated(names(a)), ]
 	}
-	return(vcf_to_TwoSampleMR(a))
+	return(gwasvcf_to_TwoSampleMR(a))
 }
 
 #' Harmonise gwas alleles to be same as reference
