@@ -31,7 +31,6 @@ Imports:
     mr.raps,
     MRMix,
     MRPRESSO,
-    RadialMR,
     susieR,
     testthat,
     tidyr,
@@ -59,7 +58,6 @@ Remotes:
     rondolab/MR-PRESSO,
     stephenslab/susieR,
     variani/finemapr,
-    WSpiller/RadialMR
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
