@@ -13,6 +13,8 @@
 gwasvcf_to_pwcoco <- function(vcf1, vcf2, chrompos, type1=NULL, type2=NULL, 
                               outfile)
 {
+	rsid <- ALT <- REF <- AF <- ES <- SE <- LP <- SS <- NC <- 
+		ss <- NULL # Fix for R CMD check note
 	overlap <- gwasvcf::vcflist_overlaps(list(vcf1, vcf2), chrompos)
 	vcf1 <- overlap[[1]]
 	vcf2 <- overlap[[2]]
