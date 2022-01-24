@@ -65,7 +65,7 @@ map_variants_to_regions <- function(chrpos, pop)
 #' @param snplist List of rsids
 #' @param pop EUR, ASN or AFR
 #' @param gcta Path to gcta binary. \cr
-#' For convenience can use default=`genetics.binaRies::get_gcta_binary()`
+#' If `NULL` uses [`genetics.binaRies::get_gcta_binary()`]
 #' @param workdir Location to store temporary files. Default=`tempdir()`
 #' @param threads Number of parallel threads. Default=`1`
 #'
@@ -73,9 +73,10 @@ map_variants_to_regions <- function(chrpos, pop)
 #' @return List of independent summary stats
 #' @importFrom utils write.table
 cojo_cond <- function(vcffile, bfile, snplist, pop, 
-                      gcta=genetics.binaRies::get_gcta_binary(), 
+                      gcta=NULL, 
                       workdir=tempdir(), threads=1)
 {
+	if (is.null(gcta)) gcta <- genetics.binaRies::get_gcta_binary()
   region <- variant <- SNP <- Chr <- 
     bp <- refA <- bC <- bC_se <- pC <- n <-
     LP <- rsid <- seqnames <- start <- 
