@@ -134,7 +134,7 @@ make_TwoSampleMR_dat <- function(id1, id2, proxies=TRUE, nthreads=1,
 		} else {
 			message("Clumping ", id1$filename[i])
 			stopifnot(file.exists(bfile))
-			o <- query_gwas(id1$filename[i], pval=pval)
+			o <- gwasvcf::query_gwas(id1$filename[i], pval=pval)
 			p <- gwasvcf_to_TwoSampleMR(o, "exposure")
 			names(p)[names(p) == "pval.exposure"] <- "pval"
 			names(p)[names(p) == "SNP"] <- "rsid"
