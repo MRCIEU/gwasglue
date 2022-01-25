@@ -52,6 +52,7 @@ Remotes:
     mrcieu/MRInstruments,
     mrcieu/TwoSampleMR,
     variani/finemapr
+biocViews: Software, Infrastructure
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
