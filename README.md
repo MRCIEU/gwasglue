@@ -81,7 +81,7 @@ Updated 1000 genomes LD reference panels (multiple populations):
 
 ## Contributing to the resource
 
-For any `<analysis>` package we create a new file called `R/<analysis>.r` which contains two functions:
+For any `<analysis>` package we create a new file called `R/<analysis>.R` which contains two functions:
 
 - `gwasvcf_to_<analysis>`
 - `ieugwasr_to_<analysis>`
