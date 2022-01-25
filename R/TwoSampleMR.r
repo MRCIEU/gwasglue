@@ -217,7 +217,8 @@ organise_ids <- function(id, vcfdir)
 #' It relates only to paths on bc4.
 #' 
 #' @export
-#' @return NULL
+#' @return A list with elements: gwasglue.vcfdir, gwasglue.proxydb, 
+#' gwasglue.rsidx, gwasglue.bfile
 set_bc4_files <- function()
 {
 	l <- list(
