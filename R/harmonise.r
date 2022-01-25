@@ -198,7 +198,7 @@ harmonise_against_ref <- function(gwas, reference)
 #' @param path Path to write out json file and txt file
 #'
 #' @export
-#' @return NULL
+#' @return Files are written to the specified path.
 #' @importFrom utils write.table
 write_out <- function(harmonised, path)
 {
