@@ -6,6 +6,10 @@
 \usage{
 set_bc4_files()
 }
+\value{
+A list with elements: gwasglue.vcfdir, gwasglue.proxydb,
+gwasglue.rsidx, gwasglue.bfile
+}
 \description{
 This is a convenience function for members at the University of Bristol
 to automatically set file locations for various reference datasets.

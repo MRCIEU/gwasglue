@@ -11,7 +11,10 @@ write_out(harmonised, path)
 
 \item{path}{Path to write out json file and txt file}
 }
+\value{
+Files are written to the specified path.
+}
 \description{
 Takes raw files and aligns them to reference. Important if files don't have
-chr:pos already
+chr:pos already.
 }
