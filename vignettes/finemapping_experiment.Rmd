@@ -69,7 +69,7 @@ args$pops <- NULL
 i <- 1
 
 paintor_res <- list()
-for(i in 1:nrow(inst$inst))
+for(i in seq_len(nrow(inst$inst)))
 {
 	args$chr <- inst$inst$chr.exposure[i]
 	args$position <- as.numeric(inst$inst$pos.exposure[i])
