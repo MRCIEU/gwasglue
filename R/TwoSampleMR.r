@@ -118,7 +118,7 @@ make_TwoSampleMR_dat <- function(id1, id2, proxies=TRUE, nthreads=1,
 	id1 <- organise_ids(id1, vcfdir)
 	id2 <- organise_ids(id2, vcfdir)
 
-	exposure_dat <- parallel::mclapply(1:nrow(id1), function(i)
+	exposure_dat <- parallel::mclapply(seq_len(nrow(id1)), function(i)
 	{
 		message("extracting tophits for ", id1$id[i])
 		d <- dirname(id1$filename[i])
@@ -155,7 +155,7 @@ make_TwoSampleMR_dat <- function(id1, id2, proxies=TRUE, nthreads=1,
 	}, mc.cores=nthreads) %>% 
 		dplyr::bind_rows()
 
-	outcome_dat <- parallel::mclapply(1:nrow(id2), function(i)
+	outcome_dat <- parallel::mclapply(seq_len(nrow(id2)), function(i)
 	{
 		gwasvcf::query_gwas(id2$filename[i], rsidx=rsidx, rsid=exposure_dat$SNP) %>%
 			gwasvcf_to_TwoSampleMR("outcome") %>%
