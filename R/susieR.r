@@ -39,7 +39,7 @@ susieR_pipeline <- function(vcffile, bfile, plink_bin, pop, threads=1,
 	                         plink_bin=plink_bin, threads=threads)
 
 	message("Perform susieR finemapping in each region")
-	m2 <- parallel::mclapply(1:length(m), function(i) {
+	m2 <- parallel::mclapply(seq_len(length(m)), function(i) {
 		message(i)
 		res <- susieR::susie_rss(
 			m[[i]]$z$zscore, 
@@ -52,7 +52,7 @@ susieR_pipeline <- function(vcffile, bfile, plink_bin, pop, threads=1,
 		return(res)
 	}, mc.cores=threads)
 
-	for(i in 1:length(m))
+	for(i in seq_len(length(m)))
 	{
 		m[[i]]$susieR <- m2[[i]]
 	}
