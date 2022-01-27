@@ -29,7 +29,7 @@ ieugwasr_to_finemapr <- function(region, id, bfile=NULL, plink_bin=NULL)
 	message("Data available for ", length(rsid_avail), " variants")
 	as <- subset(as, rsid %in% rsid_avail)
 	out <- list()
-	for(i in 1:length(unique(id)))
+	for(i in seq_len(unique(id)))
 	{
 		dat <- list()
 		x <- as[as[["rsid"]] %in% rsid_avail & as[["id"]] == id[i],]
@@ -114,7 +114,7 @@ greedy_remove <- function(ld)
 	  sort(decreasing=TRUE) %>% 
 	  as.data.frame(stringsAsFactors=FALSE)
 	rem <- c()
-	for(i in 1:nrow(tab))
+	for(i in seq_len(nrow(tab)))
 	{
 		ind <- ind[!(ind[,1] == tab[["ind"]][i] | ind[,2] == tab[["ind"]][i]), ]
 		rem <- c(rem, tab[["ind"]][i])
