@@ -379,7 +379,7 @@ harmonise <- function(chr1, pos1, ref1, alt1, chr2, pos2, ref2, alt2,
 	reference <- subset(reference, !duplicated(paste(chr, pos, ref, alt)))
 
 	target$keep <- chrpos1 %in% chrpos2
-	target$i <- 1:nrow(target)
+	target$i <- seq_len(nrow(target))
 	dat <- dplyr::left_join(target, reference, by=c("chr", "pos"))
 	dat$decision <- 6
 	dat$decision[dat$decision == 6 & is.na(dat$ref.y)] <- 7
