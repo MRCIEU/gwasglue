@@ -35,7 +35,7 @@ regions <- data.table::fread(regionfile, header=TRUE) %>%
 		stop=as.numeric(stop)
 	) %>% dplyr::as_tibble()
 
-for(i in 1:nrow(regions))
+for(i in seq_len(nrow(regions)))
 {
 	message(i)
 	x <- subset(bim, V1 == regions$chr[i] & V4 >= regions$start[i] & V4 <= regions$stop[i])$V2
