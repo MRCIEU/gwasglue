@@ -29,9 +29,7 @@ jobs:
         run: |
           install.packages(c("remotes", "rcmdcheck", "ggrepel", "BiocManager"))
           BiocManager::install(version = "3.14", ask = FALSE)
-          try(remotes::install_deps(dependencies = TRUE))
-          BiocManager::install(version = "3.14", ask = FALSE)
-          try(remotes::install_deps(dependencies = TRUE))
+          remotes::install_deps(dependencies = TRUE)
         shell: Rscript {0}
       - name: Check
         run: |
