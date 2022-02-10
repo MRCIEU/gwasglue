@@ -4,12 +4,16 @@
 \alias{ieugwasr_to_gassocplot}
 \title{Generate regional plot for ieugwasr}
 \usage{
-ieugwasr_to_gassocplot(chrpos, id)
+ieugwasr_to_gassocplot(chrpos, id, bfile = NULL, plink_bin = NULL)
 }
 \arguments{
 \item{chrpos}{A window range to plot e.g. 16:3349655-3849655}
 
 \item{id}{Vector of one or more IEU GWAS db study IDs}
+
+\item{bfile}{If number of SNPs > 500 then need to provide your own LD reference panel. Provide plink dataset here.}
+
+\item{plink_bin}{If number of SNPs > 500 then need to provide your own LD reference panel. Provide plink executable here}
 }
 \value{
 assoc_plot or stack_assoc_plot if multiple markers given

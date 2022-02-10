@@ -4,10 +4,12 @@
 #'
 #' @param chrpos A window range to plot e.g. 16:3349655-3849655
 #' @param id Vector of one or more IEU GWAS db study IDs
+#' @param bfile If number of SNPs > 500 then need to provide your own LD reference panel. Provide plink dataset here. 
+#' @param plink_bin If number of SNPs > 500 then need to provide your own LD reference panel. Provide plink executable here
 #'
 #' @export
 #' @return assoc_plot or stack_assoc_plot if multiple markers given
-ieugwasr_to_gassocplot <- function(chrpos, id)
+ieugwasr_to_gassocplot <- function(chrpos, id, bfile=NULL, plink_bin=NULL)
 {
 	stopifnot(length(chrpos) == 1)
 	r1 <- ieugwasr::associations(chrpos, id, proxies=0)
@@ -17,7 +19,7 @@ ieugwasr_to_gassocplot <- function(chrpos, id)
 	message("Found ", nrow(r1), " variants")
 	message("Extracting LD matrix for ", nrow(r1), " variants")
 	ld <- suppressWarnings(suppressMessages(
-		ieugwasr::ld_matrix(r1[["rsid"]], with_alleles=FALSE)
+		ieugwasr::ld_matrix(r1[["rsid"]], with_alleles=FALSE, bfile=bfile, plink_bin=plink_bin)
 	))
 	message("Found ", nrow(ld), " variants in LD reference panel")
 	r1 <- r1[match(rownames(ld), r1[["rsid"]]), ]
