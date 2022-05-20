@@ -28,7 +28,7 @@ jobs:
       - name: Install dependencies
         run: |
           install.packages(c("remotes", "rcmdcheck", "ggrepel", "BiocManager"))
-          BiocManager::install(version = "3.14", ask = FALSE)
+          BiocManager::install(version = "3.15", ask = FALSE)
           BiocManager::install(c("VariantAnnotation", "SummarizedExperiment", 
             "S4Vectors"))
           remotes::install_deps(dependencies = TRUE)
